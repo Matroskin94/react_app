@@ -1,0 +1,19 @@
+.root-div{    
+    width: 80%;
+    background-color: #F9F9F9;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+#faves-but{
+    float: right;
+    display: block;
+}
+
+.button{
+    margin-left:5px;
+}
+
+.textCenter{
+    text-align: center;
+}

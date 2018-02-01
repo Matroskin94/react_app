@@ -1,10 +1,9 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { PropSearch } from './components/PropSearch/PropSearch';
+
 
 render(
-    <div className='root-div'>
-        <h1>Hello react</h1>
-
-    </div>,
+    <PropSearch />,
     document.getElementById('root')
 );
