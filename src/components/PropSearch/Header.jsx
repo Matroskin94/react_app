@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = props => (
     <div>
-        <button className='button' id='faves-but'>Faves</button>
+        <Link to='/favorite' >Faves</Link>
         <h3>Property cross</h3>
     </div>
 );
