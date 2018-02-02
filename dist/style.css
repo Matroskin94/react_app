@@ -17,3 +17,25 @@
 .textCenter{
     text-align: center;
 }
+
+.favItem{
+    border:solid black 1px;
+    display: block;
+}
+
+.favImage{
+    width: 24px;
+    height: 24px;
+    background-image: url('resources/fav_img.png');
+    display: inline-block;
+    margin:5px;
+}
+
+.favText{
+    display: inline-block;
+    position: absolute;
+}
+
+.favText p{
+    margin:8px;
+}
