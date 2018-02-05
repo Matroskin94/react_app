@@ -1,7 +1,7 @@
 import React from 'react';
 
 const FavItem = props => (
-    <div className='FavItem'>
+    <div>
         <div className='favImage' />
         <div className='favText'>
             <p>Somewhere, nowhere</p>
