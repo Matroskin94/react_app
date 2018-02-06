@@ -1,8 +1,12 @@
-const initialSearch = {
-    title: 'Search reducer init'
-};
+import { GO_PRESSED } from '../../constants/constants.js';
 
-export default function PropSearchReducer(state = initialSearch, action) {
-    console.log(action.type);
-    return state;
+export default function PropSearchReducer(state = {}, action) {
+    switch (action.type) {
+        case GO_PRESSED: {
+            return state.push(action.payload);
+        }
+        default: {
+            return state;
+        }    
+    }
 }

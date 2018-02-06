@@ -4,8 +4,9 @@ import { BrowserRouter } from 'react-router-dom';
 import FavoritePage from './FavoritePage.jsx';
 import PropSearchPage from './PropSearchPage.jsx';
 import { Provider } from 'react-redux';
-import store from '../store/AppStore.js';
+import initStore from '../store/AppStore.js';
 
+const store = initStore();
 
 const AppRouter = props => (
     <Provider store={store}>

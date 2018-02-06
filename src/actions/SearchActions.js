@@ -1,13 +1,15 @@
-export function goPressed() {
+import { GO_PRESSED } from '../constants/constants.js';
+
+export function search(text) {
     return ({
-        type: 'GO_BUTT',
-        payload: 'Go to location'
+        type: GO_PRESSED,
+        payload: text
     });
 }
 
 export function locationPressed() {
     return ({
-        type: 'LOC_BUTT',
+        type: 'TEXT_INP',
         payload: 'Show localtion'
     });
 }

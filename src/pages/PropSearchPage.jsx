@@ -5,10 +5,6 @@ import Searchfield from '../components/PropSearch/Searchfield.jsx';
 import SearchResult from '../components/PropSearch/SearchResult.jsx';
 
 class PropSearchPage extends Component {
-    constructor() {
-        super();
-        this.state = { type: 'INITIAL' };
-    }
     render() {
         return (
             <div className='root-div'>
