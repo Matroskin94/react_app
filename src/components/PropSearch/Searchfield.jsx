@@ -1,23 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux'
 import { searchAction } from '../../actions/SearchActions.js';
 
 class Searchfield extends Component {
-    onSearch = ( event ) => {
+    onSearch = () => {
         return this.props.setNewQuery((document.getElementById('searchField').value));
     }
     render() {
-        let i = 0;
-        const listItems = this.props.queryRess.map((item) =>
-          <tr key = {i++}><td>{item.address} ({item.maches})</td></tr>
-        );
+        const listItems = this.props.queryRess.map( ({address, maches} = index, index)  =>
+            <tr key={index}><td>{address} ({maches})</td></tr>);
 
         return (
             <div>
                 <input type='text' id='searchField' />
-                <button onClick={this.onSearch} className='button' id='go-button'>Go</button>
-                <button className='button' id='location-button'>My Location </button>
+                <button onClick={this.onSearch}>Go</button>
+                <button>My Location </button>
                 <table><tbody>{listItems}</tbody></table>
             </div>
         );

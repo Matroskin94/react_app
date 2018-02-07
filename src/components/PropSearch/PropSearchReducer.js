@@ -8,9 +8,9 @@ const initialState = {
 };
 
 const findAddress = (array, searchWord, strict) => {
-    let ressArray = [];
+    const ressArray = [];
 
-    array.find(element => {
+    array.filter(element => {
         if (!strict) {
             let foundPos = -1;
 
@@ -29,12 +29,14 @@ const findAddress = (array, searchWord, strict) => {
 export default function PropSearchReducer(state = initialState, action) {
     switch (action.type) {
         case GO_PRESSED: {
-            let newState = Object.assign({}, state);
+            const newState = Object.assign({}, state);
+
             newState.queryRess = findAddress(newState.locations, action.payload, false);
+
             return newState;
         }
         default: {
             return state;
-        }   
+        }  
     }
 }
