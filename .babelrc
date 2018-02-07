@@ -1,7 +1,9 @@
 {
-  "presets": [["es2015", { "loose": true, "modules": false }],
-            "react",
-            "stage-0"
+  "presets":[
+            ["es2015", { "loose": true, "modules": false }],
+            "stage-0",
+            "react"
     ],
-  "plugins": ["transform-decorators-legacy"]
+  "plugins": ["transform-decorators-legacy",
+            "transform-object-rest-spread"]
 }

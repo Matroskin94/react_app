@@ -11,7 +11,6 @@ class PropSearchPage extends Component {
                 <Header />
                 <Instruction />
                 <Searchfield />
-                <SearchResult />
             </div>
         );
     }
