@@ -1,6 +1,6 @@
 import { GO_PRESSED } from '../constants/constants.js';
 
-export function search(text) {
+export function searchAction(text) {
     return ({
         type: GO_PRESSED,
         payload: text
