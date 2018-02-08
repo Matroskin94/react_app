@@ -2,18 +2,18 @@
     "queries":[
         {
             "address":"address1",
-            "maches": 1
+            "matches": 1
         },
         {
             "address":"address2",
-            "maches": 1
+            "matches": 1
         },
         {
             "address":"address3",
-            "maches": 0
+            "matches": 0
         },{
             "address":"address4",
-            "maches": 0
+            "matches": 0
         }
         
     ],

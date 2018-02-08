@@ -7,7 +7,7 @@ import SearchResult from '../components/PropSearch/SearchResult.jsx';
 class PropSearchPage extends Component {
     render() {
         return (
-            <div className='root-div'>
+            <div>
                 <Header />
                 <Instruction />
                 <Searchfield />
