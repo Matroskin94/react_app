@@ -30,8 +30,16 @@ export default function PropSearchReducer(state = initialState, action) {
     switch (action.type) {
         case GO_PRESSED: {
             const newState = Object.assign({}, state);
+            const newQuery = findAddress(newState.query, action.payload, true);
 
             newState.queryRess = findAddress(newState.locations, action.payload, false);
+            if (newQuery.length === 1) {
+                newQuery[0].maches = newState.queryRess.length;
+                newState.query.splice(newState.query.indexOf(newQuery[0]), 1);
+                newState.query.unshift(newQuery[0]);
+            } else {
+                newState.query.unshift({ 'address': action.payload, 'maches': newState.queryRess.length });
+            }
 
             return newState;
         }

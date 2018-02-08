@@ -2,11 +2,11 @@
     "queries":[
         {
             "address":"address1",
-            "maches": 0
+            "maches": 1
         },
         {
             "address":"address2",
-            "maches": 0
+            "maches": 1
         },
         {
             "address":"address3",

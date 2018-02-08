@@ -7,7 +7,7 @@ class Searchfield extends Component {
         return this.props.setNewQuery((document.getElementById('searchField').value));
     }
     render() {
-        const listItems = this.props.queryRess.map( ({address, maches} = index, index)  =>
+        const listItems = this.props.query.map( ({address, maches} = index, index)  =>
             <tr key={index}><td>{address} ({maches})</td></tr>);
 
         return (
@@ -15,7 +15,7 @@ class Searchfield extends Component {
                 <input type='text' id='searchField' />
                 <button onClick={this.onSearch}>Go</button>
                 <button>My Location </button>
-                <table><tbody>{listItems}</tbody></table>
+                <table ><tbody>{listItems}</tbody></table>
             </div>
         );
     }
