@@ -1,6 +1,6 @@
 var path = require("path");
 module.exports = {
-    entry: './src/App.jsx',
+    entry: './src/app.jsx',
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: 'bundle.js'
@@ -15,8 +15,15 @@ module.exports = {
         {
             test: /\.css$/,
             use: [
-            { loader: "style-loader" },
-            { loader: "css-loader" }
+                { 
+                    loader: "style-loader" 
+                },
+                { 
+                    loader: "css-loader",
+                    options: {
+                        modules: true
+                    }
+                }
             ]
         }
       ]
