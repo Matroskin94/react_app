@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { searchAction } from '../../actions/search-actions.js';
+import { searchAction } from '../../actions/SearchActions.js';
 
 class Searchfield extends Component {
     state = {

@@ -1,5 +1,5 @@
-import { createStore, applyMiddleware  } from 'redux';
-import combineReducers from '../reducers.js';
+import { createStore, applyMiddleware } from 'redux';
+import combineReducers from '../Reducers.js';
 import logger from 'redux-logger';
 
 
