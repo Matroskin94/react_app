@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { searchAction } from '../../actions/SearchActions.js';
+import { searchAction } from '../../actions/SearchActions';
 
 class Searchfield extends Component {
     state = {
@@ -14,17 +14,14 @@ class Searchfield extends Component {
     handleInputChange = event => this.setState({ inputValue: event.target.value });
 
     render() {
-        let listItems = [];
-        let searchResults = null;
+        const listItems = [];
 
-        if (this.props.queryRess.length === 0){
-            listItems = this.props.query.map( ( {address, matches} = {}, index)  =>
-                <tr key={index}><td>{address} ({matches})</td></tr>);
-            searchResults = <table ><tbody>{listItems}</tbody></table>;
+        if (this.props.queryRess.length === 0) {
+            listItems.push(...this.props.query.map(({ address, matches } = {}, index) =>
+                <tr key={index}><td>{address} ({matches})</td></tr>));
         } else {
-            listItems = this.props.queryRess.map( ( {address, name} = {}, index)  =>
-                <tr key={index}><td><p>{address} <br /> Location: {name}</p></td></tr>);
-            searchResults = <table ><tbody>{listItems}</tbody></table>;
+            listItems.push(...this.props.queryRess.map(({ address, name } = {}, index) =>
+                <tr key={index}><td><p>{address} <br /> Location: {name}</p></td></tr>));
         }
 
         return (
@@ -32,14 +29,13 @@ class Searchfield extends Component {
                 <input onChange={this.handleInputChange} type='text' value={this.state.inputValue} />
                 <button onClick={this.handleSearchClick}>Go</button>
                 <button>My Location </button>
-                {searchResults}
+                <table ><tbody>{listItems}</tbody></table>
             </div>
         );
     }
 }
 
-function mapStateToProps(state) { //Этот state это store который передаст Provider
-    console.log('STATE', state);
+function mapStateToProps(state) {
     return {
         query: state.search_reducer.query,
         locations: state.search_reducer.locations,

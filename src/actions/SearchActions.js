@@ -1,4 +1,4 @@
-import { GO_PRESSED } from '../constants/Constants.js';
+import { GO_PRESSED } from '../constants/Constants';
 
 export function searchAction(text) {
     return ({

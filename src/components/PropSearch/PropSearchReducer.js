@@ -10,23 +10,23 @@ const initialState = {
 };
 
 export default function PropSearchReducer(state = initialState, action) {
-    const newState = Object.assign({}, state);
+    let newState = { ...state };
 
     switch (action.type) {
         case GO_PRESSED: {
-            const res = searchByAddress(newState, action.payload);
+            newState = searchByAddress(newState, action.payload);
 
             return {
-                ...newState,
-                queryRess: res.queryRess,
-                query: res.query
+                ...state,
+                queryRess: newState.queryRess,
+                query: newState.query
             };
         }
         case LETTER_TYPED: {
-            return { ...newState, searchWord: action.payload };
+            return { ...state, searchWord: action.payload };
         }
         default: {
             return state;
-        }  
+        }
     }
 }

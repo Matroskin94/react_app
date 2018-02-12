@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Instruction from '../components/PropSearch/Instruction.jsx';
 import Header from '../components/PropSearch/Header.jsx';
 import Searchfield from '../components/PropSearch/SearchField.jsx';
-import styles from '../styles/Styles.css';
+import styles from '../styles/SearchPage.css';
 
 class PropSearchPage extends Component {
     render() {
