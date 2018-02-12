@@ -1,33 +1,16 @@
-const findAddress = (array, searchWord, strict) => {
-    const ressArray = [];
+import findAddress from '../utils/SearchUtils';
 
-    array.forEach(element => {
-        if (!strict) {
-            let foundPos = -1;
+export function searchByAddress({ query, locations, queryRess }, text) {
+    const newQuery = findAddress(query, text, true);
 
-            foundPos = element.address.indexOf(searchWord, 0);
-            if (foundPos >= 0) {
-                ressArray.push(element);
-            }
-        } else if (element.address === searchWord) {
-            ressArray.push(element);
-        }
-    });
-
-    return ressArray;
-};
-
-export function searchByAddress(state, text) {
-    const newQuery = findAddress(state.query, text, true);
-
-    state.queryRess = findAddress(state.locations, text, false);
+    queryRess = findAddress(locations, text, false);
     if (newQuery.length === 1) {
-        newQuery[0].matches = state.queryRess.length;
-        state.query.splice(state.query.indexOf(newQuery[0]), 1);
-        state.query.unshift(newQuery[0]);
+        newQuery[0].matches = queryRess.length;
+        query.splice(query.indexOf(newQuery[0]), 1);
+        query.unshift(newQuery[0]);
     } else {
-        state.query.unshift({ 'address': text, 'matches': state.queryRess.length });
+        query.unshift({ 'address': text, 'matches': queryRess.length });
     }
-    return state;
+    return { query, locations, queryRess };
 }
 

@@ -16,8 +16,6 @@ class Searchfield extends Component {
     handleInputChange = event => this.setState({ inputValue: event.target.value });
 
     render() {
-        //const listResults = this.props.queryRess.length !== 0 ? this.createSearchResList() : this.createQueriesList();
-        //const listQueries = this.props.queryRess.length === 0 ? this.createQueriesList() : [];
         let Child = ResultQueries;
         let result = this.props.queryRess;
 
@@ -39,6 +37,7 @@ class Searchfield extends Component {
 }
 
 function mapStateToProps(state) {
+    console.log('STATE', state);
     return {
         query: state.searchReducer.query,
         locations: state.searchReducer.locations,

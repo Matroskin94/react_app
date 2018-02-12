@@ -17,7 +17,7 @@
         }
         
     ],
-    "savedLocations":[
+    "locations":[
         {
             "name":"location1",
             "address":"address1"

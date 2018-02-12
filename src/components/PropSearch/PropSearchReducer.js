@@ -1,10 +1,10 @@
 import { GO_PRESSED, LETTER_TYPED } from '../../constants/constants';
-import { queries, savedLocations } from '../../data/data.json';
+import { queries, locations } from '../../data/data.json';
 import { searchByAddress } from '../../actions/ActionService';
 
 const initialState = {
     query: queries,
-    locations: savedLocations,
+    location: locations,
     queryRess: [],
     searchWord: ''
 };
@@ -14,8 +14,11 @@ export default function PropSearchReducer(state = initialState, action) {
 
     switch (action.type) {
         case GO_PRESSED: {
-            newState = searchByAddress(newState, action.payload);
-
+            newState = searchByAddress({
+                query: newState.query,
+                locations: newState.location,
+                queryRess: newState.queryRess
+            }, action.payload);
             return {
                 ...state,
                 queryRess: newState.queryRess,
@@ -26,7 +29,7 @@ export default function PropSearchReducer(state = initialState, action) {
             return { ...state, searchWord: action.payload };
         }
         default: {
-            return state;
+            return newState;
         }
     }
 }
