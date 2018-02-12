@@ -1,6 +1,6 @@
-import { GO_PRESSED, LETTER_TYPED } from '../../constants/constants.js';
+import { GO_PRESSED, LETTER_TYPED } from '../../constants/constants';
 import { queries, savedLocations } from '../../data/data.json';
-import { searchByAddress } from '../../actions/ActionService.js';
+import { searchByAddress } from '../../actions/ActionService';
 
 const initialState = {
     query: queries,
