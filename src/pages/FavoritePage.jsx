@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../components/Favorite/Header.jsx';
 import FavItem from '../components/Favorite/FavItem.jsx';
-import styles from '../styles/FavPage.css';
+import styles from '../styles/FavoritePage.css';
 
 class Favorite extends Component {
     render() {

@@ -1,5 +1,5 @@
-import { GO_PRESSED, LETTER_TYPED } from '../../constants/Constants.js';
-import { queries, savedLocations } from '../../data/Data.json';
+import { GO_PRESSED, LETTER_TYPED } from '../../constants/constants.js';
+import { queries, savedLocations } from '../../data/data.json';
 import { searchByAddress } from '../../actions/ActionService.js';
 
 const initialState = {

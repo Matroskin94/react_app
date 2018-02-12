@@ -13,23 +13,31 @@ class Searchfield extends Component {
 
     handleInputChange = event => this.setState({ inputValue: event.target.value });
 
-    render() {
-        const listItems = [];
+    createQueriesList = () => { // Создаёт список поисковых запросов
+        return this.props.query.map(({ address, matches } = {}, index) =>
+            <tr key={index}><td>{address} ({matches})</td></tr>);
+    }
 
-        if (this.props.queryRess.length === 0) {
-            listItems.push(...this.props.query.map(({ address, matches } = {}, index) =>
-                <tr key={index}><td>{address} ({matches})</td></tr>));
-        } else {
-            listItems.push(...this.props.queryRess.map(({ address, name } = {}, index) =>
-                <tr key={index}><td><p>{address} <br /> Location: {name}</p></td></tr>));
-        }
+    createSearchResList = () => { // Создаёт список результатов поиска
+        return this.props.queryRess.map(({ address, name } = {}, index) =>
+            <tr key={index}><td><p>{address} <br /> Location: {name}</p></td></tr>);
+    }
+
+    render() {
+        const listResults = this.props.queryRess.length !== 0 ? [...this.createSearchResList()] : [];
+        const listQueries = this.props.queryRess.length === 0 ? [...this.createQueriesList()] : [];
 
         return (
             <div>
                 <input onChange={this.handleInputChange} type='text' value={this.state.inputValue} />
                 <button onClick={this.handleSearchClick}>Go</button>
                 <button>My Location </button>
-                <table ><tbody>{listItems}</tbody></table>
+                <table >
+                    <tbody>
+                        {listResults}
+                        {listQueries}
+                    </tbody>
+                </table>
             </div>
         );
     }
@@ -37,10 +45,10 @@ class Searchfield extends Component {
 
 function mapStateToProps(state) {
     return {
-        query: state.search_reducer.query,
-        locations: state.search_reducer.locations,
-        queryRess: state.search_reducer.queryRess,
-        searchWord: state.search_reducer.searchWord
+        query: state.searchReducer.query,
+        locations: state.searchReducer.locations,
+        queryRess: state.searchReducer.queryRess,
+        searchWord: state.searchReducer.searchWord
     };
 }
 
