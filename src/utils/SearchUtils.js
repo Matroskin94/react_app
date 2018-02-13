@@ -1,4 +1,4 @@
-const findAddress = (array, searchWord, strict) => {
+const filterAddreses = (array, searchWord, strict) => {
     const ressArray = array.filter(element => {
         if (!strict) {
             let foundPos = -1;
@@ -10,9 +10,10 @@ const findAddress = (array, searchWord, strict) => {
         } else if (element.address === searchWord) {
             return true;
         }
+        return false;
     });
 
     return ressArray;
 };
 
-export default findAddress;
+export default filterAddreses;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FavItem = props => (
+const FavItem = () => (
     <div>
         <div className='favImage' />
         <div className='favText'>

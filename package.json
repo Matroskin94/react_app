@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --content-base ./src"
+    "start": "webpack-dev-server --content-base ./src",
+    "lint": "./node_modules/.bin/eslint src/"
   },
   "author": "",
   "license": "ISC",
@@ -26,18 +27,19 @@
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.6.1",
     "extract-text-webpack-plugin": "^3.0.2",
+    "prop-types": "^15.6.0",
     "react-css-modules": "^4.7.1",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "style-loader": "^0.20.1",
-    "webpack-dev-server": "^2.11.1"
-  },
-  "dependencies": {
+    "webpack-dev-server": "^2.11.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router": "^4.2.0",
-    "react-router-dom": "^4.2.2",
+    "react-router-dom": "^4.2.2"
+  },
+  "dependencies": {
     "webpack": "^3.10.0"
   }
 }

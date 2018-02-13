@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class ResultLocations extends Component {
-
-    createSearchResList = () => { // Создаёт список результатов поиска
-        return [...this.props.result.map(({ address, name } = {}, index) =>
-            <tr key={index}><td><p>{address} Location: {name}</p></td></tr>)];
-    }
+    createSearchResList = () => // Создаёт список результатов поиска
+        this.props.result.map(({ address, name } = {}, index) =>
+            <tr key={index.toString()}>
+                <td>
+                    <p>{address} Location: {name}</p>
+                </td>
+            </tr>);
 
     render() {
         return (
@@ -20,5 +23,13 @@ class ResultLocations extends Component {
         );
     }
 }
+
+ResultLocations.defaultProps = {
+    result: null
+};
+
+ResultLocations.propTypes = {
+    result: PropTypes.array
+};
 
 export default ResultLocations;

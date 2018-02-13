@@ -5,21 +5,21 @@ import { Switch, BrowserRouter } from 'react-router-dom';
 import FavoritePage from './FavoritePage.jsx';
 import PropSearchPage from './PropSearchPage.jsx';
 import initStore from '../store/AppStore';
-import styles from '../styles/Styles.css';
+import Layout from './Layout.jsx';
 
 const store = initStore();
 
 const AppRouter = props => (
-    <div className={styles.page}>
-        <Provider store={store}>
-            <BrowserRouter>
-                <Switch>
+    <Provider store={store}>
+        <BrowserRouter>
+            <Switch>
+                <Layout>
                     <Route exact path='/' component={PropSearchPage} />
                     <Route path='/favorite' component={FavoritePage} />
-                </Switch>
-            </BrowserRouter>
-        </Provider>
-    </div>
+                </Layout>
+            </Switch>
+        </BrowserRouter>
+    </Provider>
 );
 
 export default AppRouter;

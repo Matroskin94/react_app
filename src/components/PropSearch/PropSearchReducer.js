@@ -1,6 +1,6 @@
 import { GO_PRESSED, LETTER_TYPED } from '../../constants/constants';
 import { queries, locations } from '../../data/data.json';
-import { searchByAddress } from '../../actions/ActionService';
+import filterByAddress from '../../actions/ActionService';
 
 const initialState = {
     query: queries,
@@ -14,10 +14,9 @@ export default function PropSearchReducer(state = initialState, action) {
 
     switch (action.type) {
         case GO_PRESSED: {
-            newState = searchByAddress({
+            newState = filterByAddress({
                 query: newState.query,
-                locations: newState.location,
-                queryRess: newState.queryRess
+                locations: newState.location
             }, action.payload);
             return {
                 ...state,

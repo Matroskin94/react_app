@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { searchAction } from '../../actions/SearchActions';
 import ResultLocations from './ResultLocations.jsx';
 import ResultQueries from './ResultQueries.jsx';
@@ -16,14 +17,8 @@ class Searchfield extends Component {
     handleInputChange = event => this.setState({ inputValue: event.target.value });
 
     render() {
-        let Child = ResultQueries;
-        let result = this.props.queryRess;
-
-        if (this.props.queryRess.length !== 0){
-            Child = ResultLocations;
-        } else {
-            result = this.props.query;
-        }
+        const Child = this.props.queryRess.length !== 0 ? ResultLocations : ResultQueries;
+        const result = this.props.queryRess.length !== 0 ? this.props.queryRess : this.props.query;
 
         return (
             <div>
@@ -36,8 +31,19 @@ class Searchfield extends Component {
     }
 }
 
+Searchfield.defaultProps = {
+    setNewQuery: '',
+    queryRess: [],
+    query: []
+};
+
+Searchfield.propTypes = {
+    setNewQuery: PropTypes.func,
+    queryRess: PropTypes.array,
+    query: PropTypes.array
+};
+
 function mapStateToProps(state) {
-    console.log('STATE', state);
     return {
         query: state.searchReducer.query,
         locations: state.searchReducer.locations,

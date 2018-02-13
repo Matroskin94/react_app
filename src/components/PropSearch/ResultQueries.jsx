@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class SearchResult extends Component {
     createQueriesList = () => // Создаёт список поисковых запросов
-        [...this.props.result.map(({ address, matches } = {}, index) =>
-            <tr key={index}><td>{address}: {matches}</td></tr>)];
+        this.props.result.map(({ address, matches } = {}, index) =>
+            <tr key={index.toString()}>
+                <td>{address}: {matches}</td>
+            </tr>);
 
     render() {
         return (
@@ -18,5 +21,13 @@ class SearchResult extends Component {
         );
     }
 }
+
+SearchResult.defaultProps = {
+    result: null
+};
+
+SearchResult.propTypes = {
+    result: PropTypes.array
+};
 
 export default SearchResult;
