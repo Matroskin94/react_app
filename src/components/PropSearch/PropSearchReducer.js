@@ -10,14 +10,13 @@ const initialState = {
 };
 
 export default function PropSearchReducer(state = initialState, action) {
-    let newState = { ...state };
-
     switch (action.type) {
         case GO_PRESSED: {
-            newState = filterByAddress({
-                query: newState.query,
-                locations: newState.location
+            const newState = filterByAddress({
+                query: state.query,
+                locations: state.location
             }, action.payload);
+
             return {
                 ...state,
                 queryRess: newState.queryRess,
@@ -28,7 +27,7 @@ export default function PropSearchReducer(state = initialState, action) {
             return { ...state, searchWord: action.payload };
         }
         default: {
-            return newState;
+            return { ...state };
         }
     }
 }

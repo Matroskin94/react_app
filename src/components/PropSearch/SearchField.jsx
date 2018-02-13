@@ -17,8 +17,8 @@ class Searchfield extends Component {
     handleInputChange = event => this.setState({ inputValue: event.target.value });
 
     render() {
-        const Child = this.props.queryRess.length !== 0 ? ResultLocations : ResultQueries;
-        const result = this.props.queryRess.length !== 0 ? this.props.queryRess : this.props.query;
+        const Child = this.props.queryRess.length ? ResultLocations : ResultQueries;
+        const result = this.props.queryRess.length ? this.props.queryRess : this.props.query;
 
         return (
             <div>
@@ -31,16 +31,16 @@ class Searchfield extends Component {
     }
 }
 
-Searchfield.defaultProps = {
-    setNewQuery: '',
-    queryRess: [],
-    query: []
-};
-
 Searchfield.propTypes = {
     setNewQuery: PropTypes.func,
     queryRess: PropTypes.array,
     query: PropTypes.array
+};
+
+Searchfield.defaultProps = {
+    setNewQuery: '',
+    queryRess: [],
+    query: []
 };
 
 function mapStateToProps(state) {

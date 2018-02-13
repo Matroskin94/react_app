@@ -24,12 +24,13 @@ class ResultLocations extends Component {
     }
 }
 
-ResultLocations.defaultProps = {
-    result: null
-};
-
 ResultLocations.propTypes = {
     result: PropTypes.array
+};
+
+
+ResultLocations.defaultProps = {
+    result: []
 };
 
 export default ResultLocations;

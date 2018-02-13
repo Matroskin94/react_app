@@ -22,12 +22,12 @@ class SearchResult extends Component {
     }
 }
 
-SearchResult.defaultProps = {
-    result: null
-};
-
 SearchResult.propTypes = {
     result: PropTypes.array
+};
+
+SearchResult.defaultProps = {
+    result: []
 };
 
 export default SearchResult;

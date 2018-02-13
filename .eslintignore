@@ -1,0 +1,4 @@
+**/*.css
+**/*.json
+webpack.config.js
+**/*.html

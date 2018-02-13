@@ -24,6 +24,7 @@
                 "SwitchCase": 1
             }
         ],
+        "linebreak-style": 0,
         "no-restricted-imports": [1,  "lodash", "ramda", "crypto", "bluebird", "setimmediate2", "pure-render-decorator", "ajv"],
         "no-var": 0,
         "no-shadow": 1,
