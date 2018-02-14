@@ -1,22 +1,21 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-class ResultLocations extends Component {
-    createSearchResList = () => // Создаёт список результатов поиска
-        this.props.result.map(({ address, name } = {}, index) =>
-            <tr key={index.toString()}>
-                <td>
-                    <p>{address} Location: {name}</p>
-                </td>
-            </tr>);
-
+class ResultLocations extends PureComponent {
     render() {
+        const { result } = this.props;
+
         return (
             <div>
                 <p>Your Locations</p>
                 <table>
                     <tbody>
-                        {this.createSearchResList()}
+                        {result.map(({ address, name } = {}, index) =>
+                            <tr key={index.toString()}>
+                                <td>
+                                    <p>{address} Location: {name}</p>
+                                </td>
+                            </tr>)}
                     </tbody>
                 </table>
             </div>
@@ -27,7 +26,6 @@ class ResultLocations extends Component {
 ResultLocations.propTypes = {
     result: PropTypes.array
 };
-
 
 ResultLocations.defaultProps = {
     result: []

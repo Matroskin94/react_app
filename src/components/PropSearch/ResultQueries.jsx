@@ -1,20 +1,21 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-class SearchResult extends Component {
-    createQueriesList = () => // Создаёт список поисковых запросов
-        this.props.result.map(({ address, matches } = {}, index) =>
-            <tr key={index.toString()}>
-                <td>{address}: {matches}</td>
-            </tr>);
-
+class SearchResult extends PureComponent {
     render() {
+        const { result } = this.props;
+
         return (
             <div>
                 <p>Ricent Queries:</p>
                 <table>
                     <tbody>
-                        {this.createQueriesList()}
+                        {result.map(({ address, matches } = {}, index) =>
+                            <tr key={index.toString()}>
+                                <td>
+                                    {address}: {matches}
+                                </td>
+                            </tr>)}
                     </tbody>
                 </table>
             </div>

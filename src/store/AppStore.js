@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
-import combineReducers from '../Reducers';
+import combineReducers from '../reducers';
 
 
 export default function initStore() {

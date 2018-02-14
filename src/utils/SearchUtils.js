@@ -1,16 +1,9 @@
 const filterAddreses = (array, searchWord, strict) => {
     const ressArray = array.filter(element => {
-        if (!strict) {
-            let foundPos = -1;
+        const isMatch = (!strict && element.address.indexOf(searchWord, 0) >= 0)
+            || (element.address === searchWord);
 
-            foundPos = element.address.indexOf(searchWord, 0);
-            if (foundPos >= 0) {
-                return true;
-            }
-        } else if (element.address === searchWord) {
-            return true;
-        }
-        return false;
+        return isMatch;
     });
 
     return ressArray;
