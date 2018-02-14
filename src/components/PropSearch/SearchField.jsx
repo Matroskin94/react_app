@@ -17,15 +17,14 @@ class Searchfield extends Component {
     handleInputChange = event => this.setState({ inputValue: event.target.value });
 
     render() {
-        const Child = this.props.queryRess.length ? ResultLocations : ResultQueries;
-        const result = this.props.queryRess.length ? this.props.queryRess : this.props.query;
-
         return (
             <div>
                 <input onChange={this.handleInputChange} type='text' value={this.state.inputValue} />
                 <button onClick={this.handleSearchClick}>Go</button>
-                <button>My Location </button>
-                <Child result={result} />
+                <button onClick={this.handleLocationClick}>My Location </button>
+                {this.props.queryRessults.length ?
+                    <ResultLocations results={this.props.queryRessults} /> :
+                    <ResultQueries results={this.props.queries} />}
             </div>
         );
     }
@@ -33,21 +32,21 @@ class Searchfield extends Component {
 
 Searchfield.propTypes = {
     setNewQuery: PropTypes.func,
-    queryRess: PropTypes.array,
-    query: PropTypes.array
+    queryRessults: PropTypes.array,
+    queries: PropTypes.array
 };
 
 Searchfield.defaultProps = {
     setNewQuery: '',
-    queryRess: [],
-    query: []
+    queryRessults: [],
+    queries: []
 };
 
 function mapStateToProps(state) {
     return {
-        query: state.searchReducer.query,
+        queries: state.searchReducer.queries,
         locations: state.searchReducer.locations,
-        queryRess: state.searchReducer.queryRess,
+        queryRessults: state.searchReducer.queryRessults,
         searchWord: state.searchReducer.searchWord
     };
 }

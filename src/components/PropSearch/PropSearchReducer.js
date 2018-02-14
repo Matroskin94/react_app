@@ -3,9 +3,9 @@ import { queries, locations } from '../../data/data.json';
 import filterByAddress from '../../actions/ActionService';
 
 const initialState = {
-    query: queries,
-    location: locations,
-    queryRess: [],
+    queries,
+    locations,
+    queryRessults: [],
     searchWord: ''
 };
 
