@@ -13,13 +13,13 @@ const store = initStore();
 const AppRouter = props => (
     <Provider store={store}>
         <BrowserRouter>
-            <Switch>
-                <Layout>
+            <Layout>
+                <Switch>
                     <Route exact path='/' component={PropSearchPage} />
                     <Route path='/favorite' component={FavoritePage} />
                     <Route path='/details' component={DetailsPage} />
-                </Layout>
-            </Switch>
+                </Switch>
+            </Layout>
         </BrowserRouter>
     </Provider>
 );

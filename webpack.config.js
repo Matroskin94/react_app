@@ -4,7 +4,8 @@ module.exports = {
     entry: './src/App.jsx',
     output: {
         path: path.resolve(__dirname, "dist"),
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        publicPath: '/'
     },
     module: {
       rules: [
@@ -28,5 +29,9 @@ module.exports = {
             ]
         }
       ]
-    }
+    },
+
+      devServer: {
+        historyApiFallback: true,
+      }
 };

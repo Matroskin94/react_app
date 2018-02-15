@@ -6,11 +6,25 @@ import ItemDescription from '../components/Details/ItemDescription.jsx';
 
 class Details extends Component {
     render() {
+        const itemData = { ...this.props.activeItem};
+        const itemInfo = {
+            price: itemData.price,
+            price_currency: itemData.price_currency,
+            img_url: itemData.img_url,
+            title: itemData.title
+        }
+        const itemDescription = {
+            bathroom_number: itemData.bathroom_number,
+            bedroom_number: itemData.bedroom_number,
+            car_spaces: itemData.car_spaces,
+            lister_url: itemData.lister_url,
+            summary: itemData.summary
+        }
         return (
             <div>
                 <Header />
-                <ItemInfo />
-                <ItemDescription />
+                <ItemInfo itemInfo={itemInfo}/>
+                <ItemDescription itemDescription={itemDescription}/>
             </div>
         );
     }

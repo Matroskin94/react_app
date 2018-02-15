@@ -1,10 +1,13 @@
 import React from 'react';
 
-const Header = props => (
+const ItemInfo = props => (
     <div>
-        <h2>Items info</h2>
-        <p>Photo</p>
+        <h3>{props.itemInfo.price_currency} {props.itemInfo.price} </h3>
+        <h4>{props.itemInfo.title}</h4>
+        <div>
+            <img alt='' src={props.itemInfo.img_url} />
+        </div>
     </div>
 );
 
-export default Header;
+export default ItemInfo;

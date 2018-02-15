@@ -1,0 +1,9 @@
+.title{
+    display:inline-block;
+}
+
+.favoriteButton{
+    display:inline-block;
+    float:right;
+    margin: 30px;
+}

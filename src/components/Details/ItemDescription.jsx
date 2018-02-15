@@ -1,10 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const Header = props => (
+const ItemDescription = props => (
+    
     <div>
-        <h2>Items Description</h2>
-        <p>Lorm impsum data text bla bla bla</p>
+        <p>Beds: {props.itemDescription.bedroom_number || 0}<br />
+            Bathrooms: {props.itemDescription.bathroom_number || 0}<br />
+            Car spaces: {props.itemDescription.car_spaces || 0}
+        </p>
+        <p>
+            {props.itemDescription.summary}
+        </p>
+        <a href={props.itemDescription.lister_url}>Show full information</a>
     </div>
 );
 
-export default Header;
+export default ItemDescription;
