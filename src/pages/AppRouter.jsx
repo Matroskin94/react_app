@@ -6,6 +6,7 @@ import FavoritePage from './FavoritePage.jsx';
 import PropSearchPage from './PropSearchPage.jsx';
 import initStore from '../store/AppStore';
 import Layout from './Layout.jsx';
+import DetailsPage from './DetailsPage.jsx';
 
 const store = initStore();
 
@@ -16,6 +17,7 @@ const AppRouter = props => (
                 <Layout>
                     <Route exact path='/' component={PropSearchPage} />
                     <Route path='/favorite' component={FavoritePage} />
+                    <Route path='/details' component={DetailsPage} />
                 </Layout>
             </Switch>
         </BrowserRouter>

@@ -1,4 +1,5 @@
-import { GO_PRESSED } from '../constants/constants';
+import { GO_PRESSED, LOCATION_PRESSED } from '../constants/constants';
+import { extractData, checkError } from '../utils/SearchUtils';
 
 export function searchAction(text) {
     return ({
@@ -7,9 +8,30 @@ export function searchAction(text) {
     });
 }
 
-export function locationPressed() {
+export function locationsResultAction(data) {
     return ({
-        type: 'TEXT_INP',
-        payload: 'Show localtion'
+        type: LOCATION_PRESSED,
+        payload: data
     });
 }
+
+export const searchLocationsAction = dispatch => text => {
+    fetch(`http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&page=1&place_name=${text}`)
+        .then(response => response.json())
+        .then((response, reject) => {
+            const error = checkError(response);
+
+            if (!error) {
+                const results = extractData(response);
+
+                dispatch(locationsResultAction(results));
+            }
+        })
+        .catch(reject => {
+            console.log('REJECTED', reject);
+        });
+    return {
+        type: 'SEARCH_PROCESS',
+        payload: ''
+    };
+};

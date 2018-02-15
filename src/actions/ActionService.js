@@ -1,16 +1,15 @@
-import filterAddreses from '../utils/SearchUtils';
+import { filterAddreses } from '../utils/SearchUtils';
 
-export default function filterByAddress({ query, locations }, text) {
-    const newQuery = filterAddreses(query, text, true);
-    const queryRess = filterAddreses(locations, text, false);
+export default function filterByAddress(queries, locations, text) {
+    const newQuery = filterAddreses(queries, text, true);
+    const queryRessults = filterAddreses(locations, text, false);
 
     if (newQuery.length === 1) {
-        newQuery[0].matches = queryRess.length;
-        query.splice(query.indexOf(newQuery[0]), 1);
-        query.unshift(newQuery[0]);
+        newQuery[0].matches = queryRessults.length;
+        queries.splice(queries.indexOf(newQuery[0]), 1);
+        queries.unshift(newQuery[0]);
     } else {
-        query.unshift({ address: text, matches: queryRess.length });
+        queries.unshift({ address: text, matches: queryRessults.length });
     }
-    return { query, queryRess };
+    return { queries, queryRessults };
 }
-
