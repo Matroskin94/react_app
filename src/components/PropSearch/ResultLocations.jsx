@@ -24,11 +24,11 @@ class ResultLocations extends PureComponent {
 }
 
 ResultLocations.propTypes = {
-    result: PropTypes.array
+    results: PropTypes.array,
 };
 
 ResultLocations.defaultProps = {
-    result: []
+    results: [],
 };
 
 export default ResultLocations;

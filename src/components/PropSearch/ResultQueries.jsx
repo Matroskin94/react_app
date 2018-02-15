@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 
 class SearchResult extends PureComponent {
     render() {
-        const { result } = this.props;
+        const { results } = this.props;
 
         return (
             <div>
                 <p>Ricent Queries:</p>
                 <table>
                     <tbody>
-                        {result.map(({ address, matches } = {}, index) =>
+                        {results.map(({ address, matches } = {}, index) =>
                             <tr key={index.toString()}>
                                 <td>
                                     {address}: {matches}
@@ -24,11 +24,11 @@ class SearchResult extends PureComponent {
 }
 
 SearchResult.propTypes = {
-    result: PropTypes.array
+    results: PropTypes.array
 };
 
 SearchResult.defaultProps = {
-    result: []
+    results: []
 };
 
 export default SearchResult;

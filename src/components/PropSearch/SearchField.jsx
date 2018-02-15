@@ -6,6 +6,22 @@ import ResultLocations from './ResultLocations.jsx';
 import ResultQueries from './ResultQueries.jsx';
 
 class Searchfield extends Component {
+    static propTypes = {
+        setNewQuery: PropTypes.func,
+        searchLocations: PropTypes.func,
+        setActiveItem: PropTypes.func,
+        queryRessults: PropTypes.array,
+        queries: PropTypes.array
+    };
+
+    static defaultProps = {
+        setNewQuery: '',
+        searchLocations: '',
+        setActiveItem: '',
+        queryRessults: [],
+        queries: []
+    };
+
     state = {
         inputValue: ''
     };
@@ -29,18 +45,6 @@ class Searchfield extends Component {
         );
     }
 }
-
-Searchfield.propTypes = {
-    setNewQuery: PropTypes.func,
-    queryRessults: PropTypes.array,
-    queries: PropTypes.array
-};
-
-Searchfield.defaultProps = {
-    setNewQuery: '',
-    queryRessults: [],
-    queries: []
-};
 
 function mapStateToProps(state) {
     return {
