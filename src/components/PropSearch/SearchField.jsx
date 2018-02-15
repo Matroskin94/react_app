@@ -8,16 +8,12 @@ import ResultQueries from './ResultQueries.jsx';
 class Searchfield extends Component {
     static propTypes = {
         setNewQuery: PropTypes.func,
-        searchLocations: PropTypes.func,
-        setActiveItem: PropTypes.func,
         queryRessults: PropTypes.array,
         queries: PropTypes.array
     };
 
     static defaultProps = {
         setNewQuery: '',
-        searchLocations: '',
-        setActiveItem: '',
         queryRessults: [],
         queries: []
     };

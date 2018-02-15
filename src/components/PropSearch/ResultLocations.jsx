@@ -2,15 +2,23 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 class ResultLocations extends PureComponent {
+    static propTypes = {
+        results: PropTypes.array,
+    };
+
+    static defaultProps = {
+        results: [],
+    };
     render() {
-        const { result } = this.props;
+        const { results } = this.props;
+        console.log(this.props);
 
         return (
             <div>
                 <p>Your Locations</p>
                 <table>
                     <tbody>
-                        {result.map(({ address, name } = {}, index) =>
+                        {results.map(({ address, name } = {}, index) =>
                             <tr key={index.toString()}>
                                 <td>
                                     <p>{address} Location: {name}</p>
@@ -22,13 +30,5 @@ class ResultLocations extends PureComponent {
         );
     }
 }
-
-ResultLocations.propTypes = {
-    results: PropTypes.array,
-};
-
-ResultLocations.defaultProps = {
-    results: [],
-};
 
 export default ResultLocations;

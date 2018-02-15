@@ -1,7 +1,14 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-class SearchResult extends PureComponent {
+class ResultQueries extends PureComponent {
+    static propTypes = {
+        results: PropTypes.array
+    };
+
+    static defaultProps = {
+        results: []
+    };
     render() {
         const { results } = this.props;
 
@@ -23,12 +30,6 @@ class SearchResult extends PureComponent {
     }
 }
 
-SearchResult.propTypes = {
-    results: PropTypes.array
-};
 
-SearchResult.defaultProps = {
-    results: []
-};
 
-export default SearchResult;
+export default ResultQueries;
