@@ -1,0 +1,34 @@
+{
+    "queries":[
+        {
+            "address":"address1",
+            "matches": 1
+        },
+        {
+            "address":"address2",
+            "matches": 1
+        },
+        {
+            "address":"address3",
+            "matches": 0
+        },{
+            "address":"address4",
+            "matches": 0
+        }
+        
+    ],
+    "locations":[
+        {
+            "name":"location1",
+            "address":"address1"
+        },
+        {
+            "name":"location2",
+            "address":"address2"
+        },
+        {
+            "name":"new_location",
+            "address":"new_address"
+        }
+    ]
+}
