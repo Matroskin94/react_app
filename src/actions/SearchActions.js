@@ -1,30 +1,34 @@
-import { GO_PRESSED, LOCATION_PRESSED } from '../constants/constants';
-import { extractData, checkError } from '../utils/SearchUtils';
+import { GO_PRESSED, QUERY_LINK, QUERY_SELECTED } from '../constants/constants';
+import { checkError, extractData } from '../utils/SearchUtils';
 
-export function searchAction(text) {
+export const searchResultAction = (word, resultsNum) => {
     return ({
         type: GO_PRESSED,
-        payload: text
+        payload: {
+            word,
+            resultsNum
+        }
     });
-}
+};
 
-export function locationsResultAction(data) {
+export const chooseQueryAction = (results, word) => {
     return ({
-        type: LOCATION_PRESSED,
-        payload: data
+        type: QUERY_SELECTED,
+        payload: {
+            results,
+            word
+        }
     });
-}
+};
 
-export const searchLocationsAction = dispatch => text => {
-    fetch(`http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&page=1&place_name=${text}`)
+export const searchAction = dispatch => text => {
+    fetch(`${QUERY_LINK + text}`)
         .then(response => response.json())
         .then((response, reject) => {
             const error = checkError(response);
 
             if (!error) {
-                const results = extractData(response);
-
-                dispatch(locationsResultAction(results));
+                dispatch(searchResultAction(text, response.response.total_results));
             }
         })
         .catch(reject => {
@@ -32,6 +36,27 @@ export const searchLocationsAction = dispatch => text => {
         });
     return {
         type: 'SEARCH_PROCESS',
+        payload: ''
+    };
+};
+
+export const chooseLocationsAction = dispatch => text => {
+    fetch(`${QUERY_LINK + text}`)
+        .then(response => response.json())
+        .then((response, reject) => {
+            const error = checkError(response);
+
+            if (!error) {
+                const results = extractData(response);
+
+                dispatch(chooseQueryAction(results, text));
+            }
+        })
+        .catch(reject => {
+            console.log('REJECTED', reject);
+        });
+    return {
+        type: 'CHOOSING_LOCATION_PROCESS',
         payload: ''
     };
 };

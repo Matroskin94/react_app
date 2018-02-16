@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { searchAction, searchLocationsAction } from '../../actions/SearchActions';
-import goDetailsAction from '../../actions/DetailsActions';
-import ResultLocations from './ResultLocations.jsx';
+import { searchAction, chooseLocationsAction } from '../../actions/SearchActions';
 import ResultQueries from './ResultQueries.jsx';
 
 class Searchfield extends Component {
     static propTypes = {
         setNewQuery: PropTypes.func,
-        queryRessults: PropTypes.array,
+        chooseQuery: PropTypes.func,
         queries: PropTypes.array
     };
 
     static defaultProps = {
         setNewQuery: '',
-        queryRessults: [],
+        chooseQuery: '',
         queries: []
     };
 
@@ -27,12 +25,8 @@ class Searchfield extends Component {
         this.props.setNewQuery(this.state.inputValue);
     }
 
-    handleLocationClick = () => {
-        this.props.searchLocations(this.state.inputValue);
-    }
-
-    handleItemClick = item => {
-        this.props.setActiveItem(item);
+    handleQueryClick = address => {
+        this.props.chooseQuery(address);
     }
 
     handleInputChange = event => this.setState({ inputValue: event.target.value });
@@ -42,10 +36,8 @@ class Searchfield extends Component {
             <div>
                 <input onChange={this.handleInputChange} type='text' value={this.state.inputValue} />
                 <button onClick={this.handleSearchClick}>Go</button>
-                <button onClick={this.handleLocationClick}>My Location </button>
-                {this.props.queryRessults.length ?
-                    <ResultLocations handleItemClick={this.handleItemClick} results={this.props.queryRessults} /> :
-                    <ResultQueries results={this.props.queries} />}
+                <button>My Location </button>
+                <ResultQueries results={this.props.queries} handleItemClick={this.handleQueryClick} />
             </div>
         );
     }
@@ -54,8 +46,8 @@ class Searchfield extends Component {
 function mapStateToProps(state) {
     return {
         queries: state.searchReducer.queries,
+        trigger: state.searchReducer.trigger,
         locations: state.searchReducer.locations,
-        queryRessults: state.searchReducer.queryRessults,
         searchWord: state.searchReducer.searchWord,
         activeItem: state.detailsReducer.activeItem
     };
@@ -64,13 +56,10 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         setNewQuery: text => {
-            dispatch(searchAction(text));
+            dispatch(searchAction(dispatch)(text));
         },
-        searchLocations: text => {
-            dispatch(searchLocationsAction(dispatch)('leeds'));
-        },
-        setActiveItem: item => {
-            dispatch(goDetailsAction(item));
+        chooseQuery: text => {
+            dispatch(chooseLocationsAction(dispatch)(text));
         }
 
     };

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ItemInfo = props => (
     <div>
@@ -9,5 +10,13 @@ const ItemInfo = props => (
         </div>
     </div>
 );
+
+ItemInfo.propTypes = {
+    itemInfo: PropTypes.object
+};
+
+ItemInfo.defaultProps = {
+    itemInfo: {}
+};
 
 export default ItemInfo;

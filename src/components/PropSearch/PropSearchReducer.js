@@ -1,17 +1,17 @@
-import { GO_PRESSED, LETTER_TYPED, LOCATION_PRESSED } from '../../constants/constants';
-import { queries, locations } from '../../data/data.json';
+import { GO_PRESSED, LOCATION_PRESSED, QUERY_SELECTED } from '../../constants/constants';
 import filterByAddress from '../../actions/ActionService';
 
 const initialState = {
-    queries,
-    locations,
+    queries: [],
+    locations: [],
+    trigger: false,
     queryRessults: [],
     searchWord: ''
 };
 
 export default function PropSearchReducer(state = initialState, action) {
     switch (action.type) {
-        case GO_PRESSED: {
+        case LOCATION_PRESSED: {
             const newState = filterByAddress(
                 state.queries,
                 state.locations,
@@ -24,14 +24,28 @@ export default function PropSearchReducer(state = initialState, action) {
                 queries: newState.queries
             };
         }
-        case LOCATION_PRESSED: {
+        case QUERY_SELECTED: {
             return {
                 ...state,
-                queryRessults: action.payload
+                queryRessults: action.payload.results,
+                searchWord: action.payload.word,
+                trigger: !state.trigger
             };
         }
-        case LETTER_TYPED: {
-            return { ...state, searchWord: action.payload };
+
+        case GO_PRESSED: {
+            const newState = state.queries;
+            const newObj = filterByAddress(
+                newState,
+                action.payload
+            );
+
+            return {
+                ...state,
+                queries: newObj,
+                trigger: !state.trigger
+
+            };
         }
         default: {
             return { ...state };

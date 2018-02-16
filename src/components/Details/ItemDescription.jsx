@@ -1,8 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const ItemDescription = props => (
-    
     <div>
         <p>Beds: {props.itemDescription.bedroom_number || 0}<br />
             Bathrooms: {props.itemDescription.bathroom_number || 0}<br />
@@ -16,3 +15,11 @@ const ItemDescription = props => (
 );
 
 export default ItemDescription;
+
+ItemDescription.propTypes = {
+    itemDescription: PropTypes.object
+};
+
+ItemDescription.defaultProps = {
+    itemDescription: {}
+};

@@ -1,13 +1,18 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-class ResultQueries extends PureComponent {
+class ResultQueries extends Component {
     static propTypes = {
-        results: PropTypes.array
+        results: PropTypes.array,
+        handleItemClick: PropTypes.func
     };
-
     static defaultProps = {
-        results: []
+        results: [],
+        handleItemClick: null
+    };
+    itemClicked = address => () => {
+        this.props.handleItemClick(address);
     };
     render() {
         const { results } = this.props;
@@ -15,21 +20,15 @@ class ResultQueries extends PureComponent {
         return (
             <div>
                 <p>Ricent Queries:</p>
-                <table>
-                    <tbody>
-                        {results.map(({ address, matches } = {}, index) =>
-                            <tr key={index.toString()}>
-                                <td>
-                                    {address}: {matches}
-                                </td>
-                            </tr>)}
-                    </tbody>
-                </table>
+                {results.map(({ address, matches } = {}, index) =>
+                    <div key={index.toString()}>
+                        <Link onClick={this.itemClicked(address)} to='/results'>
+                            {address}: {matches}
+                        </Link>
+                    </div>)}
             </div>
         );
     }
 }
-
-
 
 export default ResultQueries;

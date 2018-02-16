@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../../styles/DetailsPage.css';
 
-const Header = props => (
+const Header = () => (
     <div>
         <div className={styles.title}>
             <h1>Property details</h1>
