@@ -17,7 +17,6 @@ class Searchfield extends Component {
         chooseQuery: '',
         queries: []
     };
-
     state = {
         inputValue: ''
     };
@@ -39,10 +38,12 @@ class Searchfield extends Component {
                 <button onClick={this.handleSearchClick}>Go</button>
                 <button>My Location </button>
                 <ResultQueries results={this.props.queries} handleItemClick={this.handleQueryClick} />
+
             </div>
         );
     }
 }
+
 
 function mapStateToProps(state) {
     return {
