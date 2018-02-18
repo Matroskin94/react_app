@@ -10,7 +10,7 @@ export const searchResultAction = data => {
 };
 
 export const searchAction = dispatch => word => {
-    axios.get(`${API_LINK}`, {
+    axios.get(API_LINK, {
         params: {
             country: COUNTRY_UK,
             pretty: PRETTY_1,
