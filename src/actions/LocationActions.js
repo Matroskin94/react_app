@@ -1,15 +1,16 @@
 import axios from 'axios';
-import { GO_PRESSED } from '../constants/constants';
+import { QUERY_SELECTED } from '../constants/constants';
 import { API_LINK, COUNTRY_UK, PRETTY_1, ACTION_SEARCH_LISTINGS, ENCODING_JSON, LISTING_TYPE_BUY } from '../constants/queryConstants';
+import { extractData } from '../utils/SearchUtils';
 
-export const searchResultAction = data => {
+export const chooseQueryAction = data => {
     return ({
-        type: GO_PRESSED,
+        type: QUERY_SELECTED,
         payload: data
     });
 };
 
-export const searchAction = dispatch => word => {
+export const chooseLocationsAction = dispatch => word => {
     axios.get(`${API_LINK}`, {
         params: {
             country: COUNTRY_UK,
@@ -22,16 +23,15 @@ export const searchAction = dispatch => word => {
         }
     })
         .then(response => {
-            dispatch(searchResultAction({
-                word,
-                resultsNum: response.data.response.total_results
-            }));
+            const results = extractData(response.data);
+
+            dispatch(chooseQueryAction({ results, word }));
         })
         .catch(reject => {
             console.log('REJECTED', reject);
         });
     return {
-        type: 'SEARCH_PROCESS',
+        type: 'CHOOSING_LOCATION_PROCESS',
         payload: ''
     };
 };

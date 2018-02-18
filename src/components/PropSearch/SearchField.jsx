@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { searchAction, chooseLocationsAction } from '../../actions/SearchActions';
+import { searchAction } from '../../actions/SearchActions';
+import { chooseLocationsAction } from '../../actions/LocationActions';
 import ResultQueries from './ResultQueries.jsx';
 
 class Searchfield extends Component {
@@ -46,7 +47,7 @@ class Searchfield extends Component {
 function mapStateToProps(state) {
     return {
         queries: state.searchReducer.queries,
-        trigger: state.searchReducer.trigger,
+        asyncTrigger: state.searchReducer.asyncTrigger,
         locations: state.searchReducer.locations,
         searchWord: state.searchReducer.searchWord,
         activeItem: state.detailsReducer.activeItem

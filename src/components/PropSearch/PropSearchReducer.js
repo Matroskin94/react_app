@@ -4,7 +4,7 @@ import filterByAddress from '../../actions/ActionService';
 const initialState = {
     queries: [],
     locations: [],
-    trigger: false,
+    asyncTrigger: false,
     queryRessults: [],
     searchWord: ''
 };
@@ -13,8 +13,8 @@ export default function PropSearchReducer(state = initialState, action) {
     switch (action.type) {
         case LOCATION_PRESSED: {
             const newState = filterByAddress(
-                state.queries,
-                state.locations,
+                state.queries.slice(),
+                state.locations.slice(),
                 action.payload
             );
 
@@ -29,7 +29,7 @@ export default function PropSearchReducer(state = initialState, action) {
                 ...state,
                 queryRessults: action.payload.results,
                 searchWord: action.payload.word,
-                trigger: !state.trigger
+                asyncTrigger: !state.asyncTrigger
             };
         }
 
@@ -43,7 +43,7 @@ export default function PropSearchReducer(state = initialState, action) {
             return {
                 ...state,
                 queries: newObj,
-                trigger: !state.trigger
+                asyncTrigger: !state.asyncTrigger
 
             };
         }

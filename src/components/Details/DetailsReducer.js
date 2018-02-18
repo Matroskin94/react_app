@@ -1,7 +1,7 @@
 import { GO_DETAILS } from '../../constants/constants';
 
 const initialState = {
-    activeItem: 'InitialState'
+    activeItem: {}
 };
 
 export default function DetailsReducer(state = initialState, action) {

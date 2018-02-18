@@ -8,8 +8,6 @@ const Layout = ({ children }) => (
     </div>
 );
 
-export default Layout;
-
 Layout.propTypes = {
     children: PropTypes.node
 };
@@ -17,3 +15,5 @@ Layout.propTypes = {
 Layout.defaultProps = {
     children: null
 };
+
+export default Layout;

@@ -30,8 +30,8 @@ class ResultLocations extends PureComponent {
                 {results.map((item = {}, index) =>
                     <Link onClick={this.itemClicked(item)} key={item.key} to='/details'>
                         <div className={styles.listItem}>
-                            <div>
-                                <img alt='' className={styles.itemImg} src={item.thumb_url} />
+                            <div className={styles.itemImg}>
+                                <img alt='' src={item.thumb_url} />
                             </div>
                             <div className={styles.itemText}>
                                 <p>{item.title} {item.price}{item.price_currency} <br /> {item.summary}</p>
