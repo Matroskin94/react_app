@@ -1,4 +1,4 @@
-export function filterByAddress(queries, query) {
+export function rebuildQueriesList(queries, query) {
     const newQuery = queries.find(element => element.address === query.word);
     const newQueryList = queries.slice();
 
@@ -12,7 +12,5 @@ export function filterByAddress(queries, query) {
 }
 
 export function deleteFromFavorite(favorites, item) {
-    const newFavorites = favorites.slice();
-
-    return newFavorites.filter(element => element.key !== item.key);
+    return favorites.filter(element => element.key !== item.key);
 }

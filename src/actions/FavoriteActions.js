@@ -9,7 +9,6 @@ export function addFavoriteAction(item) {
 }
 
 export function deleteFavoriteAction(item) {
-    item.isFavorite = false;
     return ({
         type: DELETE_FAVORITE,
         payload: item

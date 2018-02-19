@@ -7,16 +7,14 @@ const Header = props => {
     const onFavoriteClick = () => {
         props.handleFavoriteClick(props.isFavorite);
     };
-    const buttText = props.isFavorite ? '-' : '+';
 
-    console.log(props.isFavorite);
     return (
         <div>
             <div className={styles.title}>
                 <h1>Property details</h1>
             </div>
             <div className={styles.favoriteButton}>
-                <button onClick={onFavoriteClick}>{buttText}</button>
+                <button onClick={onFavoriteClick}>{props.isFavorite ? '-' : '+'}</button>
             </div>
         </div>
     );

@@ -1,5 +1,5 @@
 import { GO_PRESSED, LOCATION_PRESSED, QUERY_SELECTED, ADD_FAVORITE, DELETE_FAVORITE } from '../../constants/constants';
-import { filterByAddress, deleteFromFavorite } from '../../actions/ActionService';
+import { rebuildQueriesList, deleteFromFavorite } from '../../actions/ActionService';
 
 const initialState = {
     queries: [],
@@ -15,15 +15,13 @@ export default function PropSearchReducer(state = initialState, action) {
             return { ...state };
         }
         case ADD_FAVORITE: {
-            const newFavorites = state.favorites.slice();
-
-            newFavorites.unshift(action.payload);
             return {
                 ...state,
-                favorites: newFavorites
+                favorites: [action.payload, ...state.favorites]
             };
         }
         case DELETE_FAVORITE: {
+            action.payload.isFavorite = false;
             return {
                 ...state,
                 favorites: deleteFromFavorite(
@@ -41,7 +39,7 @@ export default function PropSearchReducer(state = initialState, action) {
         }
 
         case GO_PRESSED: {
-            const newQueryList = filterByAddress(
+            const newQueryList = rebuildQueriesList(
                 state.queries,
                 action.payload
             );
