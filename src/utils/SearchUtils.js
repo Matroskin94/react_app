@@ -2,6 +2,7 @@ export const extractData = data => {
     const result = data.response.listings.map((item, index) => {
         return {
             key: index + item.title,
+            isFavorite: false,
             title: item.title,
             img_url: item.img_url,
             thumb_url: item.thumb_url,

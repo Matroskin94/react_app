@@ -17,7 +17,7 @@ const AppRouter = props => (
                 <Switch>
                     <Route exact path='/' component={PropSearchPage} />
                     <Route path='/favorite' component={FavoritePage} />
-                    <Route path='/results' component={ResultsPage} />
+                    <Route path='/results/:type' component={ResultsPage} />
                     <Route path='/details' component={DetailsPage} />
                 </Switch>
             </Layout>

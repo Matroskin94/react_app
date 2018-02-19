@@ -1,4 +1,4 @@
-export default function filterByAddress(queries, query) {
+export function filterByAddress(queries, query) {
     const newQuery = queries.find(element => element.address === query.word);
     const newQueryList = queries.slice();
 
@@ -9,4 +9,10 @@ export default function filterByAddress(queries, query) {
         newQueryList.unshift({ address: query.word, matches: query.resultsNum });
     }
     return newQueryList;
+}
+
+export function deleteFromFavorite(favorites, item) {
+    const newFavorites = favorites.slice();
+
+    return newFavorites.filter(element => element.key !== item.key);
 }

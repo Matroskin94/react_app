@@ -11,15 +11,9 @@ const ItemInfo = ({ itemInfo = {} }) => {
 
     return (
         <div>
-            <h3>
-                {currency} {price}
-            </h3>
-            <h4>
-                {title}
-            </h4>
-            <div>
-                <img alt='' src={imgURL} />
-            </div>
+            <h3>{currency} {price}</h3>
+            <h4>{title}</h4>
+            <img alt='' src={imgURL} />
         </div>
     );
 };

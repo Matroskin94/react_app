@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Header = () => (
     <div>
-        <Link to='/favorite' >Faves </Link><br />
+        <Link to='/results/favorite' >Faves </Link><br />
         <h3>Property cross</h3>
     </div>
 );

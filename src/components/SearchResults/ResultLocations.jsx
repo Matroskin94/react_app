@@ -10,24 +10,35 @@ class ResultLocations extends PureComponent {
     static propTypes = {
         queryRessults: PropTypes.array,
         setActiveItem: PropTypes.func,
-        searchWord: PropTypes.string
+        searchWord: PropTypes.string,
+        favorites: PropTypes.array,
+        path: PropTypes.object
     };
 
     static defaultProps = {
         queryRessults: [],
         setActiveItem: noop,
-        searchWord: ''
+        searchWord: '',
+        favorites: [],
+        path: {}
     };
 
     itemClicked = item => () => {
         this.props.setActiveItem(item);
     }
     render() {
-        const results = this.props.queryRessults;
+        const pageType = this.props.path.match.params.type;
+        const results = pageType === 'search' ?
+            this.props.queryRessults :
+            this.props.favorites;
 
+        console.log(results);
         return (
             <div>
-                <h3>Locations: {this.props.searchWord}</h3>
+                {pageType === 'search' ?
+                    <h3>Locations: {this.props.searchWord}</h3> :
+                    <h3>Favorites</h3>
+                }
                 {results.map((item = {}, index) =>
                     <Link onClick={this.itemClicked(item)} key={item.key} to='/details'>
                         <div className={styles.listItem}>
@@ -47,8 +58,8 @@ class ResultLocations extends PureComponent {
 function mapStateToProps(state) {
     return {
         queryRessults: state.searchReducer.queryRessults,
-        searchWord: state.searchReducer.searchWord,
-        trigger: state.searchReducer.trigger
+        favorites: state.searchReducer.favorites,
+        searchWord: state.searchReducer.searchWord
     };
 }
 

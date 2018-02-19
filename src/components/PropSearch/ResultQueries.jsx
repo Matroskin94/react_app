@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { noop } from '../../utils/SearchUtils.js';
+import { noop } from '../../utils/SearchUtils';
 
 class ResultQueries extends PureComponent {
     static propTypes = {
@@ -12,7 +12,7 @@ class ResultQueries extends PureComponent {
         results: [],
         handleItemClick: noop
     };
-    onItemClicked = address => () => {
+    onQueryClicked = address => () => {
         this.props.handleItemClick(address);
     };
     render() {
@@ -23,7 +23,7 @@ class ResultQueries extends PureComponent {
                 <p>Ricent Queries:</p>
                 {results.map(({ address, matches } = {}, index) =>
                     <div key={index + address}>
-                        <Link onClick={this.onItemClicked(address)} to='/results'>
+                        <Link onClick={this.onQueryClicked(address)} to='/results/search'>
                             {address}: {matches}
                         </Link>
                     </div>)}

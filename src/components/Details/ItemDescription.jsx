@@ -12,21 +12,11 @@ const ItemDescription = ({ itemDescription = {} }) => {
 
     return (
         <div>
-            <p>
-                Beds: {bedrooms}
-            </p>
-            <p>
-                Bathrooms: {bathrooms}
-            </p>
-            <p>
-                Car spaces: {cars}
-            </p>
-            <p>
-                {summary}
-            </p>
-            <a href={listerURL}>
-                Show full information
-            </a>
+            <p>Beds: {bedrooms}</p>
+            <p>Bathrooms: {bathrooms}</p>
+            <p>Car spaces: {cars}</p>
+            <p>{summary}</p>
+            <a href={listerURL}>Show full information</a>
         </div>
     );
 };
