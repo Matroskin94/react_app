@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { searchAction } from '../../actions/SearchActions';
 import { chooseLocationsAction } from '../../actions/LocationActions';
 import ResultQueries from './ResultQueries.jsx';
+import { noop } from '../../utils/SearchUtils';
 
 class Searchfield extends Component {
     static propTypes = {
@@ -13,8 +14,8 @@ class Searchfield extends Component {
     };
 
     static defaultProps = {
-        setNewQuery: {},
-        chooseQuery: {},
+        setNewQuery: noop,
+        chooseQuery: noop,
         queries: []
     };
     state = {
@@ -38,7 +39,6 @@ class Searchfield extends Component {
                 <button onClick={this.handleSearchClick}>Go</button>
                 <button>My Location </button>
                 <ResultQueries results={this.props.queries} handleItemClick={this.handleQueryClick} />
-
             </div>
         );
     }
@@ -48,7 +48,6 @@ class Searchfield extends Component {
 function mapStateToProps(state) {
     return {
         queries: state.searchReducer.queries,
-        asyncTrigger: state.searchReducer.asyncTrigger,
         locations: state.searchReducer.locations,
         searchWord: state.searchReducer.searchWord,
         activeItem: state.detailsReducer.activeItem

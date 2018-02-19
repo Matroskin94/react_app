@@ -4,7 +4,7 @@ import filterByAddress from '../../actions/ActionService';
 const initialState = {
     queries: [],
     locations: [],
-    isLoadedTrigger: false,
+    isLoadedQueries: false,
     queryRessults: [],
     searchWord: ''
 };
@@ -19,7 +19,7 @@ export default function PropSearchReducer(state = initialState, action) {
                 ...state,
                 queryRessults: action.payload.results,
                 searchWord: action.payload.word,
-                isLoadedTrigger: !state.isLoadedTrigger
+                isLoadedQueries: !state.isLoadedQueries
             };
         }
 
@@ -33,7 +33,7 @@ export default function PropSearchReducer(state = initialState, action) {
             return {
                 ...state,
                 queries: newObj,
-                isLoadedTrigger: !state.isLoadedTrigger
+                isLoadedQueries: !state.isLoadedQueries
 
             };
         }

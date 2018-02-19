@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { defaultFunction } from '../../utils/SearchUtils.js';
+import { noop } from '../../utils/SearchUtils.js';
 
 class ResultQueries extends PureComponent {
     static propTypes = {
@@ -10,15 +10,13 @@ class ResultQueries extends PureComponent {
     };
     static defaultProps = {
         results: [],
-        handleItemClick: defaultFunction
+        handleItemClick: noop
     };
     onItemClicked = address => () => {
         this.props.handleItemClick(address);
     };
     render() {
         const { results } = this.props;
-
-        console.log(results);
 
         return (
             <div>

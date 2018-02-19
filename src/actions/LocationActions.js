@@ -13,7 +13,7 @@ export const chooseQueryAction = data => {
 
 export const chooseLocationsAction = dispatch => word => {
     return dispatch => {
-        axios.get(`${API_LINK}`, {
+        axios.get(API_LINK, {
             params: {
                 country: COUNTRY_UK,
                 pretty: PRETTY_1,

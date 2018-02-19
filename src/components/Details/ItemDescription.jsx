@@ -23,8 +23,6 @@ const ItemDescription = ({ itemDescription = {} }) => {
     );
 };
 
-export default ItemDescription;
-
 ItemDescription.propTypes = {
     itemDescription: PropTypes.object
 };
@@ -32,3 +30,5 @@ ItemDescription.propTypes = {
 ItemDescription.defaultProps = {
     itemDescription: {}
 };
+
+export default ItemDescription;

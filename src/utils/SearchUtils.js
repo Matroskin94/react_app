@@ -39,4 +39,4 @@ export const checkError = data => {
     return false;
 };
 
-export const defaultFunction = () => {};
+export const noop = () => {};
