@@ -14,19 +14,29 @@ class Details extends PureComponent {
         activeItem: {}
     };
     render() {
-        const itemData = this.props.activeItem;
+        const {
+            bathroom_number: bathrooms,
+            bedroom_number: bedrooms,
+            car_spaces: cars,
+            img_url: imgURL,
+            lister_url: listerURL,
+            price,
+            price_currency: currency,
+            summary,
+            title
+        } = this.props.activeItem;
         const itemInfo = {
-            price: itemData.price,
-            price_currency: itemData.price_currency,
-            img_url: itemData.img_url,
-            title: itemData.title
+            price,
+            currency,
+            imgURL,
+            title
         };
         const itemDescription = {
-            bathroom_number: itemData.bathroom_number,
-            bedroom_number: itemData.bedroom_number,
-            car_spaces: itemData.car_spaces,
-            lister_url: itemData.lister_url,
-            summary: itemData.summary
+            bathrooms,
+            bedrooms,
+            cars,
+            listerURL,
+            summary
         };
 
         return (

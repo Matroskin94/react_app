@@ -3,22 +3,30 @@ import PropTypes from 'prop-types';
 
 const ItemDescription = ({ itemDescription = {} }) => {
     const {
-        bedroom_number: bedrooms = 0,
-        bathroom_number: bathrooms = 0,
-        car_spaces: cars = 0,
+        bedrooms = 0,
+        bathrooms = 0,
+        cars = 0,
         summary,
-        lister_url: listerURL
+        listerURL
     } = itemDescription;
 
     return (
         <div>
-            <p> Beds: {bedrooms}</p>
-            <p> Bathrooms: {bathrooms}</p>
-            <p> Car spaces: {cars}</p>
+            <p>
+                Beds: {bedrooms}
+            </p>
+            <p>
+                Bathrooms: {bathrooms}
+            </p>
+            <p>
+                Car spaces: {cars}
+            </p>
             <p>
                 {summary}
             </p>
-            <a href={listerURL}>Show full information</a>
+            <a href={listerURL}>
+                Show full information
+            </a>
         </div>
     );
 };

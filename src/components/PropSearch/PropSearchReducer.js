@@ -4,7 +4,6 @@ import filterByAddress from '../../actions/ActionService';
 const initialState = {
     queries: [],
     locations: [],
-    isLoadedQueries: false,
     queryRessults: [],
     searchWord: ''
 };
@@ -18,22 +17,19 @@ export default function PropSearchReducer(state = initialState, action) {
             return {
                 ...state,
                 queryRessults: action.payload.results,
-                searchWord: action.payload.word,
-                isLoadedQueries: !state.isLoadedQueries
+                searchWord: action.payload.word
             };
         }
 
         case GO_PRESSED: {
-            const newState = state.queries;
-            const newObj = filterByAddress(
-                newState,
+            const newQueryList = filterByAddress(
+                state.queries,
                 action.payload
             );
 
             return {
                 ...state,
-                queries: newObj,
-                isLoadedQueries: !state.isLoadedQueries
+                queries: newQueryList
 
             };
         }
