@@ -13,8 +13,8 @@ class Searchfield extends Component {
     };
 
     static defaultProps = {
-        setNewQuery: '',
-        chooseQuery: '',
+        setNewQuery: {},
+        chooseQuery: {},
         queries: []
     };
     state = {

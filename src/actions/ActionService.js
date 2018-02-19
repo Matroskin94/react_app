@@ -1,13 +1,12 @@
-import { filterAddreses } from '../utils/SearchUtils';
-
 export default function filterByAddress(queries, query) {
-    const newQuery = filterAddreses(queries, query.word);
+    const newQuery = queries.find(element => element.address === query.word);
+    const newQueryList = queries.slice();
 
     if (newQuery) {
-        queries.splice(queries.indexOf(newQuery), 1);
-        queries.unshift(newQuery);
+        newQueryList.splice(newQueryList.indexOf(newQuery), 1);
+        newQueryList.unshift(newQuery);
     } else {
-        queries.unshift({ address: query.word, matches: query.resultsNum });
+        newQueryList.unshift({ address: query.word, matches: query.resultsNum });
     }
-    return queries;
+    return newQueryList;
 }

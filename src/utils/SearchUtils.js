@@ -1,12 +1,7 @@
-export const filterAddreses = (array, searchWord) => {
-    return array.find(element => element.address === searchWord);
-};
-
 export const extractData = data => {
     const result = data.response.listings.map((item, index) => {
         return {
-            key: index,
-            clicked: false,
+            key: index + item.title,
             title: item.title,
             img_url: item.img_url,
             thumb_url: item.thumb_url,
@@ -43,3 +38,5 @@ export const checkError = data => {
     }
     return false;
 };
+
+export const defaultFunction = () => {};

@@ -14,7 +14,7 @@ class Details extends PureComponent {
         activeItem: {}
     };
     render() {
-        const itemData = { ...this.props.activeItem };
+        const itemData = this.props.activeItem;
         const itemInfo = {
             price: itemData.price,
             price_currency: itemData.price_currency,

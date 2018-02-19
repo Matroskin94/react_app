@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styles from '../../styles/ResultLocations.css';
 import goDetailsAction from '../../actions/DetailsActions';
+import { defaultFunction } from '../../utils/SearchUtils';
 
 class ResultLocations extends PureComponent {
     static propTypes = {
@@ -14,7 +15,7 @@ class ResultLocations extends PureComponent {
 
     static defaultProps = {
         queryRessults: [],
-        setActiveItem: '',
+        setActiveItem: defaultFunction,
         searchWord: ''
     };
 
