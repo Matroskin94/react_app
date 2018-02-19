@@ -6,7 +6,7 @@ import combineReducers from '../reducers';
 export default function initStore() {
     const store = createStore(
         combineReducers,
-        applyMiddleware(logger, thunk)
+        applyMiddleware(thunk, logger)
     );
 
     return store;

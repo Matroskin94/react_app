@@ -10,7 +10,7 @@ export const searchResultAction = data => {
 };
 
 export const searchAction = dispatch => word => {
-    axios.get(API_LINK, {
+    return dispatch => axios.get(API_LINK, {
         params: {
             country: COUNTRY_UK,
             pretty: PRETTY_1,
@@ -22,7 +22,7 @@ export const searchAction = dispatch => word => {
         }
     })
         .then(response => {
-            dispatch(searchResultAction({
+            return dispatch(searchResultAction({
                 word,
                 resultsNum: response.data.response.total_results
             }));
@@ -30,8 +30,4 @@ export const searchAction = dispatch => word => {
         .catch(reject => {
             console.log('REJECTED', reject);
         });
-    return {
-        type: 'SEARCH_PROCESS',
-        payload: ''
-    };
 };

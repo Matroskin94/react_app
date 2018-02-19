@@ -10,28 +10,27 @@ export const chooseQueryAction = data => {
     });
 };
 
-export const chooseLocationsAction = dispatch => word => {
-    axios.get(`${API_LINK}`, {
-        params: {
-            country: COUNTRY_UK,
-            pretty: PRETTY_1,
-            action: ACTION_SEARCH_LISTINGS,
-            encoding: ENCODING_JSON,
-            listing_type: LISTING_TYPE_BUY,
-            page: '1',
-            place_name: word
-        }
-    })
-        .then(response => {
-            const results = extractData(response.data);
 
-            dispatch(chooseQueryAction({ results, word }));
+export const chooseLocationsAction = dispatch => word => {
+    return dispatch => {
+        axios.get(`${API_LINK}`, {
+            params: {
+                country: COUNTRY_UK,
+                pretty: PRETTY_1,
+                action: ACTION_SEARCH_LISTINGS,
+                encoding: ENCODING_JSON,
+                listing_type: LISTING_TYPE_BUY,
+                page: '1',
+                place_name: word
+            }
         })
-        .catch(reject => {
-            console.log('REJECTED', reject);
-        });
-    return {
-        type: 'CHOOSING_LOCATION_PROCESS',
-        payload: ''
-    };
+            .then(response => {
+                const results = extractData(response.data);
+
+                return dispatch(chooseQueryAction({ results, word }));
+            })
+            .catch(reject => {
+                console.log('REJECTED', reject);
+            });
+    }
 };

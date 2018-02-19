@@ -57,13 +57,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        setNewQuery: text => {
-            dispatch(searchAction(dispatch)(text));
-        },
-        chooseQuery: text => {
-            dispatch(chooseLocationsAction(dispatch)(text));
-        }
-
+        setNewQuery: text => dispatch(searchAction(dispatch)(text)),
+        chooseQuery: text => dispatch(chooseLocationsAction(dispatch)(text))
     };
 }
 
