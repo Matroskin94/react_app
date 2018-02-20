@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -6,21 +6,15 @@ import styles from '../../styles/ResultLocations.css';
 import goDetailsAction from '../../actions/DetailsActions';
 import { noop } from '../../utils/SearchUtils';
 
-class ResultLocations extends PureComponent {
+class ResultLocations extends Component {
     static propTypes = {
-        queryRessults: PropTypes.array,
         setActiveItem: PropTypes.func,
-        searchWord: PropTypes.string,
-        favorites: PropTypes.array,
-        match: PropTypes.object
+        results: PropTypes.array
     };
 
     static defaultProps = {
-        queryRessults: [],
         setActiveItem: noop,
-        searchWord: '',
-        favorites: [],
-        match: {}
+        results: []
     };
 
     itemClicked = item => () => {
@@ -28,18 +22,9 @@ class ResultLocations extends PureComponent {
     }
 
     render() {
-        const pageType = this.props.match.params.type;
-        const results = pageType === 'search' ?
-            this.props.queryRessults :
-            this.props.favorites;
-
         return (
             <div>
-                {pageType === 'search' ?
-                    <h3>Locations: {this.props.searchWord}</h3> :
-                    <h3>Favorites</h3>
-                }
-                {results.map((item = {}, index) =>
+                {this.props.results.map((item = {}, index) =>
                     <Link onClick={this.itemClicked(item)} key={item.key} to='/details'>
                         <div className={styles.listItem}>
                             <div className={styles.itemImg}>
@@ -57,11 +42,7 @@ class ResultLocations extends PureComponent {
 }
 
 function mapStateToProps(state) {
-    return {
-        queryRessults: state.searchReducer.queryRessults,
-        favorites: state.searchReducer.favorites,
-        searchWord: state.searchReducer.searchWord
-    };
+    return { };
 }
 
 function mapDispatchToProps(dispatch) {

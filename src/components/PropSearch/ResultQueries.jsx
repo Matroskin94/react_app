@@ -23,7 +23,7 @@ class ResultQueries extends PureComponent {
                 <p>Ricent Queries:</p>
                 {results.map(({ address, matches } = {}) =>
                     <div key={matches + address}>
-                        <Link onClick={this.onQueryClicked(address)} to='/results/search'>
+                        <Link onClick={this.onQueryClicked(address)} to='/results'>
                             {address}: {matches}
                         </Link>
                     </div>)}

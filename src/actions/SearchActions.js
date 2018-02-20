@@ -26,6 +26,5 @@ export const searchAction = dispatch => word => {
         })))
         .catch(err => {
             console.log('REJECTED', err);
-
         });
 };
