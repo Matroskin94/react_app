@@ -24,7 +24,7 @@ export const searchAction = dispatch => word => {
             word,
             resultsNum: response.data.response.total_results
         })))
-        .catch(reject => {
-            console.log('REJECTED', reject);
+        .catch(err => {
+            console.log('REJECTED', err);
         });
 };

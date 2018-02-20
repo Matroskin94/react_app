@@ -27,8 +27,8 @@ export const chooseLocationsAction = dispatch => word => {
 
                 return dispatch(chooseQueryAction({ results, word }));
             })
-            .catch(reject => {
-                console.log('REJECTED', reject);
+            .catch(err => {
+                console.log('REJECTED', err);
             });
     };
 };
