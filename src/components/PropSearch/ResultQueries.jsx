@@ -6,14 +6,14 @@ import { noop } from '../../utils/SearchUtils';
 class ResultQueries extends PureComponent {
     static propTypes = {
         results: PropTypes.array,
-        handleItemClick: PropTypes.func
+        onItemClick: PropTypes.func
     };
     static defaultProps = {
         results: [],
-        handleItemClick: noop
+        onItemClick: noop
     };
     onQueryClicked = address => () => {
-        this.props.handleItemClick(address);
+        this.props.onItemClick(address);
     };
     render() {
         const { results } = this.props;
@@ -21,8 +21,8 @@ class ResultQueries extends PureComponent {
         return (
             <div>
                 <p>Ricent Queries:</p>
-                {results.map(({ address, matches } = {}, index) =>
-                    <div key={index + address}>
+                {results.map(({ address, matches } = {}) =>
+                    <div key={matches + address}>
                         <Link onClick={this.onQueryClicked(address)} to='/results/search'>
                             {address}: {matches}
                         </Link>

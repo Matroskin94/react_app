@@ -2,12 +2,11 @@ import axios from 'axios';
 import { GO_PRESSED } from '../constants/constants';
 import { API_LINK, COUNTRY_UK, PRETTY_1, ACTION_SEARCH_LISTINGS, ENCODING_JSON, LISTING_TYPE_BUY } from '../constants/queryConstants';
 
-export const searchResultAction = data => {
-    return ({
-        type: GO_PRESSED,
-        payload: data
-    });
-};
+export const searchResultAction = data => ({
+    type: GO_PRESSED,
+    payload: data
+});
+
 
 export const searchAction = dispatch => word => {
     return dispatch => axios.get(API_LINK, {
@@ -21,12 +20,10 @@ export const searchAction = dispatch => word => {
             place_name: word
         }
     })
-        .then(response => {
-            return dispatch(searchResultAction({
-                word,
-                resultsNum: response.data.response.total_results
-            }));
-        })
+        .then(response => dispatch(searchResultAction({
+            word,
+            resultsNum: response.data.response.total_results
+        })))
         .catch(reject => {
             console.log('REJECTED', reject);
         });

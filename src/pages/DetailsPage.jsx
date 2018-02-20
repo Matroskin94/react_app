@@ -25,6 +25,8 @@ class Details extends PureComponent {
         isFavorite ? this.props.deleteFromFavorite(this.props.activeItem) :
             this.props.addToFavorite(this.props.activeItem);
     };
+    isFavorite = () =>
+        this.props.favorites.some(item => item.title === this.props.activeItem.title);
 
     render() {
         const {
@@ -54,7 +56,7 @@ class Details extends PureComponent {
 
         return (
             <div>
-                <Header handleFavoriteClick={this.onFavoriteClick} isFavorite={this.props.activeItem.isFavorite} />
+                <Header handleFavoriteClick={this.onFavoriteClick} isFavorite={this.isFavorite()} />
                 <ItemInfo itemInfo={itemInfo} />
                 <ItemDescription itemDescription={itemDescription} />
             </div>

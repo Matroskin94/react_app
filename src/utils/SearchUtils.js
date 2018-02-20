@@ -1,20 +1,18 @@
 export const extractData = data => {
-    const result = data.response.listings.map((item, index) => {
-        return {
-            key: index + item.title,
-            isFavorite: false,
-            title: item.title,
-            img_url: item.img_url,
-            thumb_url: item.thumb_url,
-            lister_url: item.lister_url,
-            price: item.price,
-            price_currency: item.price_currency,
-            summary: item.summary,
-            bathroom_number: item.bathroom_number,
-            bedroom_number: item.bedroom_number,
-            car_spaces: item.car_spaces
-        };
-    });
+    const result = data.response.listings.map((item, index) => ({
+        key: index + item.title,
+        isFavorite: false,
+        title: item.title,
+        img_url: item.img_url,
+        thumb_url: item.thumb_url,
+        lister_url: item.lister_url,
+        price: item.price,
+        price_currency: item.price_currency,
+        summary: item.summary,
+        bathroom_number: item.bathroom_number,
+        bedroom_number: item.bedroom_number,
+        car_spaces: item.car_spaces
+    }));
 
     return result;
 };
