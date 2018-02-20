@@ -46,7 +46,8 @@ class ResultLocations extends PureComponent {
                                 <img alt='' src={item.thumb_url} />
                             </div>
                             <div className={styles.itemText}>
-                                <p>{item.title} {item.price}{item.price_currency} <br /> {item.summary}</p>
+                                <p>{item.title} {item.price}{item.price_currency} </p>
+                                <p> {item.summary}</p>
                             </div>
                         </div>
                     </Link>)}
@@ -65,9 +66,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        setActiveItem: item => {
-            dispatch(goDetailsAction(item));
-        }
+        setActiveItem: item => dispatch(goDetailsAction(item))
     };
 }
 

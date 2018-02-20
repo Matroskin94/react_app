@@ -3,12 +3,10 @@ import { QUERY_SELECTED } from '../constants/constants';
 import { API_LINK, COUNTRY_UK, PRETTY_1, ACTION_SEARCH_LISTINGS, ENCODING_JSON, LISTING_TYPE_BUY } from '../constants/queryConstants';
 import { extractData } from '../utils/SearchUtils';
 
-export const chooseQueryAction = data => {
-    return ({
-        type: QUERY_SELECTED,
-        payload: data
-    });
-};
+export const chooseQueryAction = data => ({
+    type: QUERY_SELECTED,
+    payload: data
+});
 
 
 export const chooseLocationsAction = dispatch => word => {
@@ -32,5 +30,5 @@ export const chooseLocationsAction = dispatch => word => {
             .catch(reject => {
                 console.log('REJECTED', reject);
             });
-    }
+    };
 };

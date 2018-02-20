@@ -38,7 +38,7 @@ class Searchfield extends Component {
                 <input onChange={this.handleInputChange} type='text' value={this.state.inputValue} />
                 <button onClick={this.handleSearchClick}>Go</button>
                 <button>My Location </button>
-                <ResultQueries results={this.props.queries} handleItemClick={this.handleQueryClick} />
+                <ResultQueries results={this.props.queries} onItemClick={this.handleQueryClick} />
             </div>
         );
     }
