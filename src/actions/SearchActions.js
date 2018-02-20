@@ -8,7 +8,11 @@ export const searchResultAction = data => ({
 });
 
 
-export const searchAction = dispatch => word => {
+export const searchAction = dispatch => (word, locationBased) => {
+    const searcher = locationBased ?
+        { centre_point: word } :
+        { place_name: word };
+
     return dispatch => axios.get(API_LINK, {
         params: {
             country: COUNTRY_UK,
@@ -17,11 +21,12 @@ export const searchAction = dispatch => word => {
             encoding: ENCODING_JSON,
             listing_type: LISTING_TYPE_BUY,
             page: '1',
-            place_name: word
+            ...searcher
         }
     })
         .then(response => dispatch(searchResultAction({
             word,
+            locationBased,
             resultsNum: response.data.response.total_results
         })))
         .catch(err => {

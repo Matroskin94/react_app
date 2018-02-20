@@ -9,7 +9,11 @@ export const chooseQueryAction = data => ({
 });
 
 
-export const chooseLocationsAction = dispatch => word => {
+export const chooseLocationsAction = dispatch => (word, locationBased) => {
+    const searcher = locationBased ?
+        { centre_point: word } :
+        { place_name: word };
+
     return dispatch => {
         axios.get(API_LINK, {
             params: {
@@ -19,7 +23,7 @@ export const chooseLocationsAction = dispatch => word => {
                 encoding: ENCODING_JSON,
                 listing_type: LISTING_TYPE_BUY,
                 page: '1',
-                place_name: word
+                ...searcher
             }
         })
             .then(response => {

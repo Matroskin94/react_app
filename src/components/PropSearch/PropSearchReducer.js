@@ -6,13 +6,17 @@ const initialState = {
     locations: [],
     queryRessults: [],
     favorites: [],
+    userLocation: {},
     searchWord: ''
 };
 
 export default function PropSearchReducer(state = initialState, action) {
     switch (action.type) {
         case LOCATION_PRESSED: {
-            return { ...state };
+            return {
+                ...state,
+                queryRessults: { ...action.results }
+            };
         }
         case ADD_FAVORITE: {
             return {
