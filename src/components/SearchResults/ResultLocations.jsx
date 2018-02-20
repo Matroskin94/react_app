@@ -41,14 +41,10 @@ class ResultLocations extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return { };
-}
-
 function mapDispatchToProps(dispatch) {
     return {
         setActiveItem: item => dispatch(goDetailsAction(item))
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ResultLocations);
+export default connect(undefined, mapDispatchToProps)(ResultLocations);
