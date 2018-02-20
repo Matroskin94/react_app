@@ -12,7 +12,7 @@ class ResultLocations extends PureComponent {
         setActiveItem: PropTypes.func,
         searchWord: PropTypes.string,
         favorites: PropTypes.array,
-        path: PropTypes.object
+        match: PropTypes.object
     };
 
     static defaultProps = {
@@ -20,19 +20,19 @@ class ResultLocations extends PureComponent {
         setActiveItem: noop,
         searchWord: '',
         favorites: [],
-        path: {}
+        match: {}
     };
 
     itemClicked = item => () => {
         this.props.setActiveItem(item);
     }
+
     render() {
-        const pageType = this.props.path.match.params.type;
+        const pageType = this.props.match.params.type;
         const results = pageType === 'search' ?
             this.props.queryRessults :
             this.props.favorites;
 
-        console.log(results);
         return (
             <div>
                 {pageType === 'search' ?

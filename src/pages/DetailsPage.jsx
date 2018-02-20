@@ -11,10 +11,12 @@ class Details extends PureComponent {
     static propTypes = {
         activeItem: PropTypes.object,
         addToFavorite: PropTypes.func,
-        deleteFromFavorite: PropTypes.func
+        deleteFromFavorite: PropTypes.func,
+        favorites: PropTypes.array
     };
 
     static defaultProps = {
+        favorites: [],
         activeItem: {},
         addToFavorite: noop,
         deleteFromFavorite: noop
@@ -23,6 +25,7 @@ class Details extends PureComponent {
         isFavorite ? this.props.deleteFromFavorite(this.props.activeItem) :
             this.props.addToFavorite(this.props.activeItem);
     };
+
     render() {
         const {
             bathroom_number: bathrooms,
@@ -61,6 +64,7 @@ class Details extends PureComponent {
 
 function mapStateToProps(state) {
     return {
+        favorites: state.searchReducer.favorites,
         activeItem: state.detailsReducer.activeItem
     };
 }
