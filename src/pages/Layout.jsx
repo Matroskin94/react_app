@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from '../styles/Styles.css';
+import styles from '../styles/styles.css';
 
 const Layout = ({ children }) => (
     <div className={styles.wrapper}>

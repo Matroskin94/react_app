@@ -6,13 +6,29 @@ const initialState = {
     locations: [],
     queryRessults: [],
     favorites: [],
+    userLocation: {},
     searchWord: ''
 };
 
 export default function PropSearchReducer(state = initialState, action) {
     switch (action.type) {
+        case GO_PRESSED: {
+            const query = rebuildQueriesList(
+                state.queries,
+                action.payload
+            );
+
+            return {
+                ...state,
+                queries: query
+
+            };
+        }
         case LOCATION_PRESSED: {
-            return { ...state };
+            return {
+                ...state,
+                queryRessults: { ...action.results }
+            };
         }
         case ADD_FAVORITE: {
             return {
@@ -38,18 +54,6 @@ export default function PropSearchReducer(state = initialState, action) {
             };
         }
 
-        case GO_PRESSED: {
-            const newQueryList = rebuildQueriesList(
-                state.queries,
-                action.payload
-            );
-
-            return {
-                ...state,
-                queries: newQueryList
-
-            };
-        }
         default: {
             return { ...state };
         }
