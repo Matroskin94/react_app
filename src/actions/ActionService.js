@@ -1,15 +1,13 @@
 export function rebuildQueriesList(queries, query) {
     const searchProperty = query.place_name ? query.place_name : query.centre_point;
-    const newQuery = queries.find(element => element.address === searchProperty);
-    const newQueryList = newQuery ?
-        [].concat(newQuery)
-            .concat(queries.slice(0, queries.indexOf(newQuery)))
-            .concat(queries.slice(queries.indexOf(newQuery) + 1)) :
-        [].concat({
+    const currentQuery = queries.find(element => element.address === searchProperty);
+    const newQueryList = currentQuery ?
+        [currentQuery, ...queries.filter(item => currentQuery !== item)] :
+        [{
             address: searchProperty,
             matches: query.resultsNum,
             loactionBased: query.locationBased
-        }).concat(queries.slice());
+        }, ...queries];
 
     return newQueryList;
 }
@@ -18,15 +16,19 @@ export function deleteFromFavorite(favorites, item) {
     return favorites.filter(element => element.key !== item.key);
 }
 
+const locationSucces = resolve => result => {
+    const { longitude: lng, latitude: lat } = result.coords;
+    const coordinates = `${lng},${lat}`;
+
+    return resolve(coordinates);
+};
+
+const locationError = reject => err => reject(err);
+
 export class GeolocationService {
     getCoordinates = () => (
         new Promise((resolve, reject) => {
-            navigator.geolocation.getCurrentPosition(result => {
-                const { longitude: lng, latitude: lat } = result.coords;
-                const coordinates = `${lng},${lat}`;
-
-                resolve(coordinates);
-            });
+            navigator.geolocation.getCurrentPosition(locationSucces(resolve), locationError(reject));
         })
             .catch(err => {
                 console.log('Geolocation error:', err);

@@ -8,7 +8,7 @@ export const searchResultAction = data => ({
 });
 
 
-export const searchAction = dispatch => searcher => {
+export const searchAction = dispatch => searchProperty => {
     return dispatch => axios.get(API_LINK, {
         params: {
             country: COUNTRY_UK,
@@ -17,11 +17,11 @@ export const searchAction = dispatch => searcher => {
             encoding: ENCODING_JSON,
             listing_type: LISTING_TYPE_BUY,
             page: '1',
-            ...searcher
+            ...searchProperty
         }
     })
         .then(response => dispatch(searchResultAction({
-            ...searcher,
+            ...searchProperty,
             resultsNum: response.data.response.total_results
         })))
         .catch(err => {

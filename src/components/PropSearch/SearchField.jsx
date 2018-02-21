@@ -2,23 +2,23 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { searchAction } from '../../actions/SearchActions';
-import { chooseLocationsAction } from '../../actions/LocationActions';
+import { chooseLocationsAction, getLocationAction } from '../../actions/LocationActions';
 import { GeolocationService } from '../../actions/ActionService';
 import ResultQueries from './ResultQueries.jsx';
 import { noop } from '../../utils/SearchUtils';
 
 class Searchfield extends Component {
     static propTypes = {
-        locationQuery: PropTypes.func,
-        setNewQuery: PropTypes.func,
+        findAddressQuery: PropTypes.func,
         chooseQuery: PropTypes.func,
+        getLocation: PropTypes.func,
         queries: PropTypes.array
     };
 
     static defaultProps = {
-        locationQuery: noop,
-        setNewQuery: noop,
+        findAddressQuery: noop,
         chooseQuery: noop,
+        getLocation: noop,
         queries: []
     };
     state = {
@@ -28,18 +28,13 @@ class Searchfield extends Component {
     handleSearchClick = () => {
         const searchObject = { place_name: this.state.inputValue, locationBased: false };
 
-        this.props.setNewQuery(searchObject);
+        this.props.findAddressQuery(searchObject);
     }
 
     handleLocationClick = () => {
         const geolocation = new GeolocationService();
 
-        geolocation.getCoordinates()
-            .then(resolve => {
-                const searchObject = { centre_point: resolve, locationBased: true };
-
-                return this.props.locationQuery(searchObject);
-            });
+        this.props.getLocation(geolocation);
     }
 
     handleQueryClick = address => {
@@ -78,9 +73,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        setNewQuery: place => dispatch(searchAction(dispatch)(place)),
+        findAddressQuery: place => dispatch(searchAction(dispatch)(place)),
         chooseQuery: query => dispatch(chooseLocationsAction(dispatch)(query)),
-        locationQuery: coordinates => dispatch(searchAction(dispatch)(coordinates))
+        getLocation: geolocation => dispatch(getLocationAction(dispatch)(geolocation))
 
     };
 }
