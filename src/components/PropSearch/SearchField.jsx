@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { searchAction } from '../../actions/SearchActions';
 import { chooseLocationsAction, getLocationAction } from '../../actions/LocationActions';
-import { GeolocationService } from '../../actions/ActionService';
+import { geolocationService } from '../../actions/ActionService';
 import ResultQueries from './ResultQueries.jsx';
 import { noop } from '../../utils/SearchUtils';
 
@@ -32,9 +32,7 @@ class Searchfield extends Component {
     }
 
     handleLocationClick = () => {
-        const geolocation = new GeolocationService();
-
-        this.props.getLocation(geolocation);
+        this.props.getLocation(geolocationService());
     }
 
     handleQueryClick = address => {

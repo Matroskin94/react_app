@@ -11,12 +11,11 @@ export const chooseQueryAction = data => ({
 
 export const getLocationAction = dispatch => geolocation => {
     return dispatch => {
-        geolocation.getCoordinates()
-            .then(resolve => {
-                const searchObject = { centre_point: resolve, locationBased: true };
+        geolocation.then(resolve => {
+            const searchObject = { centre_point: resolve, locationBased: true };
 
-                return dispatch(searchAction(dispatch)(searchObject));
-            })
+            return dispatch(searchAction(dispatch)(searchObject));
+        })
             .catch(err => {
                 console.log(err);
             });

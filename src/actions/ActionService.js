@@ -16,19 +16,19 @@ export function deleteFromFavorite(favorites, item) {
     return favorites.filter(element => element.key !== item.key);
 }
 
-export class GeolocationService {
-    locationError = reject => err => reject(err);
-    locationSucces = resolve => result => {
+export function geolocationService() {
+    const locationError = reject => err => reject(err);
+    const locationSucces = resolve => result => {
         const { longitude: lng, latitude: lat } = result.coords;
         const coordinates = `${lng},${lat}`;
 
         return resolve(coordinates);
-    }
-    getCoordinates = () => (
-        new Promise((resolve, reject) => {
-            navigator.geolocation.getCurrentPosition(this.locationSucces(resolve), this.locationError(reject));
-        })
-            .catch(err => {
-                console.log('Geolocation error:', err);
-            }));
+    };
+
+    return (new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(locationSucces(resolve), locationError(reject));
+    })
+        .catch(err => {
+            console.log('Geolocation error:', err);
+        }));
 }
