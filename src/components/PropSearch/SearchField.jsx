@@ -26,7 +26,9 @@ class Searchfield extends Component {
     };
 
     handleSearchClick = () => {
-        this.props.setNewQuery(this.state.inputValue);
+        const searchObject = { place_name: this.state.inputValue, locationBased: false };
+
+        this.props.setNewQuery(searchObject);
     }
 
     handleLocationClick = () => {
@@ -34,14 +36,19 @@ class Searchfield extends Component {
 
         geolocation.getCoordinates()
             .then(resolve => {
-                this.props.locationQuery(resolve);
+                const searchObject = { centre_point: resolve, locationBased: true };
+
+                return this.props.locationQuery(searchObject);
             });
     }
 
     handleQueryClick = address => {
-        const locationBased = this.props.queries.find(item => item.address === address && item.locationBased);
+        const location = this.props.queries.find(item => item.address === address);
+        const property = location.locationBased ?
+            { centre_point: address } :
+            { place_name: address };
 
-        this.props.chooseQuery(address, locationBased);
+        this.props.chooseQuery(property);
     }
 
     handleInputChange = event => this.setState({ inputValue: event.target.value });
@@ -71,9 +78,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        setNewQuery: text => dispatch(searchAction(dispatch)(text, false)),
-        chooseQuery: (text, locationBased) => dispatch(chooseLocationsAction(dispatch)(text, locationBased)),
-        locationQuery: coordinates => dispatch(searchAction(dispatch)(coordinates, true))
+        setNewQuery: place => dispatch(searchAction(dispatch)(place)),
+        chooseQuery: query => dispatch(chooseLocationsAction(dispatch)(query)),
+        locationQuery: coordinates => dispatch(searchAction(dispatch)(coordinates))
 
     };
 }

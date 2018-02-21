@@ -9,11 +9,7 @@ export const chooseQueryAction = data => ({
 });
 
 
-export const chooseLocationsAction = dispatch => (word, locationBased) => {
-    const searcher = locationBased ?
-        { centre_point: word } :
-        { place_name: word };
-
+export const chooseLocationsAction = dispatch => searcher => {
     return dispatch => {
         axios.get(API_LINK, {
             params: {
@@ -29,10 +25,10 @@ export const chooseLocationsAction = dispatch => (word, locationBased) => {
             .then(response => {
                 const results = extractData(response.data);
 
-                return dispatch(chooseQueryAction({ results, word }));
+                return dispatch(chooseQueryAction({ results, searcher }));
             })
             .catch(err => {
-                console.log('REJECTED', err);
+                console.log('chooseLocationsAction REJECTED', err);
             });
     };
 };

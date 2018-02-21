@@ -12,6 +12,18 @@ const initialState = {
 
 export default function PropSearchReducer(state = initialState, action) {
     switch (action.type) {
+        case GO_PRESSED: {
+            const newQueryList = rebuildQueriesList(
+                state.queries,
+                action.payload
+            );
+
+            return {
+                ...state,
+                queries: newQueryList
+
+            };
+        }
         case LOCATION_PRESSED: {
             return {
                 ...state,
@@ -42,18 +54,6 @@ export default function PropSearchReducer(state = initialState, action) {
             };
         }
 
-        case GO_PRESSED: {
-            const newQueryList = rebuildQueriesList(
-                state.queries,
-                action.payload
-            );
-
-            return {
-                ...state,
-                queries: newQueryList
-
-            };
-        }
         default: {
             return { ...state };
         }

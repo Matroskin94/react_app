@@ -8,11 +8,7 @@ export const searchResultAction = data => ({
 });
 
 
-export const searchAction = dispatch => (word, locationBased) => {
-    const searcher = locationBased ?
-        { centre_point: word } :
-        { place_name: word };
-
+export const searchAction = dispatch => searcher => {
     return dispatch => axios.get(API_LINK, {
         params: {
             country: COUNTRY_UK,
@@ -25,11 +21,10 @@ export const searchAction = dispatch => (word, locationBased) => {
         }
     })
         .then(response => dispatch(searchResultAction({
-            word,
-            locationBased,
+            ...searcher,
             resultsNum: response.data.response.total_results
         })))
         .catch(err => {
-            console.log('REJECTED', err);
+            console.log('searchAction REJECTED', err);
         });
 };
