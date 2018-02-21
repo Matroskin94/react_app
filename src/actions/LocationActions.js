@@ -16,7 +16,8 @@ export const getLocationAction = dispatch => geolocation => {
                 const searchObject = { centre_point: resolve, locationBased: true };
 
                 return dispatch(searchAction(dispatch)(searchObject));
-            }).catch(err => {
+            })
+            .catch(err => {
                 console.log(err);
             });
     };
