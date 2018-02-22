@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GO_PRESSED } from '../constants/constants';
+import { GO_PRESSED, LOADING_STARTED } from '../constants/constants';
 import { API_LINK, COUNTRY_UK, PRETTY_1, ACTION_SEARCH_LISTINGS, ENCODING_JSON, LISTING_TYPE_BUY } from '../constants/queryConstants';
 
 export const searchResultAction = data => ({
@@ -7,6 +7,10 @@ export const searchResultAction = data => ({
     payload: data
 });
 
+export const loadingAction = data => ({
+    type: LOADING_STARTED,
+    payload: true
+});
 
 export const searchAction = dispatch => searchProperty => {
     return dispatch => axios.get(API_LINK, {
@@ -20,10 +24,12 @@ export const searchAction = dispatch => searchProperty => {
             ...searchProperty
         }
     })
-        .then(response => dispatch(searchResultAction({
-            ...searchProperty,
-            resultsNum: response.data.response.total_results
-        })))
+        .then(response => {
+            dispatch(searchResultAction({
+                ...searchProperty,
+                resultsNum: response.data.response.total_results
+            }));
+        })
         .catch(err => {
             console.log('searchAction REJECTED', err);
         });

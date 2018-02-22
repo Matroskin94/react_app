@@ -39,3 +39,28 @@ export const checkError = data => {
 };
 
 export const noop = () => {};
+
+export const addFavoriteToLocal = item => {
+    const favoritesList = localStorage.getItem('favoritesList') ?
+        localStorage.getItem('favoritesList') : '[]';
+    const favoritesArray = JSON.parse(favoritesList);
+
+    item.isFavorite = true;
+    favoritesArray.push(item);
+    localStorage.setItem('favoritesList', JSON.stringify(favoritesArray));
+};
+
+export const getFavoritesFromLocal = () => {
+    const favoritesList = localStorage.getItem('favoritesList') ?
+        localStorage.getItem('favoritesList') : '[]';
+
+    return JSON.parse(favoritesList);
+};
+
+export const deleteFavoriteFromLocal = dellItem => {
+    const favoritesList = localStorage.getItem('favoritesList') ?
+        localStorage.getItem('favoritesList') : '[]';
+    const resultList = JSON.parse(favoritesList).filter(item => item.key !== dellItem.key);
+
+    localStorage.setItem('favoritesList', JSON.stringify(resultList));
+};

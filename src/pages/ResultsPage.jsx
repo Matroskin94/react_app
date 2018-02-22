@@ -19,7 +19,7 @@ class ResultsPage extends PureComponent {
         return (
             <div>
                 <SearchHeader searchWord={this.props.searchWord} />
-                <Results results={this.props.queryRessults} />
+                <Results results={this.props.queryRessults} {...this.props} />
             </div>
         );
     }
@@ -28,7 +28,8 @@ class ResultsPage extends PureComponent {
 function mapStateToProps(state) {
     return {
         queryRessults: state.searchReducer.queryRessults,
-        searchWord: state.searchReducer.searchWord
+        searchWord: state.searchReducer.searchWord,
+        isLoading: state.searchReducer.isLoading
     };
 }
 

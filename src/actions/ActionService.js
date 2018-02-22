@@ -6,7 +6,7 @@ export function rebuildQueriesList(queries, query) {
         [{
             address: searchProperty,
             matches: query.resultsNum,
-            loactionBased: query.locationBased
+            locationBased: query.locationBased
         }, ...queries];
 
     return queryList;

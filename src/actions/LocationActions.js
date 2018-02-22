@@ -2,7 +2,7 @@ import axios from 'axios';
 import { QUERY_SELECTED } from '../constants/constants';
 import { API_LINK, COUNTRY_UK, PRETTY_1, ACTION_SEARCH_LISTINGS, ENCODING_JSON, LISTING_TYPE_BUY } from '../constants/queryConstants';
 import { extractData } from '../utils/SearchUtils';
-import { searchAction } from './SearchActions';
+import { searchAction, loadingAction } from './SearchActions';
 
 export const chooseQueryAction = data => ({
     type: QUERY_SELECTED,
@@ -17,12 +17,13 @@ export const getLocationAction = dispatch => geolocation => {
             return dispatch(searchAction(dispatch)(searchObject));
         })
             .catch(err => {
-                console.log(err);
+                console.log('getLocationAction', err);
             });
     };
 };
 
 export const chooseLocationsAction = dispatch => searchProperty => {
+    dispatch(loadingAction('Loading true'));
     return dispatch => {
         axios.get(API_LINK, {
             params: {
