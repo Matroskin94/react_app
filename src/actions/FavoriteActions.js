@@ -15,7 +15,7 @@ export function addFavoriteAction(item) {
 
 export function deleteFavoriteAction(dellItem) {
     const favoritesList = localStorage.getItem('favoritesList');
-    const resultList = JSON.parse(!favoritesList ? [] : favoritesList).filter(item => item.key !== dellItem.key);
+    const resultList = JSON.parse(favoritesList || []).filter(item => item.key !== dellItem.key);
 
     localStorage.setItem('favoritesList', JSON.stringify(resultList));
     return ({
