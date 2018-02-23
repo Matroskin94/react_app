@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
@@ -7,11 +7,12 @@ import SearchHeader from '../components/SearchResults/Header.jsx';
 import { noop } from '../utils/SearchUtils';
 import { chooseLocationsAction } from '../actions/LocationActions';
 
-class ResultsPage extends PureComponent {
+class ResultsPage extends Component {
     static propTypes = {
         queryRessults: PropTypes.array,
         loadQuery: PropTypes.func,
         location: PropTypes.object,
+        currentPage: PropTypes.number,
         isLoading: PropTypes.bool
     };
 
@@ -19,19 +20,24 @@ class ResultsPage extends PureComponent {
         queryRessults: [],
         loadQuery: noop,
         location: {},
+        currentPage: 1,
         isLoading: false
     };
 
     componentDidMount() {
         const { address, locationBased } = queryString.parse(this.props.location.search);
+        const property = locationBased === 'true' ?
+            { centre_point: address } :
+            { place_name: address };
 
         if (!this.props.isLoading && this.props.queryRessults.length === 0) {
-            const property = locationBased === 'true' ?
-                { centre_point: address } :
-                { place_name: address };
-
-            this.props.loadQuery(property);
+            this.props.loadQuery(property, 1);
         }
+        window.onscroll = () => {
+            if (document.body.scrollHeight - document.body.clientHeight === window.scrollY) {
+                this.props.loadQuery(property, this.props.currentPage + 1);
+            }
+        };
     }
 
     render() {
@@ -47,13 +53,14 @@ class ResultsPage extends PureComponent {
 function mapStateToProps(state) {
     return {
         queryRessults: state.searchReducer.queryRessults,
+        currentPage: state.searchReducer.currentPage,
         isLoading: state.searchReducer.isLoading
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        loadQuery: query => dispatch(chooseLocationsAction(dispatch)(query))
+        loadQuery: (query, page) => dispatch(chooseLocationsAction(dispatch)(query, page))
     };
 }
 
