@@ -22,7 +22,7 @@ export const getLocationAction = dispatch => geolocation => {
     };
 };
 
-export const chooseLocationsAction = dispatch => searchProperty => {
+export const chooseLocationsAction = dispatch => (searchProperty, currentPage) => {
     dispatch(loadingAction(true));
     return () => {
         axios.get(API_LINK, {
@@ -32,14 +32,14 @@ export const chooseLocationsAction = dispatch => searchProperty => {
                 action: ACTION_SEARCH_LISTINGS,
                 encoding: ENCODING_JSON,
                 listing_type: LISTING_TYPE_BUY,
-                page: '1',
+                page: currentPage,
                 ...searchProperty
             }
         })
             .then(response => {
                 const results = extractData(response.data);
 
-                return dispatch(chooseQueryAction({ results, searchProperty }));
+                return dispatch(chooseQueryAction({ results, searchProperty, currentPage }));
             })
             .catch(err => {
                 console.log('chooseLocationsAction REJECTED', err);

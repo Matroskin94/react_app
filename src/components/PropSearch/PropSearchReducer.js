@@ -5,6 +5,7 @@ const initialState = {
     queries: [],
     queryRessults: [],
     favorites: [],
+    currentPage: 0,
     isLoading: false,
     isFavoritesLoaded: false,
     searchWord: ''
@@ -65,8 +66,9 @@ export default function PropSearchReducer(state = initialState, action) {
             return {
                 ...state,
                 isLoading: false,
-                queryRessults: action.payload.results,
-                searchWord: action.payload.word
+                queryRessults: state.queryRessults.concat(action.payload.results),
+                searchWord: action.payload.word,
+                currentPage: action.payload.currentPage
             };
         }
 

@@ -1,6 +1,6 @@
 export const extractData = data => {
     const result = data.response.listings.map((item, index) => ({
-        key: index + item.title,
+        key: item.lister_url + Date.now(),
         isFavorite: false,
         title: item.title,
         img_url: item.img_url,
