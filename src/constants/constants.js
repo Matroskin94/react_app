@@ -6,3 +6,4 @@ export const GO_DETAILS = 'GO_DETAILS';
 export const ADD_FAVORITE = 'ADD_FAVORITE';
 export const DELETE_FAVORITE = 'DELETE_FAVORITE';
 export const LOADING_STARTED = 'LOADING_STARTED';
+export const INIT_FAVORITE = 'INIT_FAVORITE';

@@ -1,14 +1,12 @@
-import { GO_PRESSED, LOCATION_PRESSED, QUERY_SELECTED, ADD_FAVORITE, DELETE_FAVORITE } from '../../constants/constants';
+import { GO_PRESSED, LOCATION_PRESSED, QUERY_SELECTED, ADD_FAVORITE, INIT_FAVORITE, DELETE_FAVORITE } from '../../constants/constants';
 import { rebuildQueriesList, deleteFromFavorite } from '../../actions/ActionService';
-import { getFavoritesFromLocal } from '../../utils/SearchUtils';
 
 const initialState = {
     queries: [],
-    locations: [],
     queryRessults: [],
-    favorites: getFavoritesFromLocal(),
-    userLocation: {},
+    favorites: [],
     isLoading: false,
+    isFavoritesLoaded: false,
     searchWord: ''
 };
 
@@ -54,6 +52,13 @@ export default function PropSearchReducer(state = initialState, action) {
                     state.favorites,
                     action.payload
                 )
+            };
+        }
+        case INIT_FAVORITE: {
+            return {
+                ...state,
+                favorites: action.payload,
+                isFavoritesLoaded: true
             };
         }
         case QUERY_SELECTED: {

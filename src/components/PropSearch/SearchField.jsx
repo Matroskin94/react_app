@@ -1,29 +1,40 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { searchAction } from '../../actions/SearchActions';
 import { chooseLocationsAction, getLocationAction } from '../../actions/LocationActions';
 import { geolocationService } from '../../actions/ActionService';
+import { initFavoritesAction } from '../../actions/FavoriteActions';
 import ResultQueries from './ResultQueries.jsx';
 import { noop } from '../../utils/SearchUtils';
 
-class Searchfield extends Component {
+class Searchfield extends PureComponent {
     static propTypes = {
         findAddressQuery: PropTypes.func,
         chooseQuery: PropTypes.func,
         getLocation: PropTypes.func,
-        queries: PropTypes.array
+        getFavoritesFromLocal: PropTypes.func,
+        queries: PropTypes.array,
+        isFavoritesLoaded: PropTypes.bool
     };
 
     static defaultProps = {
         findAddressQuery: noop,
         chooseQuery: noop,
         getLocation: noop,
-        queries: []
+        getFavoritesFromLocal: noop,
+        queries: [],
+        isFavoritesLoaded: false
     };
     state = {
         inputValue: ''
     };
+
+    componentDidMount() {
+        if (!this.props.isFavoritesLoaded) {
+            this.props.getFavoritesFromLocal();
+        }
+    }
 
     handleSearchClick = () => {
         const searchObject = { place_name: this.state.inputValue, locationBased: false };
@@ -62,10 +73,8 @@ class Searchfield extends Component {
 function mapStateToProps(state) {
     return {
         queries: state.searchReducer.queries,
-        locations: state.searchReducer.locations,
         searchWord: state.searchReducer.searchWord,
-        userLocation: state.searchReducer.location,
-        activeItem: state.detailsReducer.activeItem
+        isFavoritesLoaded: state.searchReducer.isFavoritesLoaded
     };
 }
 
@@ -73,7 +82,8 @@ function mapDispatchToProps(dispatch) {
     return {
         findAddressQuery: place => dispatch(searchAction(dispatch)(place)),
         chooseQuery: query => dispatch(chooseLocationsAction(dispatch)(query)),
-        getLocation: geolocation => dispatch(getLocationAction(dispatch)(geolocation))
+        getLocation: geolocation => dispatch(getLocationAction(dispatch)(geolocation)),
+        getFavoritesFromLocal: () => dispatch(initFavoritesAction())
 
     };
 }

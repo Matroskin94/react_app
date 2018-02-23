@@ -10,7 +10,7 @@ export const chooseQueryAction = data => ({
 });
 
 export const getLocationAction = dispatch => geolocation => {
-    return dispatch => {
+    return () => {
         geolocation.then(resolve => {
             const searchObject = { centre_point: resolve, locationBased: true };
 
@@ -23,8 +23,8 @@ export const getLocationAction = dispatch => geolocation => {
 };
 
 export const chooseLocationsAction = dispatch => searchProperty => {
-    dispatch(loadingAction('Loading true'));
-    return dispatch => {
+    dispatch(loadingAction(true));
+    return () => {
         axios.get(API_LINK, {
             params: {
                 country: COUNTRY_UK,

@@ -9,11 +9,11 @@ export const searchResultAction = data => ({
 
 export const loadingAction = data => ({
     type: LOADING_STARTED,
-    payload: true
+    payload: data
 });
 
 export const searchAction = dispatch => searchProperty => {
-    return dispatch => axios.get(API_LINK, {
+    return () => axios.get(API_LINK, {
         params: {
             country: COUNTRY_UK,
             pretty: PRETTY_1,
