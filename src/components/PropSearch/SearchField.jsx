@@ -52,7 +52,7 @@ class Searchfield extends PureComponent {
             { centre_point: address } :
             { place_name: address };
 
-        this.props.chooseQuery(property);
+        this.props.chooseQuery(property, 1);
     }
 
     handleInputChange = event => this.setState({ inputValue: event.target.value });
@@ -81,7 +81,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         findAddressQuery: place => dispatch(searchAction(dispatch)(place)),
-        chooseQuery: query => dispatch(chooseLocationsAction(dispatch)(query)),
+        chooseQuery: (query, page) => dispatch(chooseLocationsAction(dispatch)(query, page)),
         getLocation: geolocation => dispatch(getLocationAction(dispatch)(geolocation)),
         getFavoritesFromLocal: () => dispatch(initFavoritesAction())
 
