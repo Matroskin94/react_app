@@ -25,10 +25,7 @@ export function geolocationService() {
         return resolve(coordinates);
     };
 
-    return (new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(locationSucces(resolve), locationError(reject));
-    })
-        .catch(err => {
-            console.log('Geolocation error:', err);
-        }));
+    });
 }

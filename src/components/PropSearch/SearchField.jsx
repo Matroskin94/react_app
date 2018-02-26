@@ -60,7 +60,11 @@ class Searchfield extends PureComponent {
     render() {
         return (
             <div>
-                <input onChange={this.handleInputChange} type='text' value={this.state.inputValue} />
+                <input
+                    onChange={this.handleInputChange}
+                    type='text'
+                    value={this.state.inputValue}
+                />
                 <button onClick={this.handleSearchClick}>Go</button>
                 <button onClick={this.handleLocationClick}>My Location </button>
                 <ResultQueries results={this.props.queries} onItemClick={this.handleQueryClick} />
