@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { QUERY_SELECTED } from '../constants/constants';
-import { API_LINK, COUNTRY_UK, PRETTY_1, ACTION_SEARCH_LISTINGS, ENCODING_JSON, LISTING_TYPE_BUY } from '../constants/queryConstants';
+import { QUERY_SELECTED, CLEAR_RESULTS } from '../constants/constants';
+import { API_LINK, COUNTRY_UK, PRETTY_1, ACTION_SEARCH_LISTINGS,
+    ENCODING_JSON, LISTING_TYPE_BUY } from '../constants/queryConstants';
 import { extractData } from '../utils/SearchUtils';
 import { searchAction, loadingAction } from './SearchActions';
 
@@ -9,8 +10,13 @@ export const chooseQueryAction = data => ({
     payload: data
 });
 
-export const getLocationAction = dispatch => geolocation =>
-    () => {
+export const clearResultsAction = () => ({
+    type: CLEAR_RESULTS,
+    payload: ''
+});
+
+export const getLocationAction = geolocation =>
+    dispatch => {
         geolocation.then(resolve => {
             const searchObject = { centre_point: resolve, locationBased: true };
 
@@ -19,9 +25,9 @@ export const getLocationAction = dispatch => geolocation =>
     };
 
 
-export const chooseLocationsAction = dispatch => (searchProperty, currentPage) => {
-    dispatch(loadingAction(true));
-    return () => {
+export const chooseLocationsAction = (searchProperty, currentPage) =>
+    dispatch => {
+        dispatch(loadingAction(true));
         axios.get(API_LINK, {
             params: {
                 country: COUNTRY_UK,
@@ -39,4 +45,3 @@ export const chooseLocationsAction = dispatch => (searchProperty, currentPage) =
                 return dispatch(chooseQueryAction({ results, searchProperty, currentPage }));
             });
     };
-};

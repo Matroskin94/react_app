@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { searchAction } from '../../actions/SearchActions';
 import { chooseLocationsAction, getLocationAction } from '../../actions/LocationActions';
 import { geolocationService } from '../../actions/ActionService';
@@ -65,8 +66,12 @@ class Searchfield extends PureComponent {
                     type='text'
                     value={this.state.inputValue}
                 />
-                <button onClick={this.handleSearchClick}>Go</button>
-                <button onClick={this.handleLocationClick}>My Location </button>
+                <button onClick={this.handleSearchClick}>
+                    <Link to={`/results/?address=${this.state.inputValue}&locationBased=false`}>Go</Link>
+                </button>
+                <button onClick={this.handleLocationClick}>
+                    <Link to={`/results/?address=${this.state.inputValue}&locationBased=true`}>My Location</Link>
+                </button>
                 <ResultQueries results={this.props.queries} onItemClick={this.handleQueryClick} />
             </div>
         );
@@ -84,9 +89,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        findAddressQuery: place => dispatch(searchAction(dispatch)(place)),
-        chooseQuery: (query, page) => dispatch(chooseLocationsAction(dispatch)(query, page)),
-        getLocation: geolocation => dispatch(getLocationAction(dispatch)(geolocation)),
+        findAddressQuery: place => dispatch(searchAction(place)),
+        chooseQuery: (query, page) => dispatch(chooseLocationsAction(query, page)),
+        getLocation: geolocation => dispatch(getLocationAction(geolocation)),
         getFavoritesFromLocal: () => dispatch(initFavoritesAction())
 
     };
