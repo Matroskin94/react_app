@@ -5,12 +5,13 @@ import queryString from 'query-string';
 import Results from '../components/SearchResults/ResultLocations.jsx';
 import SearchHeader from '../components/SearchResults/Header.jsx';
 import { noop } from '../utils/SearchUtils';
-import { chooseLocationsAction } from '../actions/LocationActions';
+import { chooseLocationsAction, clearResultsAction } from '../actions/LocationActions';
 
 class ResultsPage extends PureComponent {
     static propTypes = {
         queryRessults: PropTypes.array,
         loadQuery: PropTypes.func,
+        clearResults: PropTypes.func,
         location: PropTypes.object,
         currentPage: PropTypes.number,
         isLoading: PropTypes.bool
@@ -18,6 +19,7 @@ class ResultsPage extends PureComponent {
 
     static defaultProps = {
         queryRessults: [],
+        clearResults: noop,
         loadQuery: noop,
         location: {},
         currentPage: 1,
@@ -28,6 +30,10 @@ class ResultsPage extends PureComponent {
         const property = this.getProperty();
 
         this.props.loadQuery(property, 1);
+    }
+
+    componentWillUnmount() {
+        this.props.clearResults();
     }
 
     getProperty = () => {
@@ -66,6 +72,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        clearResults: () => dispatch(clearResultsAction()),
         loadQuery: (query, page) => dispatch(chooseLocationsAction(dispatch)(query, page))
     };
 }

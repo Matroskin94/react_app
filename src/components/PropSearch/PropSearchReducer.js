@@ -1,4 +1,5 @@
-import * as constants from '../../constants/constants';
+import { GO_PRESSED, LOCATION_PRESSED, ADD_FAVORITE, DELETE_FAVORITE,
+    INIT_FAVORITE, QUERY_SELECTED, LOADING_STARTED, CLEAR_RESULTS } from '../../constants/constants';
 import { rebuildQueriesList, deleteFromFavorite } from '../../actions/ActionService';
 
 const initialState = {
@@ -13,7 +14,7 @@ const initialState = {
 
 export default function PropSearchReducer(state = initialState, action) {
     switch (action.type) {
-        case constants.GO_PRESSED: {
+        case GO_PRESSED: {
             const query = rebuildQueriesList(
                 state.queries,
                 action.payload
@@ -26,26 +27,26 @@ export default function PropSearchReducer(state = initialState, action) {
 
             };
         }
-        case 'LOADING_STARTED': {
+        case LOADING_STARTED: {
             return {
                 ...state,
                 isLoading: action.payload
             };
         }
-        case constants.LOCATION_PRESSED: {
+        case LOCATION_PRESSED: {
             return {
                 ...state,
                 isLoading: false,
                 queryRessults: { ...action.results }
             };
         }
-        case constants.ADD_FAVORITE: {
+        case ADD_FAVORITE: {
             return {
                 ...state,
                 favorites: [action.payload, ...state.favorites]
             };
         }
-        case constants.DELETE_FAVORITE: {
+        case DELETE_FAVORITE: {
             action.payload.isFavorite = false;
             return {
                 ...state,
@@ -55,29 +56,26 @@ export default function PropSearchReducer(state = initialState, action) {
                 )
             };
         }
-        case constants.INIT_FAVORITE: {
+        case INIT_FAVORITE: {
             return {
                 ...state,
                 favorites: action.payload,
                 isFavoritesLoaded: true
             };
         }
-        case constants.ANOTHER_QUERY_SELECTED: {
-            return {
-                ...state,
-                isLoading: false,
-                queryRessults: action.payload.results,
-                searchWord: action.payload.word,
-                currentPage: action.payload.currentPage
-            };
-        }
-        case constants.QUERY_SELECTED: {
+        case QUERY_SELECTED: {
             return {
                 ...state,
                 isLoading: false,
                 queryRessults: state.queryRessults.concat(action.payload.results),
                 searchWord: action.payload.word,
                 currentPage: action.payload.currentPage
+            };
+        }
+        case CLEAR_RESULTS: {
+            return {
+                ...state,
+                queryRessults: []
             };
         }
 
