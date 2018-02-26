@@ -15,7 +15,11 @@ const AppRouter = props => (
         <BrowserRouter>
             <Layout>
                 <Switch>
-                    <Route exact path='/' component={PropSearchPage} />
+                    <Route
+                        exact
+                        path='/'
+                        component={PropSearchPage}
+                    />
                     <Route path='/favorite' component={FavoritePage} />
                     <Route path='/results' component={ResultsPage} />
                     <Route path='/details' component={DetailsPage} />

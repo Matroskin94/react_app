@@ -9,18 +9,15 @@ export const chooseQueryAction = data => ({
     payload: data
 });
 
-export const getLocationAction = dispatch => geolocation => {
-    return () => {
+export const getLocationAction = dispatch => geolocation =>
+    () => {
         geolocation.then(resolve => {
             const searchObject = { centre_point: resolve, locationBased: true };
 
             return dispatch(searchAction(dispatch)(searchObject));
-        })
-            .catch(err => {
-                console.log('getLocationAction', err);
-            });
+        });
     };
-};
+
 
 export const chooseLocationsAction = dispatch => (searchProperty, currentPage) => {
     dispatch(loadingAction(true));
@@ -40,9 +37,6 @@ export const chooseLocationsAction = dispatch => (searchProperty, currentPage) =
                 const results = extractData(response.data);
 
                 return dispatch(chooseQueryAction({ results, searchProperty, currentPage }));
-            })
-            .catch(err => {
-                console.log('chooseLocationsAction REJECTED', err);
             });
     };
 };
