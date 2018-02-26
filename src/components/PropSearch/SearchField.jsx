@@ -40,6 +40,7 @@ class Searchfield extends PureComponent {
         const searchObject = { place_name: this.state.inputValue, locationBased: false };
 
         this.props.findAddressQuery(searchObject);
+        this.context.router.history.push(`/results/?address=${this.state.inputValue}&locationBased=false`);
     }
 
     handleLocationClick = () => {
@@ -73,6 +74,9 @@ class Searchfield extends PureComponent {
     }
 }
 
+Searchfield.contextTypes = {
+    router: PropTypes.object.isRequired
+};
 
 function mapStateToProps(state) {
     return {

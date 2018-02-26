@@ -27,9 +27,12 @@ class ResultsPage extends PureComponent {
     componentDidMount() {
         const property = this.getProperty();
 
-        if (!this.props.isLoading && this.props.queryRessults.length === 0) {
-            this.props.loadQuery(property, 1);
-        }
+        window.addEventListener('scroll', this.handleScroll, false);
+        this.props.loadQuery(property, 1);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.handleScroll, false);
     }
 
     getProperty = () => {
@@ -43,7 +46,7 @@ class ResultsPage extends PureComponent {
     handleScroll = () => {
         const property = this.getProperty();
 
-        if (document.body.scrollHeight - document.body.clientHeight === window.scrollY && !this.props.isLoading) {
+        if (document.body.scrollHeight - document.body.clientHeight < window.scrollY + 200 && !this.props.isLoading) {
             this.props.loadQuery(property, this.props.currentPage + 1);
         }
     }

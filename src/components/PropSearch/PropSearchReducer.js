@@ -66,7 +66,9 @@ export default function PropSearchReducer(state = initialState, action) {
             return {
                 ...state,
                 isLoading: false,
-                queryRessults: state.queryRessults.concat(action.payload.results),
+                queryRessults: action.payload.currentPage === 1 ?
+                    action.payload.results :
+                    state.queryRessults.concat(action.payload.results),
                 searchWord: action.payload.word,
                 currentPage: action.payload.currentPage
             };
