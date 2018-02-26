@@ -10,13 +10,13 @@ export const chooseQueryAction = data => ({
     payload: data
 });
 
-export const clearResultsAction = data => ({
+export const clearResultsAction = () => ({
     type: CLEAR_RESULTS,
-    payload: data
+    payload: ''
 });
 
-export const getLocationAction = dispatch => geolocation =>
-    () => {
+export const getLocationAction = geolocation =>
+    dispatch => {
         geolocation.then(resolve => {
             const searchObject = { centre_point: resolve, locationBased: true };
 
@@ -25,9 +25,9 @@ export const getLocationAction = dispatch => geolocation =>
     };
 
 
-export const chooseLocationsAction = dispatch => (searchProperty, currentPage) => {
-    dispatch(loadingAction(true));
-    return () => {
+export const chooseLocationsAction = (searchProperty, currentPage) =>
+    dispatch => {
+        dispatch(loadingAction(true));
         axios.get(API_LINK, {
             params: {
                 country: COUNTRY_UK,
@@ -45,4 +45,3 @@ export const chooseLocationsAction = dispatch => (searchProperty, currentPage) =
                 return dispatch(chooseQueryAction({ results, searchProperty, currentPage }));
             });
     };
-};

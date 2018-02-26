@@ -73,7 +73,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         clearResults: () => dispatch(clearResultsAction()),
-        loadQuery: (query, page) => dispatch(chooseLocationsAction(dispatch)(query, page))
+        loadQuery: (query, page) => dispatch(chooseLocationsAction(query, page))
     };
 }
 

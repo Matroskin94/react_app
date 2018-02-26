@@ -89,9 +89,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        findAddressQuery: place => dispatch(searchAction(dispatch)(place)),
-        chooseQuery: (query, page) => dispatch(chooseLocationsAction(dispatch)(query, page)),
-        getLocation: geolocation => dispatch(getLocationAction(dispatch)(geolocation)),
+        findAddressQuery: place => dispatch(searchAction(place)),
+        chooseQuery: (query, page) => dispatch(chooseLocationsAction(query, page)),
+        getLocation: geolocation => dispatch(getLocationAction(geolocation)),
         getFavoritesFromLocal: () => dispatch(initFavoritesAction())
 
     };
