@@ -15,7 +15,8 @@ class Searchfield extends PureComponent {
         getLocation: PropTypes.func,
         getFavoritesFromLocal: PropTypes.func,
         queries: PropTypes.array,
-        isFavoritesLoaded: PropTypes.bool
+        isFavoritesLoaded: PropTypes.bool,
+        history: PropTypes.object
     };
 
     static defaultProps = {
@@ -24,7 +25,8 @@ class Searchfield extends PureComponent {
         getLocation: noop,
         getFavoritesFromLocal: noop,
         queries: [],
-        isFavoritesLoaded: false
+        isFavoritesLoaded: false,
+        history: {}
     };
     state = {
         inputValue: ''
@@ -40,7 +42,7 @@ class Searchfield extends PureComponent {
         const searchObject = { place_name: this.state.inputValue, locationBased: false };
 
         this.props.findAddressQuery(searchObject);
-        this.context.router.history.push(`/results/?address=${this.state.inputValue}&locationBased=false`);
+        this.props.history.push(`/results/?address=${this.state.inputValue}&locationBased=false`);
     }
 
     handleLocationClick = () => {
@@ -53,7 +55,7 @@ class Searchfield extends PureComponent {
             { centre_point: address } :
             { place_name: address };
 
-        this.props.chooseQuery(property, 1);
+        this.props.chooseQuery(property, [], 1);
     }
 
     handleInputChange = event => this.setState({ inputValue: event.target.value });
@@ -74,9 +76,6 @@ class Searchfield extends PureComponent {
     }
 }
 
-Searchfield.contextTypes = {
-    router: PropTypes.object.isRequired
-};
 
 function mapStateToProps(state) {
     return {
@@ -89,7 +88,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         findAddressQuery: place => dispatch(searchAction(dispatch)(place)),
-        chooseQuery: (query, page) => dispatch(chooseLocationsAction(dispatch)(query, page)),
+        chooseQuery: (query, currentResults, page) => dispatch(chooseLocationsAction(dispatch)(query, currentResults, page)),
         getLocation: geolocation => dispatch(getLocationAction(dispatch)(geolocation)),
         getFavoritesFromLocal: () => dispatch(initFavoritesAction())
 

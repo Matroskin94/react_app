@@ -19,7 +19,7 @@ export const getLocationAction = dispatch => geolocation =>
     };
 
 
-export const chooseLocationsAction = dispatch => (searchProperty, currentPage) => {
+export const chooseLocationsAction = dispatch => (searchProperty, currentResults, currentPage) => {
     dispatch(loadingAction(true));
     return () => {
         axios.get(API_LINK, {
@@ -34,7 +34,7 @@ export const chooseLocationsAction = dispatch => (searchProperty, currentPage) =
             }
         })
             .then(response => {
-                const results = extractData(response.data);
+                const results = currentResults.concat(extractData(response.data));
 
                 return dispatch(chooseQueryAction({ results, searchProperty, currentPage }));
             });
