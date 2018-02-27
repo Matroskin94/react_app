@@ -3,7 +3,7 @@ import shallowequal from 'shallowequal';
 export function rebuildQueriesList(queries, query) {
     const currentQuery = queries.find(element => shallowequal(element.address, query.address));
     const queryList = currentQuery ?
-        [currentQuery, ...queries.filter(item => !shallowequal(currentQuery, item))] :
+        [currentQuery, ...queries.filter(item => !shallowequal(currentQuery.address, item.address))] :
         [query, ...queries];
 
     return queryList;

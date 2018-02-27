@@ -6,12 +6,13 @@ import { chooseLocationsAction, getLocationAction } from '../../actions/Location
 import { geolocationService } from '../../actions/ActionService';
 import { initFavoritesAction } from '../../actions/FavoriteActions';
 import ResultQueries from './ResultQueries.jsx';
-import WrapperComponent from './WrapperComponent.jsx';
+import addToHistory from './WrapperComponent.jsx';
 import { noop } from '../../utils/SearchUtils';
 
-@WrapperComponent
+@addToHistory('/results/?centre_point=')
 class Searchfield extends PureComponent {
     static propTypes = {
+        getResults: PropTypes.func,
         chooseQuery: PropTypes.func,
         getLocation: PropTypes.func,
         getFavoritesFromLocal: PropTypes.func,
@@ -20,6 +21,7 @@ class Searchfield extends PureComponent {
     };
 
     static defaultProps = {
+        getResults: noop,
         chooseQuery: noop,
         getLocation: noop,
         getFavoritesFromLocal: noop,
@@ -39,12 +41,8 @@ class Searchfield extends PureComponent {
 
     handleLocationClick = () => {
         geolocationService().then(result => {
-            this.props.goToResults(result);
+            this.props.getResults(result); // Метод из декоратора addToHistory для перехода по ссылке
         });
-    }
-
-    handleQueryClick = address => {
-        this.props.chooseQuery({centre_point: address}, 1);
     }
 
     handleInputChange = event => this.setState({ inputValue: event.target.value });
@@ -61,7 +59,7 @@ class Searchfield extends PureComponent {
                     <Link to={`/results/?place_name=${this.state.inputValue}`}>Go</Link>
                 </button>
                 <button onClick={this.handleLocationClick}> My Location</button>
-                <ResultQueries results={this.props.queries} onItemClick={this.handleQueryClick} />
+                <ResultQueries results={this.props.queries} />
             </div>
         );
     }

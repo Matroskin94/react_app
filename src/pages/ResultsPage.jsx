@@ -33,8 +33,10 @@ class ResultsPage extends PureComponent {
     };
 
     componentDidMount() {
-        this.props.loadQuery(queryString.parse(this.props.location.search));
-        this.props.loadQueryResults(queryString.parse(this.props.location.search), 1);
+        const searchProperty = queryString.parse(this.props.location.search);
+
+        this.props.loadQuery(searchProperty);
+        this.props.loadQueryResults(searchProperty, 1);
     }
 
     componentWillUnmount() {
@@ -45,6 +47,12 @@ class ResultsPage extends PureComponent {
         const address = queryString.parse(this.props.location.search);
 
         return this.props.queries.find(item => shallowequal(item.address, address)).matches;
+    }
+
+    getHeader() {
+        return this.props.queryRessults.length !== 0 ?
+            `${20 * this.props.currentPage} of ${this.getQueryMatches()} matches` :
+            'Nothing found, try another query';
     }
 
     handleScroll = () => {
@@ -59,9 +67,7 @@ class ResultsPage extends PureComponent {
         return (
             <div>
                 <SearchHeader
-                    resultsString={this.props.queryRessults.length !== 0 ?
-                        `${20 * this.props.currentPage} of ${this.getQueryMatches()} matches` :
-                        'Nothing found, try another query'}
+                    resultsString={this.getHeader()}
                 />
                 <Results results={this.props.queryRessults} />
             </div>
