@@ -48,8 +48,11 @@ class ResultsPage extends PureComponent {
 
     handleScroll = () => {
         const property = this.getProperty();
+        const lastPage = this.props.queryRessults.length / 20 + 1;
 
-        if (document.body.scrollHeight - document.body.clientHeight < window.scrollY + 200 && !this.props.isLoading) {
+        if (document.body.scrollHeight - document.body.clientHeight < window.scrollY + 200
+            && !this.props.isLoading
+            && lastPage !== this.props.currentPage) {
             this.props.loadQuery(property, this.props.currentPage + 1);
         }
     }
