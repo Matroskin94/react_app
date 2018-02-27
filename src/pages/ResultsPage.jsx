@@ -29,10 +29,12 @@ class ResultsPage extends PureComponent {
     componentDidMount() {
         const property = this.getProperty();
 
+        window.addEventListener('scroll', this.handleScroll, false);
         this.props.loadQuery(property, 1);
     }
 
     componentWillUnmount() {
+        window.removeEventListener('scroll', this.handleScroll, false);
         this.props.clearResults();
     }
 
@@ -46,15 +48,18 @@ class ResultsPage extends PureComponent {
 
     handleScroll = () => {
         const property = this.getProperty();
+        const lastPage = this.props.queryRessults.length / 20 + 1;
 
-        if (document.body.scrollHeight - document.body.clientHeight === window.scrollY && !this.props.isLoading) {
+        if (document.body.scrollHeight - document.body.clientHeight < window.scrollY + 200
+            && !this.props.isLoading
+            && lastPage !== this.props.currentPage) {
             this.props.loadQuery(property, this.props.currentPage + 1);
         }
     }
 
     render() {
         return (
-            <div onWheel={this.handleScroll}>
+            <div>
                 <SearchHeader />
                 <Results results={this.props.queryRessults} />
             </div>
