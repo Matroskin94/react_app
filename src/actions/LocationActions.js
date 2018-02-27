@@ -18,7 +18,7 @@ export const clearResultsAction = () => ({
 export const getLocationAction = geolocation =>
     dispatch => {
         geolocation.then(resolve => {
-            const searchObject = { centre_point: resolve, locationBased: true };
+            const searchObject = { centre_point: resolve };
 
             return dispatch(searchAction(dispatch)(searchObject));
         });

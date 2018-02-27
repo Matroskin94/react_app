@@ -26,8 +26,8 @@ export const searchAction = searchProperty =>
     })
         .then(response => {
             dispatch(searchResultAction({
-                ...searchProperty,
-                resultsNum: response.data.response.total_results
+                address: searchProperty,
+                matches: response.data.response.total_results
             }));
         });
 

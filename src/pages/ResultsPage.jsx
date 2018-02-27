@@ -2,14 +2,18 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
+import shallowequal from 'shallowequal';
 import Results from '../components/SearchResults/ResultLocations.jsx';
 import SearchHeader from '../components/SearchResults/Header.jsx';
 import { noop } from '../utils/SearchUtils';
+import { searchAction } from '../actions/SearchActions';
 import { chooseLocationsAction, clearResultsAction } from '../actions/LocationActions';
 
 class ResultsPage extends PureComponent {
     static propTypes = {
         queryRessults: PropTypes.array,
+        queries: PropTypes.array,
+        loadQueryResults: PropTypes.func,
         loadQuery: PropTypes.func,
         clearResults: PropTypes.func,
         location: PropTypes.object,
@@ -19,7 +23,9 @@ class ResultsPage extends PureComponent {
 
     static defaultProps = {
         queryRessults: [],
+        queries: [],
         clearResults: noop,
+        loadQueryResults: noop,
         loadQuery: noop,
         location: {},
         currentPage: 1,
@@ -27,35 +33,36 @@ class ResultsPage extends PureComponent {
     };
 
     componentDidMount() {
-        const property = this.getProperty();
-
-        this.props.loadQuery(property, 1);
+        this.props.loadQuery(queryString.parse(this.props.location.search));
+        this.props.loadQueryResults(queryString.parse(this.props.location.search), 1);
     }
 
     componentWillUnmount() {
         this.props.clearResults();
     }
 
-    getProperty = () => {
-        const { address, locationBased } = queryString.parse(this.props.location.search);
+    getQueryMatches = () => {
+        const address = queryString.parse(this.props.location.search);
 
-        return locationBased === 'true' ?
-            { centre_point: address } :
-            { place_name: address };
+        return this.props.queries.find(item => shallowequal(item.address, address)).matches;
     }
 
     handleScroll = () => {
-        const property = this.getProperty();
+        const property = queryString.parse(this.props.location.search);
 
         if (document.body.scrollHeight - document.body.clientHeight === window.scrollY && !this.props.isLoading) {
-            this.props.loadQuery(property, this.props.currentPage + 1);
+            this.props.loadQueryResults(property, this.props.currentPage + 1);
         }
     }
 
     render() {
         return (
-            <div onWheel={this.handleScroll}>
-                <SearchHeader />
+            <div>
+                <SearchHeader
+                    resultsString={this.props.queryRessults.length !== 0 ?
+                        `${20 * this.props.currentPage} of ${this.getQueryMatches()} matches` :
+                        'Nothing found, try another query'}
+                />
                 <Results results={this.props.queryRessults} />
             </div>
         );
@@ -64,6 +71,7 @@ class ResultsPage extends PureComponent {
 
 function mapStateToProps(state) {
     return {
+        queries: state.searchReducer.queries,
         queryRessults: state.searchReducer.queryRessults,
         currentPage: state.searchReducer.currentPage,
         isLoading: state.searchReducer.isLoading
@@ -73,7 +81,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         clearResults: () => dispatch(clearResultsAction()),
-        loadQuery: (query, page) => dispatch(chooseLocationsAction(query, page))
+        loadQuery: place => dispatch(searchAction(place)),
+        loadQueryResults: (query, page) => dispatch(chooseLocationsAction(query, page))
     };
 }
 
