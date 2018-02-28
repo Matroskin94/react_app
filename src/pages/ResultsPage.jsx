@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
+import shallowequal from 'shallowequal';
 import Results from '../components/SearchResults/ResultLocations.jsx';
 import SearchHeader from '../components/SearchResults/Header.jsx';
 import { noop } from '../utils/SearchUtils';
@@ -42,6 +43,16 @@ class ResultsPage extends PureComponent {
         this.props.clearResults();
     }
 
+    getQueryMatches = () => {
+        const address = queryString.parse(this.props.location.search);
+        const resultItem = this.props.queries.find(item =>
+            shallowequal(item.address, address));
+
+        return resultItem ?
+            resultItem.matches :
+            0;
+    }
+
     handleScroll = () => {
         const property = queryString.parse(this.props.location.search);
 
@@ -55,8 +66,7 @@ class ResultsPage extends PureComponent {
             <div>
                 <SearchHeader
                     isResultsEmpty={this.props.queryRessults.length === 0}
-                    address={queryString.parse(this.props.location.search)}
-                    queries={this.props.queries}
+                    matches={this.getQueryMatches()}
                     currentPage={this.props.currentPage}
                 />
                 <Results results={this.props.queryRessults} />

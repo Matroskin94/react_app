@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-export default url => ChangeHistory => {
-    class ConnectHistory extends PureComponent {
+export default url => ConnectHistory => {
+    class ChangeHistory extends PureComponent {
         static contextTypes = {
             router: PropTypes.object.isRequired
         };
@@ -12,12 +12,12 @@ export default url => ChangeHistory => {
         }
 
         render() {
-            return <ChangeHistory
+            return <ConnectHistory
                 {...this.props}
                 historyPush={this.historyPush}
             />;
         }
     }
 
-    return ConnectHistory;
+    return ChangeHistory;
 };

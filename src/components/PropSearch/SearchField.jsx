@@ -12,7 +12,7 @@ import { noop } from '../../utils/SearchUtils';
 @ChangeHistory('/results/?centre_point=')
 class Searchfield extends PureComponent {
     static propTypes = {
-        historyPush: PropTypes.func,
+        historyPush: PropTypes.func, // Метод из декоратора ChangeHistory для перехода по ссылке
         chooseQuery: PropTypes.func,
         getLocation: PropTypes.func,
         getFavoritesFromLocal: PropTypes.func,
@@ -41,7 +41,7 @@ class Searchfield extends PureComponent {
 
     handleLocationClick = () => {
         geolocationService().then(result => {
-            this.props.historyPush(result); // Метод из декоратора ChangeHistory для перехода по ссылке
+            this.props.historyPush(result);
         });
     }
 
