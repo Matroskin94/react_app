@@ -1,14 +1,15 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import queryString from 'query-string';
 import shallowequal from 'shallowequal';
 import Results from '../components/SearchResults/ResultLocations.jsx';
 import SearchHeader from '../components/SearchResults/Header.jsx';
 import { noop } from '../utils/SearchUtils';
 import { searchAction } from '../actions/SearchActions';
 import { chooseLocationsAction, clearResultsAction } from '../actions/LocationActions';
+import ChangeHistory from '../components/PropSearch/ChangeHistory.jsx';
 
+@ChangeHistory()
 class ResultsPage extends PureComponent {
     static propTypes = {
         queryRessults: PropTypes.array,
@@ -16,7 +17,7 @@ class ResultsPage extends PureComponent {
         loadQueryResults: PropTypes.func,
         loadQuery: PropTypes.func,
         clearResults: PropTypes.func,
-        location: PropTypes.object,
+        getURLParams: PropTypes.func,
         currentPage: PropTypes.number,
         isLoading: PropTypes.bool
     };
@@ -27,13 +28,13 @@ class ResultsPage extends PureComponent {
         clearResults: noop,
         loadQueryResults: noop,
         loadQuery: noop,
-        location: {},
+        getURLParams: noop,
         currentPage: 1,
         isLoading: false
     };
 
     componentDidMount() {
-        const searchProperty = queryString.parse(this.props.location.search);
+        const searchProperty = this.props.getURLParams();
 
         this.props.loadQuery(searchProperty);
         this.props.loadQueryResults(searchProperty);
@@ -44,7 +45,7 @@ class ResultsPage extends PureComponent {
     }
 
     getQueryMatches = () => {
-        const address = queryString.parse(this.props.location.search);
+        const address = this.props.getURLParams();
         const resultItem = this.props.queries.find(item =>
             shallowequal(item.address, address));
 
@@ -52,7 +53,7 @@ class ResultsPage extends PureComponent {
     }
 
     handleScroll = () => {
-        const property = queryString.parse(this.props.location.search);
+        const property = this.props.getURLParams();
 
         if (document.body.scrollHeight - document.body.clientHeight === window.scrollY && !this.props.isLoading) {
             this.props.loadQueryResults(property, this.props.currentPage + 1);

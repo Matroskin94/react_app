@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { chooseLocationsAction, getLocationAction } from '../../actions/LocationActions';
+import { chooseLocationsAction } from '../../actions/LocationActions';
 import { geolocationService } from '../../actions/ActionService';
 import { initFavoritesAction } from '../../actions/FavoriteActions';
 import ResultQueries from './ResultQueries.jsx';
@@ -13,8 +13,6 @@ import { noop } from '../../utils/SearchUtils';
 class Searchfield extends PureComponent {
     static propTypes = {
         historyPush: PropTypes.func, // Метод из декоратора ChangeHistory для перехода по ссылке
-        chooseQuery: PropTypes.func,
-        getLocation: PropTypes.func,
         getFavoritesFromLocal: PropTypes.func,
         queries: PropTypes.array,
         isFavoritesLoaded: PropTypes.bool
@@ -22,8 +20,6 @@ class Searchfield extends PureComponent {
 
     static defaultProps = {
         historyPush: noop,
-        chooseQuery: noop,
-        getLocation: noop,
         getFavoritesFromLocal: noop,
         queries: [],
         isFavoritesLoaded: false
@@ -77,7 +73,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         chooseQuery: (query, page) => dispatch(chooseLocationsAction(query, page)),
-        getLocation: geolocation => dispatch(getLocationAction(geolocation)),
         getFavoritesFromLocal: () => dispatch(initFavoritesAction())
 
     };
