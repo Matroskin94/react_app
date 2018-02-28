@@ -17,12 +17,16 @@ class ResultQueries extends PureComponent {
         return (
             <div>
                 <p>Ricent Queries:</p>
-                {results.map(({ address, matches } = {}) =>
-                    <div key={matches}>
-                        <Link to={`/results/?${queryString.stringify(address)}`}>
-                            {address.place_name || address.centre_point}: {matches}
-                        </Link>
-                    </div>)}
+                {results.map(({ address, matches } = {}) => {
+                    const place = queryString.stringify(address);
+
+                    return (
+                        <div key={matches}>
+                            <Link to={`/results/?${place}`}>
+                                {address.place_name || address.centre_point}: {matches}
+                            </Link>
+                        </div>);
+                })}
             </div>
         );
     }
