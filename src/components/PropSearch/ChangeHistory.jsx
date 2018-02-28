@@ -1,23 +1,23 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-export default url => WrapperComponent => {
-    class GetLinckClickCallback extends PureComponent {
+export default url => ChangeHistory => {
+    class ConnectHistory extends PureComponent {
         static contextTypes = {
             router: PropTypes.object.isRequired
         };
 
-        toResults = coordinates => {
+        historyPush = coordinates => {
             this.context.router.history.push(`${url}${coordinates}`);
         }
 
         render() {
-            return <WrapperComponent
+            return <ChangeHistory
                 {...this.props}
-                getResults={this.toResults}
+                historyPush={this.historyPush}
             />;
         }
     }
 
-    return GetLinckClickCallback;
+    return ConnectHistory;
 };

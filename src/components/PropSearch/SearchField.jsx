@@ -6,13 +6,13 @@ import { chooseLocationsAction, getLocationAction } from '../../actions/Location
 import { geolocationService } from '../../actions/ActionService';
 import { initFavoritesAction } from '../../actions/FavoriteActions';
 import ResultQueries from './ResultQueries.jsx';
-import addToHistory from './WrapperComponent.jsx';
+import ChangeHistory from './ChangeHistory.jsx';
 import { noop } from '../../utils/SearchUtils';
 
-@addToHistory('/results/?centre_point=')
+@ChangeHistory('/results/?centre_point=')
 class Searchfield extends PureComponent {
     static propTypes = {
-        getResults: PropTypes.func,
+        historyPush: PropTypes.func,
         chooseQuery: PropTypes.func,
         getLocation: PropTypes.func,
         getFavoritesFromLocal: PropTypes.func,
@@ -21,7 +21,7 @@ class Searchfield extends PureComponent {
     };
 
     static defaultProps = {
-        getResults: noop,
+        historyPush: noop,
         chooseQuery: noop,
         getLocation: noop,
         getFavoritesFromLocal: noop,
@@ -41,7 +41,7 @@ class Searchfield extends PureComponent {
 
     handleLocationClick = () => {
         geolocationService().then(result => {
-            this.props.getResults(result); // Метод из декоратора addToHistory для перехода по ссылке
+            this.props.historyPush(result); // Метод из декоратора ChangeHistory для перехода по ссылке
         });
     }
 
