@@ -22,7 +22,6 @@ export default function PropSearchReducer(state = initialState, action) {
 
             return {
                 ...state,
-                isLoading: false,
                 queries: query
 
             };

@@ -25,7 +25,7 @@ export const getLocationAction = geolocation =>
     };
 
 
-export const chooseLocationsAction = (searchProperty, currentPage) =>
+export const chooseLocationsAction = (searchProperty, currentPage = 1) =>
     dispatch => {
         dispatch(loadingAction(true));
         axios.get(API_LINK, {

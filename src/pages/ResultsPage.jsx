@@ -34,8 +34,8 @@ class ResultsPage extends PureComponent {
     componentDidMount() {
         const searchProperty = queryString.parse(this.props.location.search);
 
-        this.props.loadQuery(searchProperty);
-        this.props.loadQueryResults(searchProperty, 1);
+        this.props.loadQuery(searchProperty)
+            .then(this.props.loadQueryResults(searchProperty));
     }
 
     componentWillUnmount() {
@@ -55,6 +55,7 @@ class ResultsPage extends PureComponent {
             <div>
                 <SearchHeader
                     isResultsEmpty={this.props.queryRessults.length === 0}
+                    isLoading={this.props.isLoading}
                     address={queryString.parse(this.props.location.search)}
                     queries={this.props.queries}
                     currentPage={this.props.currentPage}
@@ -78,7 +79,7 @@ function mapDispatchToProps(dispatch) {
     return {
         clearResults: () => dispatch(clearResultsAction()),
         loadQuery: place => dispatch(searchAction(place)),
-        loadQueryResults: (query, page) => dispatch(chooseLocationsAction(query, page))
+        loadQueryResults: (query) => dispatch(chooseLocationsAction(query))
     };
 }
 

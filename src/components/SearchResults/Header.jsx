@@ -1,18 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import shallowequal from 'shallowequal';
+import ResultsHeader from './ResultsHeader.jsx';
+import LoadingHeader from './LoadingHeader.jsx';
 
 const Header = props => {
-    const getQueryMatches = () =>
-        props.queries.find(item =>
-            shallowequal(item.address, props.address)).matches;
-    const headerText = props.isResultsEmpty ?
-        'Nothing found, try another query' :
-        `${20 * props.currentPage} of ${getQueryMatches()} matches`;
+    const headerText = props.isLoading ?
+        <LoadingHeader /> :
+        <ResultsHeader
+            queries={props.queries}
+            address={props.address}
+            currentPage={props.currentPage}
+            isResultsEmpty={props.isResultsEmpty}
+        />;
 
     return (
         <div>
-            <h3>{headerText}</h3>
+            {headerText}
         </div>
     );
 };
@@ -21,14 +24,16 @@ Header.propTypes = {
     queries: PropTypes.array,
     address: PropTypes.object,
     currentPage: PropTypes.number,
-    isResultsEmpty: PropTypes.bool
+    isResultsEmpty: PropTypes.bool,
+    isLoading: PropTypes.bool
 };
 
 Header.defaultProps = {
     queries: [],
     address: {},
     currentPage: 1,
-    isResultsEmpty: true
+    isResultsEmpty: true,
+    isLoading: true
 };
 
 export default Header;
