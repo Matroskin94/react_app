@@ -1,20 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import shallowequal from 'shallowequal';
+import SuccessHeader from './SuccessHeader.jsx';
+import FailHeader from './FailHeader.jsx';
 
 const ResultsHeader = props => {
     const getQueryMatches = props.queries.length !== 0 ?
         props.queries.find(item =>
             shallowequal(item.address, props.address)) :
         0;
-
-    const results = getQueryMatches.matches !== 0 ?
-        <h3>{20 * props.currentPage} of {getQueryMatches.matches} matches</h3> :
-        <h3>Nothing found, try another query</h3>;
+    const results = getQueryMatches && getQueryMatches.matches !== 0 ?
+        <SuccessHeader
+            matches={getQueryMatches.matches}
+            currentPage={props.currentPage}
+        /> :
+        <FailHeader />;
 
     return (
         <div>
-            {results}
+            { results }
         </div>
     );
 };
