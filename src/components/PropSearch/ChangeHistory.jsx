@@ -7,8 +7,8 @@ export default url => WrappedComponent => {
             router: PropTypes.object.isRequired
         };
 
-        historyPush = coordinates => {
-            this.context.router.history.push(`${url}${coordinates}`);
+        historyPush = (query = '') => {
+            this.context.router.history.push(`${url}${query}`);
         }
 
         render() {
