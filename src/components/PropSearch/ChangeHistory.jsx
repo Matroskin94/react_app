@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-export default url => ConnectHistory => {
+export default url => WrappedComponent => {
     class ChangeHistory extends PureComponent {
         static contextTypes = {
             router: PropTypes.object.isRequired
@@ -12,7 +12,7 @@ export default url => ConnectHistory => {
         }
 
         render() {
-            return <ConnectHistory
+            return <WrappedComponent
                 {...this.props}
                 historyPush={this.historyPush}
             />;

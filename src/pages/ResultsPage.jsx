@@ -2,14 +2,15 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import shallowequal from 'shallowequal';
+import queryString from 'query-string';
 import Results from '../components/SearchResults/ResultLocations.jsx';
 import SearchHeader from '../components/SearchResults/Header.jsx';
 import { noop } from '../utils/SearchUtils';
 import { searchAction } from '../actions/SearchActions';
 import { chooseLocationsAction, clearResultsAction } from '../actions/LocationActions';
-import ChangeLinks from '../components/SearchResults/ChangeLinks.jsx';
+import ParseURL from '../components/SearchResults/ParseURL.jsx';
 
-@ChangeLinks()
+@ParseURL()
 class ResultsPage extends PureComponent {
     static propTypes = {
         queryRessults: PropTypes.array,
@@ -17,7 +18,7 @@ class ResultsPage extends PureComponent {
         loadQueryResults: PropTypes.func,
         loadQuery: PropTypes.func,
         clearResults: PropTypes.func,
-        getURLParams: PropTypes.func, // Метод из декоратора ChangeLinks для получения параметров поиска из URL
+        getURLParams: PropTypes.func, // Метод из декоратора ParseURL для получения параметров loaction
         currentPage: PropTypes.number,
         isLoading: PropTypes.bool
     };
@@ -34,7 +35,8 @@ class ResultsPage extends PureComponent {
     };
 
     componentDidMount() {
-        const searchProperty = this.props.getURLParams();
+        const searchQuery = this.props.getURLParams(['search']);
+        const searchProperty = queryString.parse(searchQuery.search);
 
         this.props.loadQuery(searchProperty);
         this.props.loadQueryResults(searchProperty);
