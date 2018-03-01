@@ -21,7 +21,7 @@ class ResultQueries extends PureComponent {
                     const place = queryString.stringify(address);
 
                     return (
-                        <div key={matches}>
+                        <div key={matches + place}>
                             <Link to={`/results/?${place}`}>
                                 {address.place_name || address.centre_point}: {matches}
                             </Link>

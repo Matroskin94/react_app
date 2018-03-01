@@ -7,9 +7,9 @@ import SearchHeader from '../components/SearchResults/Header.jsx';
 import { noop } from '../utils/SearchUtils';
 import { searchAction } from '../actions/SearchActions';
 import { chooseLocationsAction, clearResultsAction } from '../actions/LocationActions';
-import ChangeHistory from '../components/PropSearch/ChangeHistory.jsx';
+import ChangeLinks from '../components/SearchResults/ChangeLinks.jsx';
 
-@ChangeHistory()
+@ChangeLinks()
 class ResultsPage extends PureComponent {
     static propTypes = {
         queryRessults: PropTypes.array,
@@ -17,7 +17,7 @@ class ResultsPage extends PureComponent {
         loadQueryResults: PropTypes.func,
         loadQuery: PropTypes.func,
         clearResults: PropTypes.func,
-        getURLParams: PropTypes.func,
+        getURLParams: PropTypes.func, // Метод из декоратора ChangeLinks для получения параметров поиска из URL
         currentPage: PropTypes.number,
         isLoading: PropTypes.bool
     };
