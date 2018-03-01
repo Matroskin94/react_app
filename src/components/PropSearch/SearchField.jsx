@@ -1,19 +1,20 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { chooseLocationsAction } from '../../actions/LocationActions';
+import { searchAction } from '../../actions/SearchActions';
 import { geolocationService } from '../../actions/ActionService';
 import { initFavoritesAction } from '../../actions/FavoriteActions';
 import ResultQueries from './ResultQueries.jsx';
 import ChangeHistory from './ChangeHistory.jsx';
 import { noop } from '../../utils/SearchUtils';
 
-@ChangeHistory('/results/?centre_point=')
+@ChangeHistory('/results/?')
 class Searchfield extends PureComponent {
     static propTypes = {
         historyPush: PropTypes.func, // Метод из декоратора ChangeHistory для перехода по ссылке
         getFavoritesFromLocal: PropTypes.func,
+        loadQuery: PropTypes.func,
         queries: PropTypes.array,
         isFavoritesLoaded: PropTypes.bool
     };
@@ -21,6 +22,7 @@ class Searchfield extends PureComponent {
     static defaultProps = {
         historyPush: noop,
         getFavoritesFromLocal: noop,
+        loadQuery: noop,
         queries: [],
         isFavoritesLoaded: false
     };
@@ -35,9 +37,14 @@ class Searchfield extends PureComponent {
         }
     }
 
+    handleGoClick = () => {
+        this.props.loadQuery({ place_name: this.state.inputValue });
+        this.props.historyPush(`place_name=${this.state.inputValue}`);
+    }
+
     handleLocationClick = () => {
         geolocationService().then(result => {
-            this.props.historyPush(result);
+            this.props.historyPush(`centre_point=${result}`);
         });
     }
 
@@ -51,9 +58,7 @@ class Searchfield extends PureComponent {
                     type='text'
                     value={this.state.inputValue}
                 />
-                <button>
-                    <Link to={`/results/?place_name=${this.state.inputValue}`}>Go</Link>
-                </button>
+                <button onClick={this.handleGoClick}>Go</button>
                 <button onClick={this.handleLocationClick}> My Location</button>
                 <ResultQueries results={this.props.queries} />
             </div>
@@ -72,6 +77,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        loadQuery: place => dispatch(searchAction(place)),
         chooseQuery: (query, page) => dispatch(chooseLocationsAction(query, page)),
         getFavoritesFromLocal: () => dispatch(initFavoritesAction())
 

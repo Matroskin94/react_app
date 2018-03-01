@@ -25,6 +25,12 @@ export const searchAction = searchProperty =>
         }
     })
         .then(response => {
+            const currentQuery = {
+                address: searchProperty,
+                matches: response.data.response.total_results
+            };
+
+            localStorage.setItem('currentQuery', JSON.stringify(currentQuery));
             dispatch(searchResultAction({
                 address: searchProperty,
                 matches: response.data.response.total_results

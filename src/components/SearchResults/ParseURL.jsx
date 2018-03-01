@@ -17,6 +17,10 @@ export default () => WrappedComponent => {
             paramsArray.forEach(item => {
                 resObject[item] = this.props.location[item];
             });
+
+            if (resObject.search) {
+                resObject.search = queryString.parse(resObject.search);
+            }
             return resObject;
         }
 

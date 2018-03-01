@@ -1,11 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import shallowequal from 'shallowequal';
 import Results from '../components/SearchResults/ResultLocations.jsx';
 import SearchHeader from '../components/SearchResults/Header.jsx';
 import { noop } from '../utils/SearchUtils';
-import { searchAction } from '../actions/SearchActions';
 import { chooseLocationsAction, clearResultsAction } from '../actions/LocationActions';
 import ParseURL from '../components/SearchResults/ParseURL.jsx';
 
@@ -13,51 +11,36 @@ import ParseURL from '../components/SearchResults/ParseURL.jsx';
 class ResultsPage extends PureComponent {
     static propTypes = {
         queryRessults: PropTypes.array,
-        queries: PropTypes.array,
         loadQueryResults: PropTypes.func,
-        loadQuery: PropTypes.func,
         clearResults: PropTypes.func,
         getURLParams: PropTypes.func, // Метод из декоратора ParseURL для получения параметров loaction
-        parseURL: PropTypes.func, // Метод из декоратора ParseURL для преобразования URL в объект
         currentPage: PropTypes.number,
         isLoading: PropTypes.bool
     };
 
     static defaultProps = {
         queryRessults: [],
-        queries: [],
         clearResults: noop,
         loadQueryResults: noop,
-        loadQuery: noop,
         getURLParams: noop,
-        parseURL: noop,
         currentPage: 1,
         isLoading: false
     };
 
     componentDidMount() {
-        const searchQuery = this.props.getURLParams(['search']);
-        const searchProperty = this.props.parseURL(searchQuery.search);
-
-        this.props.loadQuery(searchProperty);
-        this.props.loadQueryResults(searchProperty);
+        const searchProperty = this.props.getURLParams(['search']);
+        this.props.loadQueryResults(searchProperty.search);
     }
 
     componentWillUnmount() {
         this.props.clearResults();
     }
 
-    getQueryMatches = () => {
-        const address = this.props.getURLParams(['search']).search;
-        const resultItem = this.props.queries.find(item =>
-            shallowequal(item.address, address));
-
-        return resultItem ? resultItem.matches : 0;
-    }
+    getQueryMatches = () => JSON.parse(localStorage.getItem('currentQuery')).matches
 
     handleScroll = () => {
         const property = this.props.getURLParams(['search']).search;
-        console.log('scroll');
+
         if (document.body.scrollHeight - document.body.clientHeight === window.scrollY && !this.props.isLoading) {
             this.props.loadQueryResults(property, this.props.currentPage + 1);
         }
@@ -79,7 +62,6 @@ class ResultsPage extends PureComponent {
 
 function mapStateToProps(state) {
     return {
-        queries: state.searchReducer.queries,
         queryRessults: state.searchReducer.queryRessults,
         currentPage: state.searchReducer.currentPage,
         isLoading: state.searchReducer.isLoading
@@ -89,7 +71,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         clearResults: () => dispatch(clearResultsAction()),
-        loadQuery: place => dispatch(searchAction(place)),
         loadQueryResults: (query, page) => dispatch(chooseLocationsAction(query, page))
     };
 }

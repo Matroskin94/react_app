@@ -1,19 +1,13 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import queryString from 'query-string';
 import { Link } from 'react-router-dom';
-import ParseURL from '../SearchResults/ParseURL.jsx';
-import { noop } from '../../utils/SearchUtils';
 
-@ParseURL()
 class ResultQueries extends PureComponent {
     static propTypes = {
-        results: PropTypes.array,
-        stringifyObject: PropTypes.func
+        results: PropTypes.array
     };
     static defaultProps = {
-        results: [],
-        stringifyObject: noop
+        results: []
     };
 
     render() {
@@ -23,14 +17,18 @@ class ResultQueries extends PureComponent {
             <div>
                 <p>Ricent Queries:</p>
                 {results.map(({ address, matches } = {}) => {
-                    const place = this.props.stringifyObject(address);
+                    const { place_name: placeName, centre_point: centrePoint } = address;
+                    let link = null;
 
-                    return (
-                        <div key={matches + place}>
-                            <Link to={`/results/?${place}`}>
-                                {address.place_name || address.centre_point}: {matches}
-                            </Link>
-                        </div>);
+                    if (placeName) {
+                        link = <Link to={`/results/?place_name=${placeName}`}> {placeName} : {matches} </Link>;
+                    }
+
+                    if (centrePoint) {
+                        link = <Link to={`/results/?centre_point=${centrePoint}`}> {centrePoint} : {matches} </Link>;
+                    }
+
+                    return <div key={matches + centrePoint || placeName}>{link}</div>;
                 })}
             </div>
         );
