@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import queryString from 'query-string';
 
 export default () => WrappedComponent => {
     class ParseURL extends PureComponent {
@@ -19,10 +20,16 @@ export default () => WrappedComponent => {
             return resObject;
         }
 
+        parseURL = url => queryString.parse(url)
+
+        stringifyObject = obj => queryString.stringify(obj);
+
         render() {
             return <WrappedComponent
                 {...this.props}
                 getURLParams={this.getURLParams}
+                parseURL={this.parseURL}
+                stringifyObject={this.stringifyObject}
             />;
         }
     }

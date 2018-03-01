@@ -2,13 +2,18 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import { Link } from 'react-router-dom';
+import ParseURL from '../SearchResults/ParseURL.jsx';
+import { noop } from '../../utils/SearchUtils';
 
+@ParseURL()
 class ResultQueries extends PureComponent {
     static propTypes = {
-        results: PropTypes.array
+        results: PropTypes.array,
+        stringifyObject: PropTypes.func
     };
     static defaultProps = {
-        results: []
+        results: [],
+        stringifyObject: noop
     };
 
     render() {
@@ -18,7 +23,7 @@ class ResultQueries extends PureComponent {
             <div>
                 <p>Ricent Queries:</p>
                 {results.map(({ address, matches } = {}) => {
-                    const place = queryString.stringify(address);
+                    const place = this.props.stringifyObject(address);
 
                     return (
                         <div key={matches + place}>

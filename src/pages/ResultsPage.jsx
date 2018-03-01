@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import shallowequal from 'shallowequal';
-import queryString from 'query-string';
 import Results from '../components/SearchResults/ResultLocations.jsx';
 import SearchHeader from '../components/SearchResults/Header.jsx';
 import { noop } from '../utils/SearchUtils';
@@ -19,6 +18,7 @@ class ResultsPage extends PureComponent {
         loadQuery: PropTypes.func,
         clearResults: PropTypes.func,
         getURLParams: PropTypes.func, // Метод из декоратора ParseURL для получения параметров loaction
+        parseURL: PropTypes.func, // Метод из декоратора ParseURL для преобразования URL в объект
         currentPage: PropTypes.number,
         isLoading: PropTypes.bool
     };
@@ -30,13 +30,14 @@ class ResultsPage extends PureComponent {
         loadQueryResults: noop,
         loadQuery: noop,
         getURLParams: noop,
+        parseURL: noop,
         currentPage: 1,
         isLoading: false
     };
 
     componentDidMount() {
         const searchQuery = this.props.getURLParams(['search']);
-        const searchProperty = queryString.parse(searchQuery.search);
+        const searchProperty = this.props.parseURL(searchQuery.search);
 
         this.props.loadQuery(searchProperty);
         this.props.loadQueryResults(searchProperty);
@@ -47,7 +48,7 @@ class ResultsPage extends PureComponent {
     }
 
     getQueryMatches = () => {
-        const address = this.props.getURLParams();
+        const address = this.props.getURLParams(['search']).search;
         const resultItem = this.props.queries.find(item =>
             shallowequal(item.address, address));
 
@@ -55,8 +56,8 @@ class ResultsPage extends PureComponent {
     }
 
     handleScroll = () => {
-        const property = this.props.getURLParams();
-
+        const property = this.props.getURLParams(['search']).search;
+        console.log('scroll');
         if (document.body.scrollHeight - document.body.clientHeight === window.scrollY && !this.props.isLoading) {
             this.props.loadQueryResults(property, this.props.currentPage + 1);
         }
