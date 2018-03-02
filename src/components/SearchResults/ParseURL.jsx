@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import queryString from 'query-string';
 
 export default () => WrappedComponent => {
-    class Parser extends PureComponent {
+    class ParseURL extends PureComponent {
         static propTypes = {
             location: PropTypes.object
         };
@@ -24,8 +24,6 @@ export default () => WrappedComponent => {
             return resObject;
         }
 
-        parseQuery = () => JSON.parse(localStorage.getItem('currentQuery')).matches
-
         render() {
             return <WrappedComponent
                 {...this.props}
@@ -35,5 +33,5 @@ export default () => WrappedComponent => {
         }
     }
 
-    return Parser;
+    return ParseURL;
 };

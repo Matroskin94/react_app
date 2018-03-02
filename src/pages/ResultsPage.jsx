@@ -5,34 +5,38 @@ import Results from '../components/SearchResults/ResultLocations.jsx';
 import SearchHeader from '../components/SearchResults/Header.jsx';
 import { noop } from '../utils/SearchUtils';
 import { chooseLocationsAction, clearResultsAction } from '../actions/LocationActions';
-import Parser from '../components/SearchResults/Parser.jsx';
+import { getCurrentQueryInfoAction } from '../actions/SearchActions';
+import ParseURL from '../components/SearchResults/ParseURL.jsx';
 
-@Parser()
+@ParseURL()
 class ResultsPage extends PureComponent {
     static propTypes = {
         queryRessults: PropTypes.array,
-        loadQueryResults: PropTypes.func,
+        searchResults: PropTypes.func,
         clearResults: PropTypes.func,
-        parseQuery: PropTypes.func, // Метод из декоратора Parser для парсинга данных о запросе
-        getURLParams: PropTypes.func, // Метод из декоратора Parser для получения параметров loaction
+        getQueryFromLocalStorage: PropTypes.func, 
+        getURLParams: PropTypes.func, // Метод из декоратора ParseURL для получения параметров loaction
         currentPage: PropTypes.number,
+        currentQueryInfo: PropTypes.object,
         isLoading: PropTypes.bool
     };
 
     static defaultProps = {
         queryRessults: [],
         clearResults: noop,
-        loadQueryResults: noop,
-        parseQuery: noop,
+        searchResults: noop,
+        getQueryFromLocalStorage: noop,
         getURLParams: noop,
         currentPage: 1,
+        currentQueryInfo:{},
         isLoading: false
     };
 
     componentDidMount() {
         const searchProperty = this.props.getURLParams(['search']);
 
-        this.props.loadQueryResults(searchProperty.search);
+        this.props.searchResults(searchProperty.search);
+        this.props.getQueryFromLocalStorage('currentQuery');
     }
 
     componentWillUnmount() {
@@ -43,7 +47,7 @@ class ResultsPage extends PureComponent {
         const property = this.props.getURLParams(['search']).search;
 
         if (document.body.scrollHeight - document.body.clientHeight === window.scrollY && !this.props.isLoading) {
-            this.props.loadQueryResults(property, this.props.currentPage + 1);
+            this.props.searchResults(property, this.props.currentPage + 1);
         }
     }
 
@@ -52,7 +56,7 @@ class ResultsPage extends PureComponent {
             <div>
                 <SearchHeader
                     isResultsEmpty={this.props.queryRessults.length === 0}
-                    matches={this.props.parseQuery()}
+                    currentQueryInfo={this.props.currentQueryInfo}
                     currentPage={this.props.currentPage}
                 />
                 <Results results={this.props.queryRessults} />
@@ -63,6 +67,7 @@ class ResultsPage extends PureComponent {
 
 function mapStateToProps(state) {
     return {
+        currentQueryInfo: state.searchReducer.currentQueryInfo,
         queryRessults: state.searchReducer.queryRessults,
         currentPage: state.searchReducer.currentPage,
         isLoading: state.searchReducer.isLoading
@@ -71,8 +76,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        getQueryFromLocalStorage: itemKey => dispatch(getCurrentQueryInfoAction(itemKey)),
         clearResults: () => dispatch(clearResultsAction()),
-        loadQueryResults: (query, page) => dispatch(chooseLocationsAction(query, page))
+        searchResults: (query, page) => dispatch(chooseLocationsAction(query, page))
     };
 }
 
