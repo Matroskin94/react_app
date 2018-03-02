@@ -32,10 +32,15 @@ class ResultsPage extends PureComponent {
         isLoading: false
     };
 
-    componentDidMount() {
-        const searchProperty = this.props.getURLParams(['search']);
+    state = {
+        searchProperty: {}
+    };
 
-        this.props.searchResults(searchProperty.search);
+    componentDidMount() {
+        const searchProperty = this.props.getURLParams(['search']).search;
+
+        this.setState({searchProperty});
+        this.props.searchResults(searchProperty);
         this.props.getQueryFromLocalStorage('currentQuery');
     }
 
@@ -44,10 +49,10 @@ class ResultsPage extends PureComponent {
     }
 
     handleScroll = () => {
-        const property = this.props.getURLParams(['search']).search;
+        const property = this.state.searchProperty;
 
         if (document.body.scrollHeight - document.body.clientHeight === window.scrollY && !this.props.isLoading) {
-            this.props.searchResults(property, this.props.currentPage + 1);
+            this.props.searchResults(this.state.searchProperty, this.props.currentPage + 1);
         }
     }
 
