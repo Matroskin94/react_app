@@ -9,7 +9,7 @@ import ResultQueries from './ResultQueries.jsx';
 import ChangeHistory from './ChangeHistory.jsx';
 import { noop } from '../../utils/SearchUtils';
 
-@ChangeHistory('/results/?')
+@ChangeHistory()
 class Searchfield extends PureComponent {
     static propTypes = {
         historyPush: PropTypes.func, // Метод из декоратора ChangeHistory для перехода по ссылке
@@ -39,12 +39,12 @@ class Searchfield extends PureComponent {
 
     handleGoClick = () => {
         this.props.loadQuery({ place_name: this.state.inputValue });
-        this.props.historyPush(`place_name=${this.state.inputValue}`);
+        this.props.historyPush({ url: '/results/?', query: `place_name=${this.state.inputValue}` });
     }
 
     handleLocationClick = () => {
         geolocationService().then(result => {
-            this.props.historyPush(`centre_point=${result}`);
+            this.props.historyPush({ url: '/results/?', query: `centre_point=${result}` });
         });
     }
 

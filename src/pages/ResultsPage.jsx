@@ -5,15 +5,16 @@ import Results from '../components/SearchResults/ResultLocations.jsx';
 import SearchHeader from '../components/SearchResults/Header.jsx';
 import { noop } from '../utils/SearchUtils';
 import { chooseLocationsAction, clearResultsAction } from '../actions/LocationActions';
-import ParseURL from '../components/SearchResults/ParseURL.jsx';
+import Parser from '../components/SearchResults/Parser.jsx';
 
-@ParseURL()
+@Parser()
 class ResultsPage extends PureComponent {
     static propTypes = {
         queryRessults: PropTypes.array,
         loadQueryResults: PropTypes.func,
         clearResults: PropTypes.func,
-        getURLParams: PropTypes.func, // Метод из декоратора ParseURL для получения параметров loaction
+        parseQuery: PropTypes.func, // Метод из декоратора Parser для парсинга данных о запросе
+        getURLParams: PropTypes.func, // Метод из декоратора Parser для получения параметров loaction
         currentPage: PropTypes.number,
         isLoading: PropTypes.bool
     };
@@ -22,6 +23,7 @@ class ResultsPage extends PureComponent {
         queryRessults: [],
         clearResults: noop,
         loadQueryResults: noop,
+        parseQuery: noop,
         getURLParams: noop,
         currentPage: 1,
         isLoading: false
@@ -29,14 +31,13 @@ class ResultsPage extends PureComponent {
 
     componentDidMount() {
         const searchProperty = this.props.getURLParams(['search']);
+
         this.props.loadQueryResults(searchProperty.search);
     }
 
     componentWillUnmount() {
         this.props.clearResults();
     }
-
-    getQueryMatches = () => JSON.parse(localStorage.getItem('currentQuery')).matches
 
     handleScroll = () => {
         const property = this.props.getURLParams(['search']).search;
@@ -51,7 +52,7 @@ class ResultsPage extends PureComponent {
             <div>
                 <SearchHeader
                     isResultsEmpty={this.props.queryRessults.length === 0}
-                    matches={this.getQueryMatches()}
+                    matches={this.props.parseQuery()}
                     currentPage={this.props.currentPage}
                 />
                 <Results results={this.props.queryRessults} />
