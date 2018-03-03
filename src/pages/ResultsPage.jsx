@@ -8,7 +8,7 @@ import { chooseLocationsAction, clearResultsAction } from '../actions/LocationAc
 import { getCurrentQueryInfoAction } from '../actions/SearchActions';
 import ParseURL from '../components/SearchResults/ParseURL.jsx';
 
-//@ParseURL()
+@ParseURL()
 class ResultsPage extends PureComponent {
     static propTypes = {
         queryRessults: PropTypes.array,
