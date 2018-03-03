@@ -14,7 +14,7 @@ class ResultsPage extends PureComponent {
         queryRessults: PropTypes.array,
         searchResults: PropTypes.func,
         clearResults: PropTypes.func,
-        getQueryFromLocalStorage: PropTypes.func, 
+        getQueryFromLocalStorage: PropTypes.func,
         getURLParams: PropTypes.func, // Метод из декоратора ParseURL для получения параметров loaction
         currentPage: PropTypes.number,
         currentQueryInfo: PropTypes.object,
@@ -28,7 +28,7 @@ class ResultsPage extends PureComponent {
         getQueryFromLocalStorage: noop,
         getURLParams: noop,
         currentPage: 1,
-        currentQueryInfo:{},
+        currentQueryInfo: {},
         isLoading: false
     };
 
@@ -36,11 +36,13 @@ class ResultsPage extends PureComponent {
         searchProperty: {}
     };
 
-    componentDidMount() {
-        const searchProperty = this.props.getURLParams(['search']).search;
+    constructor(props) {
+        super(props);
+        this.state.searchProperty = props.getURLParams(['search']).search;
+    }
 
-        this.setState({searchProperty});
-        this.props.searchResults(searchProperty);
+    componentDidMount() {
+        this.props.searchResults(this.state.searchProperty);
         this.props.getQueryFromLocalStorage('currentQuery');
     }
 
@@ -49,8 +51,6 @@ class ResultsPage extends PureComponent {
     }
 
     handleScroll = () => {
-        const property = this.state.searchProperty;
-
         if (document.body.scrollHeight - document.body.clientHeight === window.scrollY && !this.props.isLoading) {
             this.props.searchResults(this.state.searchProperty, this.props.currentPage + 1);
         }
