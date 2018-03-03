@@ -4,18 +4,15 @@ import queryString from 'query-string';
 
 export default () => WrappedComponent => {
     class ParseURL extends PureComponent {
-        static propTypes = {
-            location: PropTypes.object
-        };
-        static defaultProps = {
-            location: {}
+        static contextTypes = {
+            router: PropTypes.object.isRequired
         };
 
         getURLParams = (paramsArray = []) => {
             const resObject = {};
 
             paramsArray.forEach(item => {
-                resObject[item] = this.props.location[item];
+                resObject[item] = this.context.router.history.location[item];
             });
 
             if (resObject.search) {
