@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GO_PRESSED, LOADING_STARTED } from '../constants/constants';
+import { GO_PRESSED, LOADING_STARTED, QUERY_DATA_FROM_LOCAL } from '../constants/constants';
 import { API_LINK, COUNTRY_UK, PRETTY_1, ACTION_SEARCH_LISTINGS, ENCODING_JSON, LISTING_TYPE_BUY } from '../constants/queryConstants';
 
 export const searchResultAction = data => ({
@@ -10,6 +10,11 @@ export const searchResultAction = data => ({
 export const loadingAction = data => ({
     type: LOADING_STARTED,
     payload: data
+});
+
+export const getCurrentQueryInfoAction = data => ({
+    type: QUERY_DATA_FROM_LOCAL,
+    payload: JSON.parse(localStorage.getItem(data))
 });
 
 export const searchAction = searchProperty =>
@@ -25,9 +30,12 @@ export const searchAction = searchProperty =>
         }
     })
         .then(response => {
-            dispatch(searchResultAction({
-                ...searchProperty,
-                resultsNum: response.data.response.total_results
-            }));
+            const currentQuery = {
+                address: searchProperty,
+                matches: response.data.response.total_results
+            };
+
+            localStorage.setItem('currentQuery', JSON.stringify(currentQuery));
+            dispatch(searchResultAction(currentQuery));
         });
 

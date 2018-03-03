@@ -6,27 +6,46 @@ import { noop } from '../../utils/SearchUtils';
 class ResultQueries extends PureComponent {
     static propTypes = {
         results: PropTypes.array,
-        onItemClick: PropTypes.func
+        onHandleLinkClick: PropTypes.func
     };
     static defaultProps = {
         results: [],
-        onItemClick: noop
+        onHandleLinkClick: noop
     };
-    onQueryClicked = address => () => {
-        this.props.onItemClick(address);
-    };
+    handleLinkClick = prop => () => {
+        this.props.onHandleLinkClick(prop);
+    }
+
     render() {
         const { results } = this.props;
 
         return (
             <div>
                 <p>Ricent Queries:</p>
-                {results.map(({ address, matches, locationBased } = {}) =>
-                    <div key={matches}>
-                        <Link onClick={this.onQueryClicked(address)} to={`/results/?address=${address}&locationBased=${locationBased}`}>
-                            {address}: {matches}
-                        </Link>
-                    </div>)}
+                {results.map(({ address, matches } = {}) => {
+                    const { place_name: placeName, centre_point: centrePoint } = address;
+                    let link = null;
+
+                    if (placeName) {
+                        link =
+                            <Link
+                                onClick={this.handleLinkClick({ place_name: placeName })}
+                                to={`/results/?place_name=${placeName}`}
+                            > {placeName} : {matches}
+                            </Link>;
+                    }
+
+                    if (centrePoint) {
+                        link =
+                            <Link
+                                onClick={this.handleLinkClick({ centre_point: centrePoint })}
+                                to={`/results/?centre_point=${centrePoint}`}
+                            > {centrePoint} : {matches}
+                            </Link>;
+                    }
+
+                    return <div key={matches + centrePoint || placeName}>{link}</div>;
+                })}
             </div>
         );
     }

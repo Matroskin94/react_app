@@ -18,14 +18,14 @@ export const clearResultsAction = () => ({
 export const getLocationAction = geolocation =>
     dispatch => {
         geolocation.then(resolve => {
-            const searchObject = { centre_point: resolve, locationBased: true };
+            const searchObject = { centre_point: resolve };
 
             return dispatch(searchAction(dispatch)(searchObject));
         });
     };
 
 
-export const chooseLocationsAction = (searchProperty, currentPage) =>
+export const chooseLocationsAction = (searchProperty, currentPage = 1) =>
     dispatch => {
         dispatch(loadingAction(true));
         axios.get(API_LINK, {

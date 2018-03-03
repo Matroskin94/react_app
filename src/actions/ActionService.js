@@ -1,13 +1,10 @@
+import shallowequal from 'shallowequal';
+
 export function rebuildQueriesList(queries, query) {
-    const searchProperty = query.place_name ? query.place_name : query.centre_point;
-    const currentQuery = queries.find(element => element.address === searchProperty);
+    const currentQuery = queries.find(element => shallowequal(element.address, query.address));
     const queryList = currentQuery ?
-        [currentQuery, ...queries.filter(item => currentQuery !== item)] :
-        [{
-            address: searchProperty,
-            matches: query.resultsNum,
-            locationBased: query.locationBased
-        }, ...queries];
+        [currentQuery, ...queries.filter(item => !shallowequal(currentQuery.address, item.address))] :
+        [query, ...queries];
 
     return queryList;
 }
