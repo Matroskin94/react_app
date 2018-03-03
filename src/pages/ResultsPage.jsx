@@ -8,7 +8,7 @@ import { chooseLocationsAction, clearResultsAction } from '../actions/LocationAc
 import { getCurrentQueryInfoAction } from '../actions/SearchActions';
 import ParseURL from '../components/SearchResults/ParseURL.jsx';
 
-@ParseURL()
+//@ParseURL()
 class ResultsPage extends PureComponent {
     static propTypes = {
         queryRessults: PropTypes.array,
@@ -32,13 +32,11 @@ class ResultsPage extends PureComponent {
         isLoading: false
     };
 
-    state = {
-        searchProperty: {}
-    };
-
     constructor(props) {
         super(props);
-        this.state.searchProperty = props.getURLParams(['search']).search;
+        this.state = {
+            searchProperty: props.getURLParams(['search']).search || {}
+        };
     }
 
     componentDidMount() {
@@ -49,10 +47,6 @@ class ResultsPage extends PureComponent {
 
     componentWillUnmount() {
         window.removeEventListener('scroll', this.handleScroll, false);
-        this.props.clearResults();
-    }
-
-    componentWillUnmount() {
         this.props.clearResults();
     }
 

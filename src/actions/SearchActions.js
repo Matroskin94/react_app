@@ -36,9 +36,6 @@ export const searchAction = searchProperty =>
             };
 
             localStorage.setItem('currentQuery', JSON.stringify(currentQuery));
-            dispatch(searchResultAction({
-                address: searchProperty,
-                matches: response.data.response.total_results
-            }));
+            dispatch(searchResultAction(currentQuery));
         });
 

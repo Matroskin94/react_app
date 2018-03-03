@@ -1,14 +1,20 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { noop } from '../../utils/SearchUtils';
 
 class ResultQueries extends PureComponent {
     static propTypes = {
-        results: PropTypes.array
+        results: PropTypes.array,
+        onHandleLinkClick: PropTypes.func
     };
     static defaultProps = {
-        results: []
+        results: [],
+        onHandleLinkClick: noop
     };
+    handleLinkClick = prop => () => {
+        this.props.onHandleLinkClick(prop);
+    }
 
     render() {
         const { results } = this.props;
@@ -21,11 +27,21 @@ class ResultQueries extends PureComponent {
                     let link = null;
 
                     if (placeName) {
-                        link = <Link to={`/results/?place_name=${placeName}`}> {placeName} : {matches} </Link>;
+                        link =
+                            <Link
+                                onClick={this.handleLinkClick({ place_name: placeName })}
+                                to={`/results/?place_name=${placeName}`}
+                            > {placeName} : {matches}
+                            </Link>;
                     }
 
                     if (centrePoint) {
-                        link = <Link to={`/results/?centre_point=${centrePoint}`}> {centrePoint} : {matches} </Link>;
+                        link =
+                            <Link
+                                onClick={this.handleLinkClick({ centre_point: centrePoint })}
+                                to={`/results/?centre_point=${centrePoint}`}
+                            > {centrePoint} : {matches}
+                            </Link>;
                     }
 
                     return <div key={matches + centrePoint || placeName}>{link}</div>;
