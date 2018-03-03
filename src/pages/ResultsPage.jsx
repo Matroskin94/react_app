@@ -44,6 +44,12 @@ class ResultsPage extends PureComponent {
     componentDidMount() {
         this.props.searchResults(this.state.searchProperty);
         this.props.getQueryFromLocalStorage('currentQuery');
+        window.addEventListener('scroll', this.handleScroll, false);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.handleScroll, false);
+        this.props.clearResults();
     }
 
     componentWillUnmount() {
@@ -51,7 +57,7 @@ class ResultsPage extends PureComponent {
     }
 
     handleScroll = () => {
-        if (document.body.scrollHeight - document.body.clientHeight === window.scrollY && !this.props.isLoading) {
+        if (document.body.scrollHeight - document.body.clientHeight < window.scrollY + 300 && !this.props.isLoading) {
             this.props.searchResults(this.state.searchProperty, this.props.currentPage + 1);
         }
     }
@@ -64,6 +70,7 @@ class ResultsPage extends PureComponent {
                     currentQueryInfo={this.props.currentQueryInfo}
                     currentPage={this.props.currentPage}
                 />
+
                 <Results results={this.props.queryRessults} />
             </div>
         );
