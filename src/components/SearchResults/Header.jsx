@@ -7,10 +7,9 @@ const Header = props => {
     const headerText = props.isLoading ?
         <LoadingHeader /> :
         <ResultsHeader
-            queries={props.queries}
-            address={props.address}
+            resultsLength={props.resultsLength}
+            currentQueryInfo={props.currentQueryInfo}
             currentPage={props.currentPage}
-            isResultsEmpty={props.isResultsEmpty}
         />;
 
     return (
@@ -21,19 +20,17 @@ const Header = props => {
 };
 
 Header.propTypes = {
-    queries: PropTypes.array,
-    address: PropTypes.object,
+    currentQueryInfo: PropTypes.object,
     currentPage: PropTypes.number,
-    isResultsEmpty: PropTypes.bool,
-    isLoading: PropTypes.bool
+    isLoading: PropTypes.bool,
+    resultsLength: PropTypes.number
 };
 
 Header.defaultProps = {
-    queries: [],
-    address: {},
+    currentQueryInfo: {},
     currentPage: 1,
-    isResultsEmpty: true,
-    isLoading: true
+    isLoading: true,
+    resultsLength: 0
 };
 
 export default Header;

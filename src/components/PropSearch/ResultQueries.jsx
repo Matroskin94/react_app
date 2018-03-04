@@ -1,15 +1,21 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import queryString from 'query-string';
 import { Link } from 'react-router-dom';
+import { noop } from '../../utils/SearchUtils';
 
 class ResultQueries extends PureComponent {
     static propTypes = {
-        results: PropTypes.array
+        results: PropTypes.array,
+        onLinkClick: PropTypes.func
     };
     static defaultProps = {
-        results: []
+        results: [],
+        onLinkClick: noop
     };
+    handleLinkClick = (propObject, propString) => e => {
+        e.preventDefault();
+        this.props.onLinkClick(propObject, propString);
+    }
 
     render() {
         const { results } = this.props;
@@ -17,12 +23,30 @@ class ResultQueries extends PureComponent {
         return (
             <div>
                 <p>Ricent Queries:</p>
-                {results.map(({ address, matches } = {}) =>
-                    <div key={matches}>
-                        <Link to={`/results/?${queryString.stringify(address)}`}>
-                            {address.place_name || address.centre_point}: {matches}
-                        </Link>
-                    </div>)}
+                {results.map(({ address, matches } = {}) => {
+                    const { place_name: placeName, centre_point: centrePoint } = address;
+                    let link = null;
+
+                    if (placeName) {
+                        link =
+                            <Link
+                                onClick={this.handleLinkClick({ place_name: placeName }, `place_name=${placeName}`)}
+                                to={`/results/?place_name=${placeName}`}
+                            > {placeName} : {matches}
+                            </Link>;
+                    }
+
+                    if (centrePoint) {
+                        link =
+                            <Link
+                                onClick={this.handleLinkClick({ centre_point: centrePoint }, `centre_point=${centrePoint}`)}
+                                to={`/results/?centre_point=${centrePoint}`}
+                            > {centrePoint} : {matches}
+                            </Link>;
+                    }
+
+                    return <div key={matches + centrePoint || placeName}>{link}</div>;
+                })}
             </div>
         );
     }
