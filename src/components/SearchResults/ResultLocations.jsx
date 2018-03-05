@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import styles from '../../styles/ResultLocations.css';
+import styles from './ResultLocations.css';
 import goDetailsAction from '../../actions/DetailsActions';
 import { noop } from '../../utils/SearchUtils';
 

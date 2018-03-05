@@ -1,5 +1,5 @@
 import React from 'react';
-import loadingAnimation from '../../styles/LoadingAnimation.css';
+import loadingAnimation from './LoadingAnimation.css';
 
 const LoadingHeader = () => (
     <div className={loadingAnimation.spinner}>
