@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import ResultsHeader from './ResultsHeader.jsx';
 import LoadingHeader from './LoadingHeader.jsx';
 
-const Header = props => {
-    const headerText = props.isLoading ?
+const Header = ({
+    isLoading, resultsLength, currentQueryInfo, currentPage
+}) => {
+    const headerText = isLoading ?
         <LoadingHeader /> :
         <ResultsHeader
-            resultsLength={props.resultsLength}
-            currentQueryInfo={props.currentQueryInfo}
-            currentPage={props.currentPage}
+            resultsLength={resultsLength}
+            currentQueryInfo={currentQueryInfo}
+            currentPage={currentPage}
         />;
 
     return (

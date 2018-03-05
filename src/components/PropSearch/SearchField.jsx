@@ -50,9 +50,9 @@ class Searchfield extends PureComponent {
 
     handleInputChange = event => this.setState({ inputValue: event.target.value });
 
-    handleLinkClick = (propertyObj, propertyString) => {
-        this.props.loadQuery(propertyObj);
-        this.props.historyPush({ url: '/results/?', query: propertyString });
+    handleLinkClick = (propertyAsString, propertyAsObject) => {
+        this.props.loadQuery(propertyAsString);
+        this.props.historyPush({ url: '/results/?', query: propertyAsObject });
     }
 
     render() {

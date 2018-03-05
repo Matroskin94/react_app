@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-
 export default () => WrappedComponent => {
     class ChangeHistory extends PureComponent {
         static contextTypes = {
