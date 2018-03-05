@@ -12,9 +12,9 @@ class ResultQueries extends PureComponent {
         results: [],
         onLinkClick: noop
     };
-    handleLinkClick = (propertyAsString, propertyAsObject) => e => {
+    handleLinkClick = (queryAsObject, queryAsString) => e => {
         e.preventDefault();
-        this.props.onLinkClick(propertyAsString, propertyAsObject);
+        this.props.onLinkClick(queryAsObject, queryAsString);
     }
 
     render() {

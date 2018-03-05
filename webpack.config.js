@@ -1,4 +1,5 @@
-var path = require("path");
+const path = require("path");
+const autoprefixer = require('autoprefixer');
 
 module.exports = {
     entry: './src/App.jsx',
@@ -24,6 +25,17 @@ module.exports = {
                     loader: "css-loader",
                     options: {
                         modules: true
+                    }
+                },
+                {
+                    loader: 'postcss-loader',
+                    options: {
+                        plugins: [
+                            autoprefixer({
+                                browsers:['ie >= 8', 'last 4 version']
+                            })
+                        ],
+                        sourceMap: true
                     }
                 }
             ]
