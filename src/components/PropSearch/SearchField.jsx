@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Button from 'material-ui/Button';
+import TextField from 'material-ui/TextField';
 import { searchAction } from '../../actions/SearchActions';
 import { chooseLocationsAction, getLocationAction } from '../../actions/LocationActions';
 import { geolocationService } from '../../actions/ActionService';
@@ -61,17 +63,31 @@ class Searchfield extends PureComponent {
     render() {
         return (
             <div>
-                <input
+                <TextField
                     onChange={this.handleInputChange}
                     type='text'
+                    label='Input your query'
+                    placeholder='city'
+                    multiline
+                    margin='normal'
                     value={this.state.inputValue}
                 />
-                <button onClick={this.handleSearchClick}>
+                <Button
+                    variant='raised'
+                    size='small'
+                    color='primary'
+                    onClick={this.handleSearchClick}
+                >
                     <Link to={`/results/?address=${this.state.inputValue}&locationBased=false`}>Go</Link>
-                </button>
-                <button onClick={this.handleLocationClick}>
+                </Button>
+                <Button
+                    variant='raised'
+                    size='small'
+                    color='primary'
+                    onClick={this.handleLocationClick}
+                >
                     <Link to={`/results/?address=${this.state.inputValue}&locationBased=true`}>My Location</Link>
-                </button>
+                </Button>
                 <ResultQueries results={this.props.queries} onItemClick={this.handleQueryClick} />
             </div>
         );
