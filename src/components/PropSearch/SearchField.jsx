@@ -10,7 +10,7 @@ import ChangeHistory from './ChangeHistory.jsx';
 import { noop } from '../../utils/SearchUtils';
 import gridStyles from '../../styles/GridStyles.css';
 
-//@ChangeHistory()
+@ChangeHistory()
 class Searchfield extends PureComponent {
     static propTypes = {
         historyPush: PropTypes.func, // Метод из декоратора ChangeHistory для перехода по ссылке

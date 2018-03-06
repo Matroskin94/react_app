@@ -4,27 +4,38 @@ import PropTypes from 'prop-types';
 import Header from '../components/Details/Header.jsx';
 import ItemInfo from '../components/Details/ItemInfo.jsx';
 import ItemDescription from '../components/Details/ItemDescription.jsx';
+import ChangeHistory from '../components/PropSearch//ChangeHistory.jsx';
 import { addFavoriteAction, deleteFavoriteAction } from '../actions/FavoriteActions';
 import { noop } from '../utils/SearchUtils';
 
+@ChangeHistory()
 class Details extends PureComponent {
     static propTypes = {
+        favorites: PropTypes.array,
         activeItem: PropTypes.object,
         addToFavorite: PropTypes.func,
         deleteFromFavorite: PropTypes.func,
-        favorites: PropTypes.array
+        historyBack: PropTypes.func, // метод из декоратора ChangeHistory для перехода назад по истории
     };
 
     static defaultProps = {
         favorites: [],
         activeItem: {},
         addToFavorite: noop,
-        deleteFromFavorite: noop
+        deleteFromFavorite: noop,
+        historyBack: noop
     };
+
     onFavoriteClick = isFavorite => {
         isFavorite ? this.props.deleteFromFavorite(this.props.activeItem) :
             this.props.addToFavorite(this.props.activeItem);
     };
+
+    onBackClick = e => {
+        e.preventDefault();
+        this.props.historyBack();
+    }
+
     isFavorite = () =>
         this.props.favorites.some(item => item.title === this.props.activeItem.title);
 
@@ -56,7 +67,11 @@ class Details extends PureComponent {
 
         return (
             <div>
-                <Header handleFavoriteClick={this.onFavoriteClick} isFavorite={this.isFavorite()} />
+                <Header
+                    handleFavoriteClick={this.onFavoriteClick}
+                    handleBackClick={this.onBackClick}
+                    isFavorite={this.isFavorite()}
+                />
                 <ItemInfo itemInfo={itemInfo} />
                 <ItemDescription itemDescription={itemDescription} />
             </div>

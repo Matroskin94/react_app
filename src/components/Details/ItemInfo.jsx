@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from './DetailsPage.css';
 
 const ItemInfo = ({ itemInfo = {} }) => {
     const {
@@ -10,10 +11,10 @@ const ItemInfo = ({ itemInfo = {} }) => {
     } = itemInfo;
 
     return (
-        <div>
+        <div className={styles.itemInfo}>
             <h3>{currency} {price}</h3>
             <h4>{title}</h4>
-            <img alt='' src={imgURL} />
+            <img alt={title} src={imgURL} />
         </div>
     );
 };
