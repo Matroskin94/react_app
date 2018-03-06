@@ -6,14 +6,15 @@ import { noop } from '../../utils/SearchUtils';
 class ResultQueries extends PureComponent {
     static propTypes = {
         results: PropTypes.array,
-        onHandleLinkClick: PropTypes.func
+        onLinkClick: PropTypes.func
     };
     static defaultProps = {
         results: [],
-        onHandleLinkClick: noop
+        onLinkClick: noop
     };
-    handleLinkClick = prop => () => {
-        this.props.onHandleLinkClick(prop);
+    handleLinkClick = (queryAsObject, queryAsString) => e => {
+        e.preventDefault();
+        this.props.onLinkClick(queryAsObject, queryAsString);
     }
 
     render() {
@@ -29,7 +30,7 @@ class ResultQueries extends PureComponent {
                     if (placeName) {
                         link =
                             <Link
-                                onClick={this.handleLinkClick({ place_name: placeName })}
+                                onClick={this.handleLinkClick({ place_name: placeName }, `place_name=${placeName}`)}
                                 to={`/results/?place_name=${placeName}`}
                             > {placeName} : {matches}
                             </Link>;
@@ -38,7 +39,7 @@ class ResultQueries extends PureComponent {
                     if (centrePoint) {
                         link =
                             <Link
-                                onClick={this.handleLinkClick({ centre_point: centrePoint })}
+                                onClick={this.handleLinkClick({ centre_point: centrePoint }, `centre_point=${centrePoint}`)}
                                 to={`/results/?centre_point=${centrePoint}`}
                             > {centrePoint} : {matches}
                             </Link>;

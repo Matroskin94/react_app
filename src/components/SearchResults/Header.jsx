@@ -1,30 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ResultsHeader from './ResultsHeader.jsx';
+import LoadingHeader from './LoadingHeader.jsx';
 
-const Header = props => {
-    const headerText = props.isResultsEmpty ?
-        'Nothing found, try another query' :
-        `${20 * props.currentPage} of ${props.currentQueryInfo.matches} matches`;
-
-    return (
-        <div>
-            <h3>{headerText}</h3>
-        </div>
-    );
-};
+const Header = ({
+    isLoading, resultsLength, currentQueryInfo, currentPage
+}) => (isLoading ?
+    <LoadingHeader /> :
+    <ResultsHeader
+        resultsLength={resultsLength}
+        currentQueryInfo={currentQueryInfo}
+        currentPage={currentPage}
+    />
+);
 
 Header.propTypes = {
     currentQueryInfo: PropTypes.object,
-    matches: PropTypes.number,
     currentPage: PropTypes.number,
-    isResultsEmpty: PropTypes.bool
+    isLoading: PropTypes.bool,
+    resultsLength: PropTypes.number
 };
 
 Header.defaultProps = {
     currentQueryInfo: {},
-    matches: 0,
     currentPage: 1,
-    isResultsEmpty: true
+    isLoading: true,
+    resultsLength: 0
 };
 
 export default Header;
