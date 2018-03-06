@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from '../../styles/DetailsPage.css';
+import styles from './DetailsPage.css';
 import { noop } from '../../utils/SearchUtils';
 
 const Header = props => {

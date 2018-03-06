@@ -8,8 +8,9 @@ import { initFavoritesAction } from '../../actions/FavoriteActions';
 import ResultQueries from './ResultQueries.jsx';
 import ChangeHistory from './ChangeHistory.jsx';
 import { noop } from '../../utils/SearchUtils';
+import gridStyles from '../../styles/GridStyles.css';
 
-@ChangeHistory()
+//@ChangeHistory()
 class Searchfield extends PureComponent {
     static propTypes = {
         historyPush: PropTypes.func, // Метод из декоратора ChangeHistory для перехода по ссылке
@@ -58,14 +59,22 @@ class Searchfield extends PureComponent {
     render() {
         return (
             <div>
-                <input
-                    onChange={this.handleInputChange}
-                    type='text'
-                    value={this.state.inputValue}
-                />
-                <button onClick={this.handleGoClick}>Go</button>
-                <button onClick={this.handleLocationClick}> My Location</button>
-                <ResultQueries onHandleLinkClick={this.handleLinkClick} results={this.props.queries} />
+                <div className={gridStyles.row}>
+                    <div className={`${gridStyles.col4} ${gridStyles.cols}`}>
+                        <input
+                            onChange={this.handleInputChange}
+                            type='text'
+                            value={this.state.inputValue}
+                        />
+                    </div>
+                    <div className={`${gridStyles.col6} ${gridStyles.cols}`}>
+                        <button onClick={this.handleGoClick}>Go</button>
+                        <button onClick={this.handleLocationClick}> My Location</button>
+                    </div>
+                </div>
+                <div className={gridStyles.row}>
+                    <ResultQueries onHandleLinkClick={this.handleLinkClick} results={this.props.queries} />
+                </div>
             </div>
         );
     }

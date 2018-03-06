@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { noop } from '../../utils/SearchUtils';
+import gridStyles from '../../styles/GridStyles.css';
 
 class ResultQueries extends PureComponent {
     static propTypes = {
@@ -20,7 +21,7 @@ class ResultQueries extends PureComponent {
         const { results } = this.props;
 
         return (
-            <div>
+            <div className={`${gridStyles.col4} ${gridStyles.cols}`}>
                 <p>Ricent Queries:</p>
                 {results.map(({ address, matches } = {}) => {
                     const { place_name: placeName, centre_point: centrePoint } = address;
