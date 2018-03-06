@@ -5,21 +5,14 @@ import LoadingHeader from './LoadingHeader.jsx';
 
 const Header = ({
     isLoading, resultsLength, currentQueryInfo, currentPage
-}) => {
-    const headerText = isLoading ?
-        <LoadingHeader /> :
-        <ResultsHeader
-            resultsLength={resultsLength}
-            currentQueryInfo={currentQueryInfo}
-            currentPage={currentPage}
-        />;
-
-    return (
-        <div>
-            {headerText}
-        </div>
-    );
-};
+}) => (isLoading ?
+    <LoadingHeader /> :
+    <ResultsHeader
+        resultsLength={resultsLength}
+        currentQueryInfo={currentQueryInfo}
+        currentPage={currentPage}
+    />
+);
 
 Header.propTypes = {
     currentQueryInfo: PropTypes.object,
