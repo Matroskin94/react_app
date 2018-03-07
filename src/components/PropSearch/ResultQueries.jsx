@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { noop } from '../../utils/SearchUtils';
-import searchField from './SearchField.css';
 
 class ResultQueries extends PureComponent {
     static propTypes = {

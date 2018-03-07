@@ -8,7 +8,7 @@
     box-sizing: border-box;
 }
 
-@media (min-width: 401px) {
+@media (min-width: 481px) {
     .wrapper {
         width: 80%;
     }

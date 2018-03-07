@@ -12,9 +12,18 @@
     width: 100%;
 }
 
-@media(min-width: 401px) {
+@media(--mediumScreen) {
     .searchField {
         width: 33.33333%;
+    }
+    .buttonsField {
+        width: 50%;
+    }
+}
+
+@media(--largeScreen) {
+    .searchField {
+        width: 25%;
     }
     .buttonsField {
         width: 50%;

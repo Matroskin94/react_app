@@ -1,5 +1,7 @@
-const path = require("path");
+const path = require('path');
 const autoprefixer = require('autoprefixer');
+const customMedia = require('postcss-custom-media');
+const screenSizes = require('./src/constants/ScreenSizes.js');
 
 module.exports = {
     entry: './src/App.jsx',
@@ -34,17 +36,9 @@ module.exports = {
                         plugins: [
                             autoprefixer({
                                 browsers:['ie >= 8', 'last 4 version']
-                            })
-                        ],
-                        sourceMap: true
-                    }
-                },
-                {
-                    loader: 'postcss-loader',
-                    options: {
-                        plugins: [
-                            autoprefixer({
-                                browsers:['ie >= 8', 'last 4 version']
+                            }),
+                            customMedia({
+                                extensions:screenSizes
                             })
                         ],
                         sourceMap: true

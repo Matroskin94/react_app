@@ -9,7 +9,7 @@
     right: 0px;
 }
 
-@media(min-width: 501px) {
+@media(--mediumScreen) {
     .favoriteButton {
         margin-right: 3.125em;
     }
