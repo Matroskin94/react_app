@@ -11,7 +11,8 @@ export default () => WrappedComponent => {
             this.context.router.history.push(`${url}${query}`);
         }
 
-        historyBack = () => {
+        historyBack = (e) => {
+            console.log('HistoryBack');
             this.context.router.history.goBack();
         }
 

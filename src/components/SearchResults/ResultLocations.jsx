@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import goDetailsAction from '../../actions/DetailsActions';
 import { noop } from '../../utils/SearchUtils';
 import styles from './ResultLocations.css';
-import gridStyles from '../../styles/GridStyles.css';
 
 class ResultLocations extends PureComponent {
     static propTypes = {

@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import Results from '../components/SearchResults/ResultLocations.jsx';
 import SearchHeader from '../components/SearchResults/Header.jsx';
 import { noop } from '../utils/SearchUtils';
-import { chooseLocationsAction, clearResultsAction } from '../actions/LocationActions';
 import { getCurrentQueryInfoAction } from '../actions/SearchActions';
+import { chooseLocationsAction, clearResultsAction } from '../actions/LocationActions';
 import ParseURL from '../components/SearchResults/ParseURL.jsx';
 
 @ParseURL()
@@ -31,7 +31,6 @@ class ResultsPage extends PureComponent {
         currentQueryInfo: {},
         isLoading: false
     };
-
     constructor(props) {
         super(props);
         this.state = {
@@ -60,11 +59,11 @@ class ResultsPage extends PureComponent {
         return (
             <div>
                 <SearchHeader
-                    isResultsEmpty={this.props.queryRessults.length === 0}
-                    currentQueryInfo={this.props.currentQueryInfo}
+                    isLoading={this.props.isLoading}
                     currentPage={this.props.currentPage}
+                    currentQueryInfo={this.props.currentQueryInfo}
+                    resultsLength={this.props.queryRessults.length}
                 />
-
                 <Results results={this.props.queryRessults} />
             </div>
         );

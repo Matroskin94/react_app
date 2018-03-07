@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './DetailsPage.css';
+import styles from './ItemInfo.css';
 
 const ItemInfo = ({ itemInfo = {} }) => {
     const {

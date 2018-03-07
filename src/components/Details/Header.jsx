@@ -1,16 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import styles from './DetailsPage.css';
+import styles from './Header.css';
 import { noop } from '../../utils/SearchUtils';
+import changeHistory from '../PropSearch/ChangeHistory.jsx';
 
-const Header = ({ handleFavoriteClick, handleBackClick, isFavorite }) => {
+const Header = ({ handleFavoriteClick, historyBack, isFavorite }) => {
     const onFavoriteClick = () => {
         handleFavoriteClick(isFavorite);
     };
 
     const onBackClick = e => {
-        handleBackClick(e);
+        e.preventDefault();
+        historyBack();
     };
 
     return (
@@ -27,15 +29,15 @@ const Header = ({ handleFavoriteClick, handleBackClick, isFavorite }) => {
 };
 
 Header.propTypes = {
-    handleBackClick: PropTypes.func,
+    historyBack: PropTypes.func,
     handleFavoriteClick: PropTypes.func,
     isFavorite: PropTypes.bool
 };
 
 Header.defaultProps = {
-    handleBackClick: noop,
+    historyBack: noop,
     handleFavoriteClick: noop,
     isFavorite: false
 };
 
-export default Header;
+export default changeHistory()(Header);

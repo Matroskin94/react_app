@@ -8,7 +8,7 @@ import { initFavoritesAction } from '../../actions/FavoriteActions';
 import ResultQueries from './ResultQueries.jsx';
 import ChangeHistory from './ChangeHistory.jsx';
 import { noop } from '../../utils/SearchUtils';
-import gridStyles from '../../styles/GridStyles.css';
+import styles from './SearchField.css';
 
 @ChangeHistory()
 class Searchfield extends PureComponent {
@@ -51,30 +51,26 @@ class Searchfield extends PureComponent {
 
     handleInputChange = event => this.setState({ inputValue: event.target.value });
 
-    handleLinkClick = (propertyObj, propertyString) => {
-        this.props.loadQuery(propertyObj);
-        this.props.historyPush({ url: '/results/?', query: propertyString });
+    handleLinkClick = (queryAsObject, queryAsString) => {
+        this.props.loadQuery(queryAsObject);
+        this.props.historyPush({ url: '/results/?', query: queryAsString });
     }
 
     render() {
         return (
             <div>
-                <div className={gridStyles.row}>
-                    <div className={`${gridStyles.col4} ${gridStyles.cols}`}>
-                        <input
-                            onChange={this.handleInputChange}
-                            type='text'
-                            value={this.state.inputValue}
-                        />
-                    </div>
-                    <div className={`${gridStyles.col6} ${gridStyles.cols}`}>
-                        <button onClick={this.handleGoClick}>Go</button>
-                        <button onClick={this.handleLocationClick}> My Location</button>
-                    </div>
+                <div className={styles.searchField}>
+                    <input
+                        onChange={this.handleInputChange}
+                        type='text'
+                        value={this.state.inputValue}
+                    />
                 </div>
-                <div className={gridStyles.row}>
-                    <ResultQueries onHandleLinkClick={this.handleLinkClick} results={this.props.queries} />
+                <div className={styles.buttonsField}>
+                    <button onClick={this.handleGoClick}>Go</button>
+                    <button onClick={this.handleLocationClick}> My Location</button>
                 </div>
+                <ResultQueries onLinkClick={this.handleLinkClick} results={this.props.queries} />
             </div>
         );
     }
