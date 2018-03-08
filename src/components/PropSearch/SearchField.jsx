@@ -6,11 +6,11 @@ import { searchAction } from '../../actions/SearchActions';
 import { geolocationService } from '../../actions/ActionService';
 import { initFavoritesAction } from '../../actions/FavoriteActions';
 import ResultQueries from './ResultQueries.jsx';
-import ChangeHistory from './ChangeHistory.jsx';
+import changeHistory from './ChangeHistory.jsx';
 import { noop } from '../../utils/SearchUtils';
 import styles from './SearchField.css';
 
-@ChangeHistory()
+@changeHistory()
 class Searchfield extends PureComponent {
     static propTypes = {
         historyPush: PropTypes.func, // Метод из декоратора ChangeHistory для перехода по ссылке
@@ -45,6 +45,7 @@ class Searchfield extends PureComponent {
 
     handleLocationClick = () => {
         geolocationService().then(result => {
+            this.props.loadQuery({ centre_point: result });
             this.props.historyPush({ url: '/results/?', query: `centre_point=${result}` });
         });
     }

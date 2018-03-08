@@ -5,12 +5,12 @@
 .favoriteButton {
     display: inline-block;
     position: absolute;
-    margin: 3.125em 1.25em;
+    margin: 50px 20px;
     right: 0px;
 }
 
 @media(--mediumScreen) {
     .favoriteButton {
-        margin-right: 3.125em;
+        margin-right: 50px;
     }
 }
