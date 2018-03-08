@@ -2,3 +2,4 @@
 **/*.json
 webpack.config.js
 **/*.html
+**/*.test.js

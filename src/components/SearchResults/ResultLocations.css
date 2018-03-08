@@ -7,7 +7,7 @@ a {
     padding-left: 5px;
     box-shadow: 0 0 1px rgba(0,0,0,0.5);
     margin-bottom: 5px;
-    height: 5.3125em;
+    height: 85px;
     box-sizing: border-box;
 }
 
@@ -34,7 +34,6 @@ a {
 }
 
 .itemText p {
-    margin: 0.25em;
-    padding-right: 1em;
+    margin: 4px;
     color:black;
 }
