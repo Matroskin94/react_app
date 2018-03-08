@@ -2,15 +2,14 @@
     display: inline-block;
 }
 
+.itemInfo img {
+    max-width: 100%;
+    height: auto;
+}
+
 .favoriteButton {
     display: inline-block;
     position: absolute;
-    margin: 50px 20px;
+    margin: 30px;
     right: 0px;
-}
-
-@media(--mediumScreen) {
-    .favoriteButton {
-        margin-right: 50px;
-    }
 }

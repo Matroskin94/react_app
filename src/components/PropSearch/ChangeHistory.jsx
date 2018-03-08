@@ -11,10 +11,15 @@ export default () => WrappedComponent => {
             this.context.router.history.push(`${url}${query}`);
         }
 
+        historyBack = () => {
+            this.context.router.history.goBack();
+        }
+
         render() {
             return <WrappedComponent
                 {...this.props}
                 historyPush={this.historyPush}
+                historyBack={this.historyBack}
             />;
         }
     }

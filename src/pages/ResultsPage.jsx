@@ -6,9 +6,9 @@ import SearchHeader from '../components/SearchResults/Header.jsx';
 import { noop } from '../utils/SearchUtils';
 import { getCurrentQueryInfoAction } from '../actions/SearchActions';
 import { chooseLocationsAction, clearResultsAction } from '../actions/LocationActions';
-import ParseURL from '../components/SearchResults/ParseURL.jsx';
+import parseURL from '../components/SearchResults/ParseURL.jsx';
 
-@ParseURL()
+@parseURL()
 class ResultsPage extends PureComponent {
     static propTypes = {
         queryRessults: PropTypes.array,

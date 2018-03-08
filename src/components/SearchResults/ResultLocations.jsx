@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import styles from './ResultLocations.css';
 import goDetailsAction from '../../actions/DetailsActions';
 import { noop } from '../../utils/SearchUtils';
+import styles from './ResultLocations.css';
 
 class ResultLocations extends PureComponent {
     static propTypes = {
@@ -35,7 +35,8 @@ class ResultLocations extends PureComponent {
                                 <img alt='' src={item.thumb_url} />
                             </div>
                             <div className={styles.itemText}>
-                                <p>{item.title} {item.price}{item.price_currency} </p>
+                                <p>{item.title}</p>
+                                <p>{item.price}{item.price_currency}</p>
                                 <p> {item.summary}</p>
                             </div>
                         </div>
