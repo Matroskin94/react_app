@@ -40,7 +40,7 @@ export const chooseLocationsAction = (searchProperty, currentPage = 1) =>
             }
         })
             .then(response => {
-                const results = extractData(response.data);
+                const results = extractData(response.data.response.listings);
 
                 return dispatch(chooseQueryAction({ results, searchProperty, currentPage }));
             });

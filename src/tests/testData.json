@@ -1,0 +1,146 @@
+{
+    "NotSuitableObjectsForItemData": [
+        {
+            "propertyA": "valueA",
+            "propertyB": "valueB"
+        },
+        {
+            "propertyC": "valueC",
+            "propertyD": "valueD"
+        }
+    ],
+    "extractDataInput": [
+        {
+            "title": "title",
+            "img_url": "img_url",
+            "thumb_url": "thumb_url",
+            "lister_url": "lister_url",
+            "price": "price",
+            "price_currency": "price_currency",
+            "summary": "summary",
+            "bathroom_number": "bathroom_number",
+            "bedroom_number": "bedroom_number",
+            "сar_spaces": "car_spaces"
+        },
+        {
+            "title": "title2",
+            "img_url": "img_url2",
+            "thumb_url": "thumb_url2",
+            "lister_url": "lister_url2",
+            "price": "price2",
+            "price_currency": "price_currency2",
+            "summary": "summary2",
+            "bathroom_number": "bathroom_number2",
+            "bedroom_number": "bedroom_number2",
+            "сar_spaces": "car_spaces2"
+        }
+    ],
+    "extractWrongDataInput": [
+        {
+            "wrongData": "wrongData1",
+            "img_url": "img_url2",
+            "thumb_url": "thumb_url2",
+            "lister_url": "lister_url2",
+            "price": "price2",
+            "price_currency": "price_currency2",
+            "summary": "summary2",
+            "bathroom_number": "bathroom_number2",
+            "bedroom_number": "bedroom_number2",
+            "сar_spaces": "car_spaces2"
+            
+        }
+    ],
+    "favoritesList": [
+        {
+            "bathroom_number": "",
+            "bedroom_number": "1",
+            "car_spaces": "0",
+            "img_url": "https://imgs.nestimg.com/1_bedroom_flat_for_sale_108817257474713781.jpg",
+            "isFavorite": "true",
+            "key": "https://www.nestoria.co.uk/detail/0000000108817257474713781/title/5/1-1?serpUid=&pt=1&ot=1&l=leeds&did=105_high1&utm_source=api&utm_medium=external",
+            "lister_url": "https://www.nestoria.co.uk/detail/0000000108817257474713781/title/5/1-1?serpUid=&pt=1&ot=1&l=leeds&did=105_high1&utm_source=api&utm_medium=external",
+            "price": "139950",
+            "price_currency": "£",
+            "summary": "One bedroom property on the 8th floor of this riverside development...",
+            "thumb_url": "https://imgs.nestimg.com/medium/1_bedroom_flat_for_sale_108817257474713781.jpg",
+            "title": "St James Quay, Bowman Lane, Hunslet, Leeds, LS10"
+        },
+        {
+            "bathroom_number": "2",
+            "bedroom_number": "3",
+            "car_spaces": "0",
+            "img_url": "https://imgs.nestimg.com/terraced_london_108817205858270305.jpg",
+            "isFavorite": "true",
+            "key": "https://www.nestoria.co.uk/detail/0000000108817205858270305/title/5/1-2?serpUid=&pt=1&ot=1&l=london&did=90_high1&utm_source=api&utm_medium=external",
+            "lister_url": "https://www.nestoria.co.uk/detail/0000000108817205858270305/title/5/1-2?serpUid=&pt=1&ot=1&l=london&did=90_high1&utm_source=api&utm_medium=external",
+            "price": "1850000",
+            "price_currency": "£",
+            "summary": "This georgian grade ii listed terraced house is positioned over fou...",
+            "thumb_url": "https://imgs.nestimg.com/medium/terraced_london_108817205858270305.jpg",
+            "title": "Canonbury Road, Canonbury, London, N1"
+        }
+    ],
+    "deletedItemKey": {
+        "key": "https://www.nestoria.co.uk/detail/0000000108817205858270305/title/5/1-2?serpUid=&pt=1&ot=1&l=london&did=90_high1&utm_source=api&utm_medium=external"
+    },
+    "favoritesListWithoutDeletedItem": [
+        {
+            "bathroom_number": "",
+            "bedroom_number": "1",
+            "car_spaces": "0",
+            "img_url": "https://imgs.nestimg.com/1_bedroom_flat_for_sale_108817257474713781.jpg",
+            "isFavorite": "true",
+            "key": "https://www.nestoria.co.uk/detail/0000000108817257474713781/title/5/1-1?serpUid=&pt=1&ot=1&l=leeds&did=105_high1&utm_source=api&utm_medium=external",
+            "lister_url": "https://www.nestoria.co.uk/detail/0000000108817257474713781/title/5/1-1?serpUid=&pt=1&ot=1&l=leeds&did=105_high1&utm_source=api&utm_medium=external",
+            "price": "139950",
+            "price_currency": "£",
+            "summary": "One bedroom property on the 8th floor of this riverside development...",
+            "thumb_url": "https://imgs.nestimg.com/medium/1_bedroom_flat_for_sale_108817257474713781.jpg",
+            "title": "St James Quay, Bowman Lane, Hunslet, Leeds, LS10"
+        }
+    ],
+    "favoritesListWithAddedItem": [
+        {
+            "bathroom_number": "",
+            "bedroom_number": "1",
+            "car_spaces": "0",
+            "img_url": "https://imgs.nestimg.com/1_bedroom_flat_for_sale_108817257474713781.jpg",
+            "isFavorite": "true",
+            "key": "https://www.nestoria.co.uk/detail/0000000108817257474713781/title/5/1-1?serpUid=&pt=1&ot=1&l=leeds&did=105_high1&utm_source=api&utm_medium=external",
+            "lister_url": "https://www.nestoria.co.uk/detail/0000000108817257474713781/title/5/1-1?serpUid=&pt=1&ot=1&l=leeds&did=105_high1&utm_source=api&utm_medium=external",
+            "price": "139950",
+            "price_currency": "£",
+            "summary": "One bedroom property on the 8th floor of this riverside development...",
+            "thumb_url": "https://imgs.nestimg.com/medium/1_bedroom_flat_for_sale_108817257474713781.jpg",
+            "title": "St James Quay, Bowman Lane, Hunslet, Leeds, LS10"
+        },
+        {
+            "bathroom_number": "2",
+            "bedroom_number": "3",
+            "car_spaces": "0",
+            "img_url": "https://imgs.nestimg.com/terraced_london_108817205858270305.jpg",
+            "isFavorite": "true",
+            "key": "https://www.nestoria.co.uk/detail/0000000108817205858270305/title/5/1-2?serpUid=&pt=1&ot=1&l=london&did=90_high1&utm_source=api&utm_medium=external",
+            "lister_url": "https://www.nestoria.co.uk/detail/0000000108817205858270305/title/5/1-2?serpUid=&pt=1&ot=1&l=london&did=90_high1&utm_source=api&utm_medium=external",
+            "price": "1850000",
+            "price_currency": "£",
+            "summary": "This georgian grade ii listed terraced house is positioned over fou...",
+            "thumb_url": "https://imgs.nestimg.com/medium/terraced_london_108817205858270305.jpg",
+            "title": "Canonbury Road, Canonbury, London, N1"
+        },
+        {
+            "bathroom_number": "2",
+            "bedroom_number": "2",
+            "car_spaces": "0",
+            "img_url": "https://imgs.nestimg.com/flat_london_107679041082313768.jpg",
+            "isFavorite": "true",
+            "key": "https://www.nestoria.co.uk/detail/0000000107679041082313768/title/5/1-1?serpUid=&pt=1&ot=1&l=london&did=90_high1&utm_source=api&utm_medium=external",
+            "lister_url": "https://www.nestoria.co.uk/detail/0000000107679041082313768/title/5/1-1?serpUid=&pt=1&ot=1&l=london&did=90_high1&utm_source=api&utm_medium=external",
+            "price": "625000",
+            "price_currency": "£",
+            "summary": "A example of modern living in a iconic period building, this pentho...",
+            "thumb_url": "https://imgs.nestimg.com/medium/flat_london_107679041082313768.jpg",
+            "title": "Manor Gardens, London, N7 - Sauna"
+        }
+    ]
+}
