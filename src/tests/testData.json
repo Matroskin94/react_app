@@ -1,5 +1,5 @@
 {
-    "NotSuitableObjectsForItemData": [
+    "notSuitableObjectsForItemData": [
         {
             "propertyA": "valueA",
             "propertyB": "valueB"
@@ -9,18 +9,52 @@
             "propertyD": "valueD"
         }
     ],
-    "extractDataInput": [
+    "extractDataPropriateInput": [
+        {
+            "anotherProp1": "propValue1",
+            "anotherProp2": "propValue2",
+            "anotherProp3": "propValue3",
+            "title": "title",
+            "img_url": "img_url",
+            "thumb_url": "thumb_url",
+            "lister_url": "lister_url",
+            "price": 100500,
+            "price_currency": "price_currency",
+            "summary": "summary",
+            "bathroom_number": "bathroom_number",
+            "bedroom_number": "bedroom_number",
+            "car_spaces": "cars1"
+        },
+        {
+            "anotherProp5": "propValue5",
+            "anotherProp6": "propValue6",
+            "anotherProp7": "propValue7",
+            "title": "title2",
+            "img_url": "img_url2",
+            "thumb_url": "thumb_url2",
+            "lister_url": "lister_url2",
+            "price": "price2",
+            "price_currency": "price_currency2",
+            "summary": "summary2",
+            "bathroom_number": "bathroom_number2",
+            "bedroom_number": "bedroom_number2",
+            "car_spaces": "cars2"
+        }
+    ],
+    "extractDataPropriateOutput": [
         {
             "title": "title",
             "img_url": "img_url",
             "thumb_url": "thumb_url",
             "lister_url": "lister_url",
-            "price": "price",
+            "price": 100500,
             "price_currency": "price_currency",
             "summary": "summary",
             "bathroom_number": "bathroom_number",
             "bedroom_number": "bedroom_number",
-            "сar_spaces": "car_spaces"
+            "car_spaces": "cars1",
+            "isFavorite": false,
+            "key": "lister_url"
         },
         {
             "title": "title2",
@@ -32,7 +66,9 @@
             "summary": "summary2",
             "bathroom_number": "bathroom_number2",
             "bedroom_number": "bedroom_number2",
-            "сar_spaces": "car_spaces2"
+            "car_spaces": "cars2",
+            "isFavorite": false,
+            "key": "lister_url2"
         }
     ],
     "extractWrongDataInput": [

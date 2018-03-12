@@ -16,11 +16,19 @@ test('Empty input array should return empty array []', () => {
 });
 
 test('Array with another objects as input should return empty array []', () => {
-    expect(extractData(testData.NotSuitableObjectsForItemData)).toEqual([]);
+    expect(extractData(testData.notSuitableObjectsForItemData)).toEqual([]);
 });
 
 test('Array with object with not all suitable properties should return empty array []', () => {
     expect(extractData(testData.extractWrongDataInput)).toEqual([]);
+});
+
+test('Input as undefined should return empty array []', () => {
+    expect(extractData(undefined)).toEqual([]);
+});
+
+test('Array of suitable objects, functon should return array with objects with necessary properties', () => {
+    expect(extractData(testData.extractDataPropriateInput)).toEqual(testData.extractDataPropriateOutput);
 });
 
 // getFavoritesFromLocal() function test
