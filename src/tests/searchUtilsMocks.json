@@ -53,8 +53,7 @@
             "bathroom_number": "bathroom_number",
             "bedroom_number": "bedroom_number",
             "car_spaces": "cars1",
-            "isFavorite": false,
-            "key": "lister_url"
+            "isFavorite": false
         },
         {
             "title": "title2",
@@ -67,8 +66,7 @@
             "bathroom_number": "bathroom_number2",
             "bedroom_number": "bedroom_number2",
             "car_spaces": "cars2",
-            "isFavorite": false,
-            "key": "lister_url2"
+            "isFavorite": false
         }
     ],
     "extractWrongDataInput": [
@@ -93,7 +91,6 @@
             "car_spaces": "0",
             "img_url": "https://imgs.nestimg.com/1_bedroom_flat_for_sale_108817257474713781.jpg",
             "isFavorite": "true",
-            "key": "https://www.nestoria.co.uk/detail/0000000108817257474713781/title/5/1-1?serpUid=&pt=1&ot=1&l=leeds&did=105_high1&utm_source=api&utm_medium=external",
             "lister_url": "https://www.nestoria.co.uk/detail/0000000108817257474713781/title/5/1-1?serpUid=&pt=1&ot=1&l=leeds&did=105_high1&utm_source=api&utm_medium=external",
             "price": "139950",
             "price_currency": "£",
@@ -107,7 +104,6 @@
             "car_spaces": "0",
             "img_url": "https://imgs.nestimg.com/terraced_london_108817205858270305.jpg",
             "isFavorite": "true",
-            "key": "https://www.nestoria.co.uk/detail/0000000108817205858270305/title/5/1-2?serpUid=&pt=1&ot=1&l=london&did=90_high1&utm_source=api&utm_medium=external",
             "lister_url": "https://www.nestoria.co.uk/detail/0000000108817205858270305/title/5/1-2?serpUid=&pt=1&ot=1&l=london&did=90_high1&utm_source=api&utm_medium=external",
             "price": "1850000",
             "price_currency": "£",
@@ -117,7 +113,7 @@
         }
     ],
     "deletedItemKey": {
-        "key": "https://www.nestoria.co.uk/detail/0000000108817205858270305/title/5/1-2?serpUid=&pt=1&ot=1&l=london&did=90_high1&utm_source=api&utm_medium=external"
+        "key": "Canonbury Road, Canonbury, London, N1"
     },
     "favoritesListWithoutDeletedItem": [
         {
@@ -126,7 +122,6 @@
             "car_spaces": "0",
             "img_url": "https://imgs.nestimg.com/1_bedroom_flat_for_sale_108817257474713781.jpg",
             "isFavorite": "true",
-            "key": "https://www.nestoria.co.uk/detail/0000000108817257474713781/title/5/1-1?serpUid=&pt=1&ot=1&l=leeds&did=105_high1&utm_source=api&utm_medium=external",
             "lister_url": "https://www.nestoria.co.uk/detail/0000000108817257474713781/title/5/1-1?serpUid=&pt=1&ot=1&l=leeds&did=105_high1&utm_source=api&utm_medium=external",
             "price": "139950",
             "price_currency": "£",
@@ -142,7 +137,6 @@
             "car_spaces": "0",
             "img_url": "https://imgs.nestimg.com/1_bedroom_flat_for_sale_108817257474713781.jpg",
             "isFavorite": "true",
-            "key": "https://www.nestoria.co.uk/detail/0000000108817257474713781/title/5/1-1?serpUid=&pt=1&ot=1&l=leeds&did=105_high1&utm_source=api&utm_medium=external",
             "lister_url": "https://www.nestoria.co.uk/detail/0000000108817257474713781/title/5/1-1?serpUid=&pt=1&ot=1&l=leeds&did=105_high1&utm_source=api&utm_medium=external",
             "price": "139950",
             "price_currency": "£",
@@ -156,7 +150,6 @@
             "car_spaces": "0",
             "img_url": "https://imgs.nestimg.com/terraced_london_108817205858270305.jpg",
             "isFavorite": "true",
-            "key": "https://www.nestoria.co.uk/detail/0000000108817205858270305/title/5/1-2?serpUid=&pt=1&ot=1&l=london&did=90_high1&utm_source=api&utm_medium=external",
             "lister_url": "https://www.nestoria.co.uk/detail/0000000108817205858270305/title/5/1-2?serpUid=&pt=1&ot=1&l=london&did=90_high1&utm_source=api&utm_medium=external",
             "price": "1850000",
             "price_currency": "£",
@@ -170,7 +163,6 @@
             "car_spaces": "0",
             "img_url": "https://imgs.nestimg.com/flat_london_107679041082313768.jpg",
             "isFavorite": "true",
-            "key": "https://www.nestoria.co.uk/detail/0000000107679041082313768/title/5/1-1?serpUid=&pt=1&ot=1&l=london&did=90_high1&utm_source=api&utm_medium=external",
             "lister_url": "https://www.nestoria.co.uk/detail/0000000107679041082313768/title/5/1-1?serpUid=&pt=1&ot=1&l=london&did=90_high1&utm_source=api&utm_medium=external",
             "price": "625000",
             "price_currency": "£",

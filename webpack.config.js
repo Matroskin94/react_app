@@ -1,4 +1,4 @@
-    const path = require('path');
+const path = require('path');
 const autoprefixer = require('autoprefixer');
 const customMedia = require('postcss-custom-media');
 const screenSizes = require('./src/constants/ScreenSizes.js');

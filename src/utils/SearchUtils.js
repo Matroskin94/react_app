@@ -1,20 +1,16 @@
 import { pick } from 'ramda';
 
 const filterArray = array => {
-    const resultArray = [];
     const keysArray = ['title', 'img_url', 'thumb_url', 'lister_url', 'price', 'price_currency',
         'summary', 'bathroom_number', 'bedroom_number', 'car_spaces'];
 
-    array.forEach(item => {
+    return array.map(item => {
         const resultObject = pick(keysArray, item);
 
-        if (Object.keys(resultObject).length === keysArray.length) {
-            resultObject.key = item.lister_url;
-            resultObject.isFavorite = false;
-            resultArray.push(resultObject);
-        }
-    });
-    return resultArray;
+        return Object.keys(resultObject).length === keysArray.length ?
+            { ...resultObject, isFavorite: false } :
+            false;
+    }).filter(item => item !== false);
 };
 
 export const extractData = data => {
@@ -66,7 +62,7 @@ export const getFavoritesFromLocal = () => {
 
 export const deleteFavoriteFromLocal = dellItem => {
     const favoritesList = localStorage.getItem('favoritesList');
-    const resultList = JSON.parse(!favoritesList ? [] : favoritesList).filter(item => item.key !== dellItem.key);
+    const resultList = JSON.parse(!favoritesList ? [] : favoritesList).filter(item => item.title !== dellItem.key);
 
     localStorage.setItem('favoritesList', JSON.stringify(resultList));
     return resultList;
