@@ -39,18 +39,22 @@ describe('extractData function tests', () => {
 
 // getFavoritesFromLocal() function test
 test('Get array of favorites from localStorage, should return parsed array form localStorage', () => {
-    localStorageMock.getItem.mockReturnValueOnce(JSON.stringify(favoritesList));
-    expect(getFavoritesFromLocal()).toEqual(favoritesList);
+    expect(getFavoritesFromLocal()).toBeInstanceOf(Array);
+    expect(localStorageMock.getItem).toHaveBeenCalledWith('favoritesList');
 });
 
 // deleteFavoriteFromLocal() function test
 test('Delete item from favoritesList array, should change favoritesList array in localStorage', () => {
     localStorageMock.getItem.mockReturnValueOnce(JSON.stringify(favoritesList));
-    expect(deleteFavoriteFromLocal(deletedItemKey)).toEqual(favoritesListWithoutDeletedItem);
+    deleteFavoriteFromLocal(deletedItemKey);
+    expect(localStorageMock.getItem).toHaveBeenCalledWith('favoritesList');
+    expect(localStorageMock.setItem).toHaveBeenCalledWith('favoritesList', expect.any(String));
 });
 
 // addFavoriteToLocal() function test
 test('Adding favorite item to localStorage, should return array with added item', () => {
     localStorageMock.getItem.mockReturnValueOnce(JSON.stringify(favoritesList));
-    expect(addFavoriteToLocal(favoritesListWithAddedItem[2])).toEqual(favoritesListWithAddedItem);
+    addFavoriteToLocal(favoritesListWithAddedItem[2]);
+    expect(localStorage.getItem).toHaveBeenCalledWith('favoritesList');
+    expect(localStorageMock.setItem).toHaveBeenCalledWith('favoritesList', expect.any(String));
 });

@@ -8,15 +8,12 @@ const filterArray = array => {
         const resultObject = pick(keysArray, item);
 
         return Object.keys(resultObject).length === keysArray.length ?
-            { ...resultObject, isFavorite: false } :
-            false;
+            { ...resultObject, isFavorite: false } : false;
     }).filter(item => item !== false);
 };
 
 export const extractData = data => {
-    const result = Array.isArray(data) ?
-        filterArray(data) :
-        [];
+    const result = Array.isArray(data) ? filterArray(data) : [];
 
     return result;
 };
@@ -51,7 +48,6 @@ export const addFavoriteToLocal = item => {
     item.isFavorite = true;
     favoritesArray.push(item);
     localStorage.setItem('favoritesList', JSON.stringify(favoritesArray));
-    return favoritesArray;
 };
 
 export const getFavoritesFromLocal = () => {
@@ -65,5 +61,4 @@ export const deleteFavoriteFromLocal = dellItem => {
     const resultList = JSON.parse(!favoritesList ? [] : favoritesList).filter(item => item.title !== dellItem.key);
 
     localStorage.setItem('favoritesList', JSON.stringify(resultList));
-    return resultList;
 };
