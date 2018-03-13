@@ -2,6 +2,11 @@
     display: inline-block;
 }
 
+.itemInfo img {
+    max-width: 100%;
+    height: auto;
+}
+
 .favoriteButton {
     display: inline-block;
     position: absolute;

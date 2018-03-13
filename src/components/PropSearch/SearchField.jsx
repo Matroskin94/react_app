@@ -4,31 +4,33 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
+import { chooseLocationsAction } from '../../actions/LocationActions';
 import { searchAction } from '../../actions/SearchActions';
-import { chooseLocationsAction, getLocationAction } from '../../actions/LocationActions';
 import { geolocationService } from '../../actions/ActionService';
 import { initFavoritesAction } from '../../actions/FavoriteActions';
 import ResultQueries from './ResultQueries.jsx';
+import changeHistory from './ChangeHistory.jsx';
 import { noop } from '../../utils/SearchUtils';
+import styles from './SearchField.css';
 
+@changeHistory()
 class Searchfield extends PureComponent {
     static propTypes = {
-        findAddressQuery: PropTypes.func,
-        chooseQuery: PropTypes.func,
-        getLocation: PropTypes.func,
+        historyPush: PropTypes.func, // Метод из декоратора ChangeHistory для перехода по ссылке
         getFavoritesFromLocal: PropTypes.func,
+        loadQuery: PropTypes.func,
         queries: PropTypes.array,
         isFavoritesLoaded: PropTypes.bool
     };
 
     static defaultProps = {
-        findAddressQuery: noop,
-        chooseQuery: noop,
-        getLocation: noop,
+        historyPush: noop,
         getFavoritesFromLocal: noop,
+        loadQuery: noop,
         queries: [],
         isFavoritesLoaded: false
     };
+
     state = {
         inputValue: ''
     };
@@ -39,26 +41,24 @@ class Searchfield extends PureComponent {
         }
     }
 
-    handleSearchClick = () => {
-        const searchObject = { place_name: this.state.inputValue, locationBased: false };
-
-        this.props.findAddressQuery(searchObject);
+    handleGoClick = () => {
+        this.props.loadQuery({ place_name: this.state.inputValue });
+        this.props.historyPush({ url: '/results/?', query: `place_name=${this.state.inputValue}` });
     }
 
     handleLocationClick = () => {
-        this.props.getLocation(geolocationService());
-    }
-
-    handleQueryClick = address => {
-        const location = this.props.queries.find(item => item.address === address);
-        const property = location.locationBased ?
-            { centre_point: address } :
-            { place_name: address };
-
-        this.props.chooseQuery(property, 1);
+        geolocationService().then(result => {
+            this.props.loadQuery({ centre_point: result });
+            this.props.historyPush({ url: '/results/?', query: `centre_point=${result}` });
+        });
     }
 
     handleInputChange = event => this.setState({ inputValue: event.target.value });
+
+    handleLinkClick = (queryAsObject, queryAsString) => {
+        this.props.loadQuery(queryAsObject);
+        this.props.historyPush({ url: '/results/?', query: queryAsString });
+    }
 
     render() {
         return (
@@ -76,9 +76,9 @@ class Searchfield extends PureComponent {
                     variant='raised'
                     size='small'
                     color='primary'
-                    onClick={this.handleSearchClick}
+                    onClick={this.handleGoClick}
                 >
-                    <Link to={`/results/?address=${this.state.inputValue}&locationBased=false`}>Go</Link>
+                    Go
                 </Button>
                 <Button
                     variant='raised'
@@ -86,9 +86,9 @@ class Searchfield extends PureComponent {
                     color='primary'
                     onClick={this.handleLocationClick}
                 >
-                    <Link to={`/results/?address=${this.state.inputValue}&locationBased=true`}>My Location</Link>
+                    My Location
                 </Button>
-                <ResultQueries results={this.props.queries} onItemClick={this.handleQueryClick} />
+                <ResultQueries onLinkClick={this.handleLinkClick} results={this.props.queries} />
             </div>
         );
     }
@@ -105,9 +105,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        findAddressQuery: place => dispatch(searchAction(place)),
+        loadQuery: place => dispatch(searchAction(place)),
         chooseQuery: (query, page) => dispatch(chooseLocationsAction(query, page)),
-        getLocation: geolocation => dispatch(getLocationAction(geolocation)),
         getFavoritesFromLocal: () => dispatch(initFavoritesAction())
 
     };

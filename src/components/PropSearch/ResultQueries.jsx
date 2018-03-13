@@ -5,19 +5,22 @@ import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import List, { ListItem, ListItemText } from 'material-ui/List';
 import { noop } from '../../utils/SearchUtils';
+import styles from './ResultQueries.css';
 
 class ResultQueries extends PureComponent {
     static propTypes = {
         results: PropTypes.array,
-        onItemClick: PropTypes.func
+        onLinkClick: PropTypes.func
     };
     static defaultProps = {
         results: [],
-        onItemClick: noop
+        onLinkClick: noop
     };
-    onQueryClicked = address => () => {
-        this.props.onItemClick(address);
-    };
+    handleLinkClick = (queryAsObject, queryAsString) => e => {
+        e.preventDefault();
+        this.props.onLinkClick(queryAsObject, queryAsString);
+    }
+
     render() {
         const { results } = this.props;
 
@@ -25,22 +28,46 @@ class ResultQueries extends PureComponent {
             <div>
                 <p>Ricent Queries:</p>
                 <List>
-                    {results.map(({ address, matches, locationBased } = {}) =>
-                        <Grid
-                            key={matches + address}
-                            item md={6}
-                        >
-                            <Paper>
-                                <ListItem>
-                                    <Link
-                                        onClick={this.onQueryClicked(address)}
-                                        to={`/results/?address=${address}&locationBased=${locationBased}`}
-                                    >
-                                        <ListItemText primary={address} secondary={`Matches: ${matches}`} />
-                                    </Link>
-                                </ListItem>
-                            </Paper>
-                        </Grid>)}
+                    {results.map(({ address, matches } = {}) => {
+                        const { place_name: placeName, centre_point: centrePoint } = address;
+                        let link = null;
+
+                        if (placeName) {
+                            link =
+                                <Link
+                                    onClick={this.handleLinkClick({ place_name: placeName }, `place_name=${placeName}`)}
+                                    to={`/results/?place_name=${placeName}`}
+                                >
+                                    <Paper className={styles.queryItem}>
+                                        <ListItem>
+                                            <ListItemText primary={placeName} secondary={`Matches: ${matches}`} />
+                                        </ListItem>
+                                    </Paper>
+                                </Link>;
+                        }
+
+                        if (centrePoint) {
+                            link =
+                                <Link
+                                    onClick={this.handleLinkClick({ centre_point: centrePoint }, `centre_point=${centrePoint}`)}
+                                    to={`/results/?centre_point=${centrePoint}`}
+                                >
+                                    <Paper className={styles.queryItem}>
+                                        <ListItem>
+                                            <ListItemText primary={centrePoint} secondary={`Matches: ${matches}`} />
+                                        </ListItem>
+                                    </Paper>
+                                </Link>;
+                        }
+                        return (
+                            <Grid
+                                key={matches + address}
+                                item md={6}
+                            >
+                                {link}
+                            </Grid>
+                        );
+                    })}
                 </List>
             </div>
         );

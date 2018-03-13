@@ -1,0 +1,39 @@
+a {
+    text-decoration: none;
+}
+
+.listItem {
+    display: flex;
+    padding-left: 5px;
+    box-shadow: 0 0 1px rgba(0,0,0,0.5);
+    margin-bottom: 5px;
+    height: 85px;
+    box-sizing: border-box;
+}
+
+.listItem:hover {
+    background-color: #DEDEDE;
+    cursor: pointer;
+}
+
+.itemImg {
+    display: inline-block;
+    width: 80px;
+    height: 60px;
+    margin: auto 4px;
+}
+
+.itemText {
+    display: inline-block;
+    position: relative;  
+    box-sizing: border-box;
+    margin: auto 4px;
+    padding: 0 5px 0 5px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.itemText p {
+    margin: 4px;
+    color:black;
+}

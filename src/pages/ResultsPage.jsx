@@ -1,36 +1,47 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import queryString from 'query-string';
 import Results from '../components/SearchResults/ResultLocations.jsx';
 import SearchHeader from '../components/SearchResults/Header.jsx';
 import { noop } from '../utils/SearchUtils';
+import { getCurrentQueryInfoAction } from '../actions/SearchActions';
 import { chooseLocationsAction, clearResultsAction } from '../actions/LocationActions';
+import parseURL from '../components/SearchResults/ParseURL.jsx';
 
+@parseURL()
 class ResultsPage extends PureComponent {
     static propTypes = {
         queryRessults: PropTypes.array,
-        loadQuery: PropTypes.func,
+        searchResults: PropTypes.func,
         clearResults: PropTypes.func,
-        location: PropTypes.object,
+        getQueryFromLocalStorage: PropTypes.func,
+        getURLParams: PropTypes.func, // Метод из декоратора ParseURL для получения параметров loaction
         currentPage: PropTypes.number,
+        currentQueryInfo: PropTypes.object,
         isLoading: PropTypes.bool
     };
 
     static defaultProps = {
         queryRessults: [],
         clearResults: noop,
-        loadQuery: noop,
-        location: {},
+        searchResults: noop,
+        getQueryFromLocalStorage: noop,
+        getURLParams: noop,
         currentPage: 1,
+        currentQueryInfo: {},
         isLoading: false
     };
+    constructor(props) {
+        super(props);
+        this.state = {
+            searchProperty: props.getURLParams(['search']).search || {}
+        };
+    }
 
     componentDidMount() {
-        const property = this.getProperty();
-
+        this.props.searchResults(this.state.searchProperty);
+        this.props.getQueryFromLocalStorage('currentQuery');
         window.addEventListener('scroll', this.handleScroll, false);
-        this.props.loadQuery(property, 1);
     }
 
     componentWillUnmount() {
@@ -38,29 +49,21 @@ class ResultsPage extends PureComponent {
         this.props.clearResults();
     }
 
-    getProperty = () => {
-        const { address, locationBased } = queryString.parse(this.props.location.search);
-
-        return locationBased === 'true' ?
-            { centre_point: address } :
-            { place_name: address };
-    }
-
     handleScroll = () => {
-        const property = this.getProperty();
-        const lastPage = this.props.queryRessults.length / 20 + 1;
-
-        if (document.body.scrollHeight - document.body.clientHeight < window.scrollY + 200
-            && !this.props.isLoading
-            && lastPage !== this.props.currentPage) {
-            this.props.loadQuery(property, this.props.currentPage + 1);
+        if (document.body.scrollHeight - document.body.clientHeight < window.scrollY + 300 && !this.props.isLoading) {
+            this.props.searchResults(this.state.searchProperty, this.props.currentPage + 1);
         }
     }
 
     render() {
         return (
             <div>
-                <SearchHeader />
+                <SearchHeader
+                    isLoading={this.props.isLoading}
+                    currentPage={this.props.currentPage}
+                    currentQueryInfo={this.props.currentQueryInfo}
+                    resultsLength={this.props.queryRessults.length}
+                />
                 <Results results={this.props.queryRessults} />
             </div>
         );
@@ -69,6 +72,7 @@ class ResultsPage extends PureComponent {
 
 function mapStateToProps(state) {
     return {
+        currentQueryInfo: state.searchReducer.currentQueryInfo,
         queryRessults: state.searchReducer.queryRessults,
         currentPage: state.searchReducer.currentPage,
         isLoading: state.searchReducer.isLoading
@@ -77,8 +81,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        getQueryFromLocalStorage: itemKey => dispatch(getCurrentQueryInfoAction(itemKey)),
         clearResults: () => dispatch(clearResultsAction()),
-        loadQuery: (query, page) => dispatch(chooseLocationsAction(query, page))
+        searchResults: (query, page) => dispatch(chooseLocationsAction(query, page))
     };
 }
 

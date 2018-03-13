@@ -4,15 +4,16 @@ import PropTypes from 'prop-types';
 import Header from '../components/Details/Header.jsx';
 import ItemInfo from '../components/Details/ItemInfo.jsx';
 import ItemDescription from '../components/Details/ItemDescription.jsx';
+import ChangeHistory from '../components/PropSearch//ChangeHistory.jsx';
 import { addFavoriteAction, deleteFavoriteAction } from '../actions/FavoriteActions';
 import { noop } from '../utils/SearchUtils';
 
 class Details extends PureComponent {
     static propTypes = {
+        favorites: PropTypes.array,
         activeItem: PropTypes.object,
         addToFavorite: PropTypes.func,
-        deleteFromFavorite: PropTypes.func,
-        favorites: PropTypes.array
+        deleteFromFavorite: PropTypes.func
     };
 
     static defaultProps = {
@@ -21,10 +22,12 @@ class Details extends PureComponent {
         addToFavorite: noop,
         deleteFromFavorite: noop
     };
+
     onFavoriteClick = isFavorite => {
         isFavorite ? this.props.deleteFromFavorite(this.props.activeItem) :
             this.props.addToFavorite(this.props.activeItem);
     };
+
     isFavorite = () =>
         this.props.favorites.some(item => item.title === this.props.activeItem.title);
 
@@ -56,7 +59,10 @@ class Details extends PureComponent {
 
         return (
             <div>
-                <Header handleFavoriteClick={this.onFavoriteClick} isFavorite={this.isFavorite()} />
+                <Header
+                    handleFavoriteClick={this.onFavoriteClick}
+                    isFavorite={this.isFavorite()}
+                />
                 <ItemInfo itemInfo={itemInfo} />
                 <ItemDescription itemDescription={itemDescription} />
             </div>

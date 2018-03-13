@@ -1,0 +1,16 @@
+.title {
+    display: inline-block;
+}
+
+.favoriteButton {
+    display: inline-block;
+    position: absolute;
+    margin: 50px 20px;
+    right: 0px;
+}
+
+@media(--mediumScreen) {
+    .favoriteButton {
+        margin-right: 50px;
+    }
+}
