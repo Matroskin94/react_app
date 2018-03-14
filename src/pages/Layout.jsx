@@ -13,8 +13,7 @@ const Layout = ({ children }) => (
             <Grid
                 className={styles.content}
                 item xs={12}
-                sm={12} md={8}
-                lg={8}
+                sm={8}
             >
                 {children}
             </Grid>

@@ -1,31 +1,8 @@
-.searchField, .buttonsField {
-    display: inline-block;
-    padding: 8px 8px 0 0;
-    box-sizing: border-box;
+.buttons {
+    margin: 0 5px;
+    background-color: yellow;
 }
 
-.searchField {
-    width: 100%;
-}
-
-.searchField input {
-    width: 100%;
-}
-
-@media(--mediumScreen) {
-    .searchField {
-        width: 33.33333%;
-    }
-    .buttonsField {
-        width: 50%;
-    }
-}
-
-@media(--largeScreen) {
-    .searchField {
-        width: 25%;
-    }
-    .buttonsField {
-        width: 50%;
-    }
+.buttons:hover {
+    background: red;
 }

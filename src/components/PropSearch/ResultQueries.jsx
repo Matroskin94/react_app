@@ -62,7 +62,7 @@ class ResultQueries extends PureComponent {
                         return (
                             <Grid
                                 key={matches + address}
-                                item md={6}
+                                item
                             >
                                 {link}
                             </Grid>

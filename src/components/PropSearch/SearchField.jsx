@@ -1,8 +1,11 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import Button from 'material-ui/Button';
+import Grid from 'material-ui/Grid';
+import { withStyles } from 'material-ui/styles';
+import withWidth from 'material-ui/utils/withWidth';
+import compose from 'recompose/compose';
 import TextField from 'material-ui/TextField';
 import { chooseLocationsAction } from '../../actions/LocationActions';
 import { searchAction } from '../../actions/SearchActions';
@@ -11,16 +14,18 @@ import { initFavoritesAction } from '../../actions/FavoriteActions';
 import ResultQueries from './ResultQueries.jsx';
 import changeHistory from './ChangeHistory.jsx';
 import { noop } from '../../utils/SearchUtils';
-import styles from './SearchField.css';
+import stylesJS from './SearchFieldStyles';
 
 @changeHistory()
+@compose(withStyles(stylesJS), withWidth())
 class Searchfield extends PureComponent {
     static propTypes = {
         historyPush: PropTypes.func, // Метод из декоратора ChangeHistory для перехода по ссылке
         getFavoritesFromLocal: PropTypes.func,
         loadQuery: PropTypes.func,
         queries: PropTypes.array,
-        isFavoritesLoaded: PropTypes.bool
+        isFavoritesLoaded: PropTypes.bool,
+        classes: PropTypes.object
     };
 
     static defaultProps = {
@@ -28,7 +33,8 @@ class Searchfield extends PureComponent {
         getFavoritesFromLocal: noop,
         loadQuery: noop,
         queries: [],
-        isFavoritesLoaded: false
+        isFavoritesLoaded: false,
+        classes: {}
     };
 
     state = {
@@ -62,34 +68,44 @@ class Searchfield extends PureComponent {
 
     render() {
         return (
-            <div>
-                <TextField
-                    onChange={this.handleInputChange}
-                    type='text'
-                    label='Input your query'
-                    placeholder='city'
-                    multiline
-                    margin='normal'
-                    value={this.state.inputValue}
-                />
-                <Button
-                    variant='raised'
-                    size='small'
-                    color='primary'
-                    onClick={this.handleGoClick}
+            <Grid container>
+                <Grid
+                    item
+                    xs={12} md={3}
                 >
-                    Go
-                </Button>
-                <Button
-                    variant='raised'
-                    size='small'
-                    color='primary'
-                    onClick={this.handleLocationClick}
+                    <TextField
+                        onChange={this.handleInputChange}
+                        type='text'
+                        label='Input your query'
+                        placeholder='city'
+                        multiline
+                        margin='normal'
+                        value={this.state.inputValue}
+                    />
+                </Grid>
+                <Grid
+                    item
+                    xs={12} md={9}
                 >
-                    My Location
-                </Button>
+                    <Button
+                        className={this.props.classes.buttons}
+                        variant='raised'
+                        size='small'
+                        onClick={this.handleGoClick}
+                    >
+                        Go
+                    </Button>
+                    <Button
+                        className={this.props.classes.buttons}
+                        variant='raised'
+                        size='small'
+                        onClick={this.handleLocationClick}
+                    >
+                        My Location
+                    </Button>
+                </Grid>
                 <ResultQueries onLinkClick={this.handleLinkClick} results={this.props.queries} />
-            </div>
+            </Grid>
         );
     }
 }
