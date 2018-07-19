@@ -12,7 +12,7 @@ export const loadingAction = data => ({
     payload: data
 });
 
-export const getCurrentQueryInfoAction = data => ({
+export const getCurrentQueryInfoAction = (data = {}) => ({
     type: QUERY_DATA_FROM_LOCAL,
     payload: JSON.parse(localStorage.getItem(data))
 });
