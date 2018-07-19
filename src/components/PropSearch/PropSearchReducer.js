@@ -29,26 +29,26 @@ export default function PropSearchReducer(state = initialState, action) {
                 currentQueryInfo: action.payload
 
             };
-        }
+        };
         case LOADING_STARTED: {
             return {
                 ...state,
                 isLoading: action.payload
             };
-        }
+        };
         case LOCATION_PRESSED: {
             return {
                 ...state,
                 isLoading: false,
                 queryRessults: { ...action.results }
             };
-        }
+        };
         case ADD_FAVORITE: {
             return {
                 ...state,
                 favorites: [action.payload, ...state.favorites]
             };
-        }
+        };
         case DELETE_FAVORITE: {
             action.payload.isFavorite = false;
             return {
@@ -58,20 +58,20 @@ export default function PropSearchReducer(state = initialState, action) {
                     action.payload
                 )
             };
-        }
+        };
         case INIT_FAVORITE: {
             return {
                 ...state,
                 favorites: action.payload,
                 isFavoritesLoaded: true
             };
-        }
+        };
         case QUERY_DATA_FROM_LOCAL: {
             return {
                 ...state,
                 currentQueryInfo: action.payload
             };
-        }
+        };
         case QUERY_SELECTED: {
             return {
                 ...state,
@@ -80,16 +80,16 @@ export default function PropSearchReducer(state = initialState, action) {
                 searchWord: action.payload.word,
                 currentPage: action.payload.currentPage
             };
-        }
+        };
         case CLEAR_RESULTS: {
             return {
                 ...state,
                 queryRessults: []
             };
-        }
+        };
 
         default: {
             return { ...state };
-        }
+        };
     }
 }

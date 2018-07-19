@@ -104,7 +104,13 @@ class Searchfield extends PureComponent {
                         My Location
                     </Button>
                 </Grid>
-                <ResultQueries onLinkClick={this.handleLinkClick} results={this.props.queries} />
+                <Grid
+                    item
+                    xs={12}
+                    md={6}
+                >
+                    <ResultQueries onLinkClick={this.handleLinkClick} results={this.props.queries} />
+                </Grid>
             </Grid>
         );
     }
