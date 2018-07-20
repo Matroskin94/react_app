@@ -79,7 +79,6 @@ describe('Async actions tests', () => {
 
 	    return store.dispatch(searchAction({place_name: 'london'})).then(() => {
 	      // return of async actions
-	      console.log('store.getActions()', store.getActions());
 	      expect(store.getActions()).toEqual(expectedActions);
 	    });
 	});
