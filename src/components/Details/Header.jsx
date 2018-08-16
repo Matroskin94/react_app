@@ -5,7 +5,7 @@ import styles from './Header.css';
 import { noop } from '../../utils/SearchUtils';
 import changeHistory from '../PropSearch/ChangeHistory.jsx';
 
-const Header = ({ handleFavoriteClick, historyBack, isFavorite }) => {
+export const Header = ({ handleFavoriteClick, historyBack, isFavorite }) => {
     const onFavoriteClick = () => {
         handleFavoriteClick(isFavorite);
     };

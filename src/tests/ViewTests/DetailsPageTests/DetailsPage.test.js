@@ -3,7 +3,7 @@ import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
-import Header from '../../../components/Details/Header.jsx';
+import Header, { Header as NotWrappedHeader} from '../../../components/Details/Header.jsx';
 import ChangeHistory from '../../../components/PropSearch/ChangeHistory.jsx';
 
 const middlewares = [thunk];
@@ -35,15 +35,15 @@ describe('Details page testing', () => {
 		// Необходимо прокинуть контекст с ним работает компонент обёртка
 		const wrapper = shallow(
 				<Provider store={store}>
-					<Header
+					<NotWrappedHeader
 						handleFavoriteClick={onFavoriteClickMock}
-						isFavorite="true"
+						isFavorite={true}
 						historyBack={historyBackMock}
 					/>
 				</Provider>
 			);
 
-		expect(wrapper.prop('isFavorite')).toEqual('true');
+		expect(wrapper.prop('isFavorite')).toEqual(true);
 		expect(wrapper.prop('handleFavoriteClick')).toEqual(onFavoriteClickMock);
 		expect(wrapper).toMatchSnapshot();
 	});
