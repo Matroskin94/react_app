@@ -1,8 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PropSearch page testing Header test 1`] = `
-<div>
+<div
+  data-test="searchHeader"
+>
   <Link
+    data-test="favesLink"
     replace={false}
     to="/favorite"
   >

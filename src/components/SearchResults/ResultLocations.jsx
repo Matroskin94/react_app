@@ -23,7 +23,7 @@ class ResultLocations extends PureComponent {
 
     render() {
         return (
-            <div>
+            <div data-test='resultLocations'>
                 {this.props.results.map((item = {}, index) =>
                     <Link
                         onClick={this.itemClicked(item)}

@@ -74,6 +74,8 @@ class Searchfield extends PureComponent {
                     xs={12} md={3}
                 >
                     <TextField
+                        data-test='cityInput'
+                        name='city'
                         onChange={this.handleInputChange}
                         type='text'
                         label='Input your query'
@@ -88,6 +90,7 @@ class Searchfield extends PureComponent {
                     xs={12} md={9}
                 >
                     <Button
+                        data-test='goButton'
                         className={this.props.classes.buttons}
                         variant='raised'
                         size='small'

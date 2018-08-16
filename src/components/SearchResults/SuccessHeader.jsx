@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 const SuccessHeader = props => (
-    <div>
+    <div data-test='successHeader'>
         <Link to='/'> BACK </Link>
         <h3>{props.resultsLength} of {props.matches} matches</h3>
     </div>
