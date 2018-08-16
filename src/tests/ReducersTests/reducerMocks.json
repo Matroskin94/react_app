@@ -1,0 +1,30 @@
+{
+	"searchResultsMock": [
+        {
+            "bathroom_number": "",
+            "bedroom_number": "1",
+            "car_spaces": "0",
+            "img_url": "https://imgs.nestimg.com/1_bedroom_flat_for_sale_108817257474713781.jpg",
+            "isFavorite": "true",
+            "lister_url": "https://www.nestoria.co.uk/detail/0000000108817257474713781/title/5/1-1?serpUid=&pt=1&ot=1&l=leeds&did=105_high1&utm_source=api&utm_medium=external",
+            "price": "139950",
+            "price_currency": "£",
+            "summary": "One bedroom property on the 8th floor of this riverside development...",
+            "thumb_url": "https://imgs.nestimg.com/medium/1_bedroom_flat_for_sale_108817257474713781.jpg",
+            "title": "St James Quay, Bowman Lane, Hunslet, Leeds, LS10"
+        },
+        {
+            "bathroom_number": "2",
+            "bedroom_number": "3",
+            "car_spaces": "0",
+            "img_url": "https://imgs.nestimg.com/terraced_london_108817205858270305.jpg",
+            "isFavorite": "true",
+            "lister_url": "https://www.nestoria.co.uk/detail/0000000108817205858270305/title/5/1-2?serpUid=&pt=1&ot=1&l=london&did=90_high1&utm_source=api&utm_medium=external",
+            "price": "1850000",
+            "price_currency": "£",
+            "summary": "This georgian grade ii listed terraced house is positioned over fou...",
+            "thumb_url": "https://imgs.nestimg.com/medium/terraced_london_108817205858270305.jpg",
+            "title": "Canonbury Road, Canonbury, London, N1"
+        }
+    ]
+}

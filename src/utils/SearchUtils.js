@@ -1,18 +1,19 @@
+import { pick } from 'ramda';
+
+const filterArray = array => {
+    const keysArray = ['title', 'img_url', 'thumb_url', 'lister_url', 'price', 'price_currency',
+        'summary', 'bathroom_number', 'bedroom_number', 'car_spaces'];
+
+    return array.map(item => {
+        const resultObject = pick(keysArray, item);
+
+        return Object.keys(resultObject).length === keysArray.length ?
+            { ...resultObject, isFavorite: false } : false;
+    }).filter(item => item !== false);
+};
+
 export const extractData = data => {
-    const result = data.response.listings.map((item, index) => ({
-        key: item.lister_url,
-        isFavorite: false,
-        title: item.title,
-        img_url: item.img_url,
-        thumb_url: item.thumb_url,
-        lister_url: item.lister_url,
-        price: item.price,
-        price_currency: item.price_currency,
-        summary: item.summary,
-        bathroom_number: item.bathroom_number,
-        bedroom_number: item.bedroom_number,
-        car_spaces: item.car_spaces
-    }));
+    const result = Array.isArray(data) ? filterArray(data) : [];
 
     return result;
 };
@@ -57,7 +58,7 @@ export const getFavoritesFromLocal = () => {
 
 export const deleteFavoriteFromLocal = dellItem => {
     const favoritesList = localStorage.getItem('favoritesList');
-    const resultList = JSON.parse(!favoritesList ? [] : favoritesList).filter(item => item.key !== dellItem.key);
+    const resultList = JSON.parse(!favoritesList ? [] : favoritesList).filter(item => item.title !== dellItem.key);
 
     localStorage.setItem('favoritesList', JSON.stringify(resultList));
 };

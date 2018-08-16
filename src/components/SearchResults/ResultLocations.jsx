@@ -27,7 +27,7 @@ class ResultLocations extends PureComponent {
                 {this.props.results.map((item = {}, index) =>
                     <Link
                         onClick={this.itemClicked(item)}
-                        key={item.key}
+                        key={item.lister_url}
                         to='/details'
                     >
                         <div className={styles.listItem}>

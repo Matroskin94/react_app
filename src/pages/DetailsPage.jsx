@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import Header from '../components/Details/Header.jsx';
 import ItemInfo from '../components/Details/ItemInfo.jsx';
 import ItemDescription from '../components/Details/ItemDescription.jsx';
-import ChangeHistory from '../components/PropSearch//ChangeHistory.jsx';
 import { addFavoriteAction, deleteFavoriteAction } from '../actions/FavoriteActions';
 import { noop } from '../utils/SearchUtils';
 
