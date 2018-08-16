@@ -1,15 +1,16 @@
-.wrapper {
-    position: relative;
-    background-color: #F6F6F6;
-    width: 100%;
-    margin: 5px auto;
-    padding: 10px;
-    text-align: justify;
-    box-sizing: border-box;
+@font-face {
+    src: url(https://fonts.googleapis.com/css?family=Roboto:300,400,500);
 }
 
-@media (--mediumScreen) {
-    .wrapper {
-        width: 80%;
-    }
+body {
+    font-family:'Roboto';
+}
+.wrapper {
+    position: relative;
+    margin: 5px auto;
+    padding: 10px;
+}
+.content {
+    background-color: #F6F6F6;
+    position: relative;
 }

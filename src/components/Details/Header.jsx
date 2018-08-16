@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Button from 'material-ui/Button';
 import { Link } from 'react-router-dom';
 import styles from './Header.css';
 import { noop } from '../../utils/SearchUtils';
@@ -22,7 +23,12 @@ export const Header = ({ handleFavoriteClick, historyBack, isFavorite }) => {
                 <h1>Property details</h1>
             </div>
             <div className={styles.favoriteButton}>
-                <button onClick={onFavoriteClick}>{isFavorite ? '-' : '+'}</button>
+                <Button
+                    variant='fab'
+                    mini onClick={onFavoriteClick}
+                >
+                    {isFavorite ? '-' : '+'}
+                </Button>
             </div>
         </div>
     );

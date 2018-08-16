@@ -2,10 +2,14 @@
     display: inline-block;
 }
 
+.title button{
+    min-width: auto;
+}
+
 .favoriteButton {
     display: inline-block;
     position: absolute;
-    margin: 50px 20px;
+    margin: 40px 20px;
     right: 0px;
 }
 

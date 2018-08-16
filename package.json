@@ -58,9 +58,10 @@
     "webpack-dev-server": "^2.11.1"
   },
   "dependencies": {
+    "css-loader": "^0.28.9",
+    "material-ui": "^1.0.0-beta.35",
     "autoprefixer": "^8.1.0",
     "classnames": "^2.2.5",
-    "css-loader": "^0.28.9",
     "postcss-custom-media": "^6.0.0",
     "postcss-loader": "^2.1.1",
     "prop-types": "^15.6.0",
